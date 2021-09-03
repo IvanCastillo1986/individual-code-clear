@@ -31,9 +31,17 @@
 .app-link {
   text-decoration: none;
 }
+.Box{
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap;
+}
 
-.editor{
-  margin-left: -500px;
+.edit{
+  margin-left: -20px;
+}
+.solution{
+  margin-right: -50px;
 }
 @keyframes App-logo-spin {
   from {
