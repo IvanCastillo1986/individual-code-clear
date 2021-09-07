@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
+const inputController = require("./Controllers/inputController");
 
 // CONFIGURATION
 const app = express();
@@ -11,21 +12,18 @@ app.use(express.json()); // Parse incoming JSON
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.send("Welcome to the Code Clearly back-end.");
 });
 
 /////////////////////////////////////
 // REMOVE AFTER SUCCESSFUL DEPLOYMENT
 /////////////////////////////////////
-const db = require("./db/dbConfig.js");
 
-app.get("/test", async (req, res) => {
-  try {
-    const allDays = await db.any("SELECT * FROM test");
-    res.json(allDays);
-  } catch (err) {
-    res.json(err);
-  }
+app.use("/code", inputController);
+
+// 404 Page
+app.get("*", (req, res) => {
+  res.status(404).send("Page not found");
 });
 
 /////////////////////////////////////
