@@ -5,13 +5,13 @@ import { useState } from "react";
 import Solution from "./Solution";
 
 export default function Home() {
-  const [input, setInput] = useState([]);
-  const [sol, setSol] = useState([]);
+  const [input, setInput] = useState('');
+  const [sol, setSol] = useState('');
 
   const handleInput = (value, e) => {
     setInput(value);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSol(input);
@@ -29,8 +29,6 @@ export default function Home() {
           width="70vh"
           onChange={handleInput}
           defaultLanguage="javascript"
-          defaultValue="// some comment"
-          value='home'
           className="edit"
         />
         {""}
