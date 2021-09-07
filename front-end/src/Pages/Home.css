@@ -1,0 +1,21 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.EditorWrapper {
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.EditorForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.EditorForm input {
+    width: 100px;
+    height: 30px;
+}
