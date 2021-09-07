@@ -6,11 +6,17 @@ import Editor from '@monaco-editor/react'
 export default function CodeEditor() {
     
     const [input, setInput] = useState('')
+    const [finalVal, setFinalVal] = useState('')
     const editorRef = useRef(null)
     const monacoRef = useRef(null)
     
     const handleChange = (value, event) => {
         setInput(value)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(e.target)
+        // setFinalVal(e.target.value)
     }
     
     function handleEditorDidMount(editor, monaco) {
@@ -30,16 +36,22 @@ export default function CodeEditor() {
     return (
         <div>
             <h1>Code Editor</h1>
-            <Editor 
-            className='MyEditor'
-            onChange={handleChange}
-            height='40vh'
-            defaultLanguage='javascript'
-            defaultValue='// some comment'
-            beforeMount={handleEditorWillMount}
-            onMount={handleEditorDidMount}
-            />
-            <p>{input}</p>
+            <form action="" onSubmit={handleSubmit}>
+                <Editor 
+                wrapperClassName='EditorWrapper'
+                className='Editor'
+                onChange={handleChange}
+                width='60%'
+                height='40vh'
+                defaultLanguage='javascript'
+                defaultValue='// some comment'
+                beforeMount={handleEditorWillMount}
+                onMount={handleEditorDidMount}
+                value={input}
+                />
+                <p>{input}</p>
+                <input type="submit" value="Submit Code" />
+            </form>
         </div>
     )
 }

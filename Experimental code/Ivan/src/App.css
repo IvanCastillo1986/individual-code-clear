@@ -1,6 +1,7 @@
-.Editor {
+.EditorWrapper {
   border: 1px solid black;
   margin: 20px;
+  width: 50%;
 }
 
 h1 {
