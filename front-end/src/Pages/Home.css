@@ -4,13 +4,19 @@
     align-items: center;
 }
 
+main {
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+
 .EditorWrapper {
     border: 1px solid black;
     margin-bottom: 10px;
 }
 
 .EditorForm {
-    width: 100%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
