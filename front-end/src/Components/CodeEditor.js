@@ -18,7 +18,6 @@ export default function CodeEditor() {
                 className='Editor'
                 wrapperClassName='EditorWrapper'
                 height='50vh'
-                width='80%'
                 defaultLanguage='javascript'
                 defaultValue='// Some comment'
                 onChange={handleChange}
