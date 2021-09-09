@@ -32,9 +32,12 @@ app.get("*", (req, res) => {
 /////////////////////////////////////
 
 // Lint Test
+
+let str = "() => {    const yes = 0      }";
+
 const linter = async () => {
   const eslint = new ESLint();
-  const results = await eslint.lintText("() => {    const yes = 0      }");
+  const results = await eslint.lintText(str);
   console.log(results[0].messages);
 };
 
