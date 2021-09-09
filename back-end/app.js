@@ -2,6 +2,7 @@
 const cors = require("cors");
 const express = require("express");
 const inputController = require("./Controllers/inputController");
+const { ESLint } = require("eslint");
 
 // CONFIGURATION
 const app = express();
@@ -29,6 +30,15 @@ app.get("*", (req, res) => {
 /////////////////////////////////////
 // REMOVE AFTER SUCCESSFUL DEPLOYMENT
 /////////////////////////////////////
+
+// Lint Test
+const linter = async () => {
+  const eslint = new ESLint();
+  const results = await eslint.lintText("() => {    const yes = 0      }");
+  console.log(results[0].messages);
+};
+
+linter();
 
 // EXPORT
 module.exports = app;
