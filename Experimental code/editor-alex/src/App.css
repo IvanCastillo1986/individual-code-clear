@@ -9,7 +9,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin  10s linear;
+    animation: App-logo-spin 10s linear;
   }
 }
 
@@ -24,23 +24,29 @@
   color: white;
 }
 
-.App-header p{
+.App-header p {
   color: white;
   font-size: 50px;
 }
 .app-link {
   text-decoration: none;
 }
-.Box{
+.Box {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   flex-wrap: wrap;
 }
-
-.edit{
+.editor {
+  height: 70vh;
+  width: 70vh;
+  background-color: aliceblue;
+  color: black;
+  flex-wrap: wrap;
+}
+.edit {
   margin-left: -20px;
 }
-.solution{
+.solution {
   margin-right: -50px;
 }
 @keyframes App-logo-spin {

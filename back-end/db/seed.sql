@@ -1,4 +1,4 @@
-\c production_database_name;
+\c test_dev;
 
 INSERT INTO test (name) VALUES
 ('Monday'),

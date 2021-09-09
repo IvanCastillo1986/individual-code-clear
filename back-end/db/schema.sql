@@ -1,7 +1,6 @@
-DROP DATABASE IF EXISTS production_database_name;
-CREATE DATABASE production_database_name;
-
-\c production_database_name;
+DROP DATABASE IF EXISTS test_dev;
+CREATE DATABASE test_dev;
+\c test_dev;
 
 DROP TABLE IF EXISTS test;
 CREATE TABLE test (
