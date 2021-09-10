@@ -32,7 +32,7 @@ let str = "() => {    const yes = 0      }";
 const linter = async () => {
   const eslint = new ESLint();
   const results = await eslint.lintText(str);
-  console.log(results[0].messages[6]);
+  console.log(results[0].messages);
 };
 
 linter();

@@ -27,8 +27,6 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
 
 
 
-
-
 // MONACO EDITOR NOTES
 // The editor instance does not perform computations for us.
 // It's pretty much just an area where you can write text.
