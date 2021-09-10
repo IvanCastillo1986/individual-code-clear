@@ -10,7 +10,9 @@ export default function Home() {
     return (
         <div className='Home'>
             <h1>Welcome to CodeClear!</h1>
-            <CodeEditor />
+            <main>
+                <CodeEditor />
+            </main>
         </div>
     )
 }

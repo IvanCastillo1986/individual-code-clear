@@ -1,55 +1,21 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import Editor from '@monaco-editor/react'
 
 
 
-export default function CodeEditor() {
-    
-    const [input, setInput] = useState('')
-    const [finalVal, setFinalVal] = useState('')
-    const editorRef = useRef(null)
-    const monacoRef = useRef(null)
-    
-    const handleChange = (value, event) => {
-        setInput(value)
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(e.target)
-        // setFinalVal(e.target.value)
-    }
-    
-    function handleEditorDidMount(editor, monaco) {
-        editorRef.current = editor
-    }
-    
-    function handleEditorWillMount(editor, monaco) {
-        monacoRef.current = monaco
-    }
-    
-    console.log('monacoRef: ', monacoRef)    // Shows an object with current: null on pageload, shows current: undefined on re-render
-    console.log('editorRef: ', editorRef)    // Shows an object with current: null on pageload, shows current: T on re-render
-    console.log('Editor: ', Editor)    // Shows the Editor instance's properties
-
+export default function CodeEditor({ handleChange, handleSubmit }) {
 
 
     return (
-        <div>
-            <h1>Code Editor</h1>
+        <div className='CodeEditor'>
+            <h2>Code Editor</h2>
             <form action="" onSubmit={handleSubmit}>
                 <Editor 
-                wrapperClassName='EditorWrapper'
-                className='Editor'
-                onChange={handleChange}
-                width='60%'
-                height='40vh'
-                defaultLanguage='javascript'
-                defaultValue='// some comment'
-                beforeMount={handleEditorWillMount}
-                onMount={handleEditorDidMount}
-                value={input}
+                    className='Editor'
+                    onChange={handleChange}
+                    defaultLanguage='javascript'
+                    defaultValue='// some comment'
                 />
-                <p>{input}</p>
                 <input type="submit" value="Submit Code" />
             </form>
         </div>

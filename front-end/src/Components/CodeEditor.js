@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
 import Editor from '@monaco-editor/react'
+import axios from "axios";
+import { apiURL } from '../util/apiURL';
 
-
+const url = apiURL();
 
 export default function CodeEditor() {
 
     const [input, setInput] = useState('')
 
     const handleChange = (value, e) => {
+        console.log("change:", value)
         setInput(value)
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { data } = await axios.post(`${url}/eslint`, { input });
+        console.log(data);
+    }
 
     return (
-        <form className='EditorForm'>
-            <Editor 
+        <form className='EditorForm' onSubmit={handleSubmit}>
+            <Editor
                 className='Editor'
                 wrapperClassName='EditorWrapper'
                 height='50vh'
-                width='80%'
                 defaultLanguage='javascript'
                 defaultValue='// Some comment'
                 onChange={handleChange}
