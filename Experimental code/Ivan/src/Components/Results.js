@@ -2,13 +2,15 @@ import React from 'react'
 
 
 
-export default function Results() {
+export default function Results({ resultInput }) {
 
     
     return (
         <div className='Results'>
             <h2>Results</h2>
-            <p>{/* Use this element to recieve data from Back-End */}</p>
+            <ul>
+                <li>{resultInput.name}</li>
+            </ul>
         </div>
     )
 }
