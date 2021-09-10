@@ -2,6 +2,7 @@
 const cors = require("cors");
 const express = require("express");
 const inputController = require("./Controllers/inputController");
+const eslintController = require("./Controllers/eslintController");
 const { ESLint } = require("eslint");
 
 // CONFIGURATION
@@ -16,20 +17,13 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Code Clearly back-end.");
 });
 
-/////////////////////////////////////
-// REMOVE AFTER SUCCESSFUL DEPLOYMENT
-/////////////////////////////////////
-
+app.use("/eslint", eslintController);
 app.use("/code", inputController);
 
 // 404 Page
 app.get("*", (req, res) => {
   res.status(404).send("Page not found");
 });
-
-/////////////////////////////////////
-// REMOVE AFTER SUCCESSFUL DEPLOYMENT
-/////////////////////////////////////
 
 // Lint Test
 
