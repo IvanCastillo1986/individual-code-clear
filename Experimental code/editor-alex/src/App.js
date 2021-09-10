@@ -23,6 +23,7 @@ function App() {
       setDays(data)
     })
   },[])
+  
  console.log(days)
   return (
     <div className="App">
