@@ -1,18 +1,19 @@
 import React from 'react'
-import CodeEditor from '../Components/CodeEditor'
+import ParentComponent from '../Components/ParentComponent'
 import './Home.css'
 
 
+
+// This component currently has no state or functionality, as per Pursuit MVC recommendations 
+// for Page components
 
 export default function Home() {
 
 
     return (
         <div className='Home'>
-            <h1>Welcome to CodeClear!</h1>
-            <main>
-                <CodeEditor />
-            </main>
+            <h1>Welcome to Code Clear!</h1>
+            <ParentComponent />
         </div>
     )
 }
