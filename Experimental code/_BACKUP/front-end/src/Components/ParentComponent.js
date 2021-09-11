@@ -20,13 +20,16 @@ export default function ParentComponent() {
         e.preventDefault()
 
         try {
+
             axios.post(`${API}/eslint`, input)
-                .then(
-                    (res) => { setResultInput(res.data.result[0].messages) }
-                )
+            .then(
+                (res) => {setResultInput(res.data.result[0].messages)}
+            )
         } catch (c) {
             console.log('Error in ParentComponent: ', c)
         }
+
+        console.log('handleSubmit')
     }
 
 
