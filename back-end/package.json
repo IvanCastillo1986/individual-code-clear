@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "db:seed": "psql -U postgres -f db/seed.sql",
