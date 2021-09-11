@@ -10,11 +10,11 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
         <div className='CodeEditor'>
             <h2>Code Editor</h2>
             <form action="" onSubmit={handleSubmit}>
-                <Editor 
+                <Editor
                     className='Editor'
                     onChange={handleChange}
                     defaultLanguage='javascript'
-                    defaultValue='// some comment'
+                    defaultValue='// your code here'
                 />
                 <input type="submit" value="Submit Code" />
             </form>
