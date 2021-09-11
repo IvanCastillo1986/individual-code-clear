@@ -29,4 +29,11 @@
 .Results {
     border: 2px solid rgb(0, 251, 255);
     width: 45%;
+    overflow: auto;
+}
+.Results p {
+    border-bottom: 1px solid rgb(255, 0, 255);
+}
+.Results span {
+    display: block;
 }
