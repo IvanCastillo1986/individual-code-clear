@@ -63,6 +63,7 @@
   overflow-y: scroll;
   border-radius:5px;
   color: black;
+  
 }
 .result::-webkit-scrollbar{
   display: none;
@@ -74,8 +75,14 @@
   font-size: 20px;
 
   padding: 5px;
-  border-bottom: 1px solid rgb(255, 0, 255);
+  border-bottom: 2px solid rgb(255, 0, 255);
   color: black;
+}
+ol{
+  margin: 10px;
+}
+.well{
+  background-color: white;
 }
 @keyframes App-logo-spin {
   from {

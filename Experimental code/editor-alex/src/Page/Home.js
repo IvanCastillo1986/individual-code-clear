@@ -42,7 +42,7 @@ export default function Home() {
       <div className="Box">
         <Editor
           height="50vh"
-          width="70vh"
+          width="80vh"
           onChange={handleInput}
           defaultLanguage="javascript"
           className="edit"

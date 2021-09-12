@@ -6,7 +6,7 @@ export default function Solution({ sol }) {
       {sol.length === 0 ? (
         <p>Congrats! You have no errors. You are a great coder!</p>
       ) : (
-        <div className="result">
+        <div className="result" >
           <ol>
             {sol
               ? sol.map((item, id) => {
