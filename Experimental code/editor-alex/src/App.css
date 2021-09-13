@@ -9,8 +9,14 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin 10s linear;
+    animation: App-logo-spin 5s linear;
+   
+   
   }
+  .App-logo::backdrop{
+    transform: scale(4);
+  }
+
 }
 
 .App-header {
@@ -45,15 +51,80 @@
 }
 .edit {
   margin-left: -20px;
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 .solution {
-  margin-right: -50px;
+  margin-left: 30px;
+  margin-bottom: 20px;
 }
+.resultado{
+  margin-top: -30px;;
+}
+.result{
+  margin:auto;
+  background-color:white;
+  text-align:start;
+  width: 700px;
+  height: 230px;
+  overflow-y: scroll;
+  border-radius:5px;
+  color: black;
+  margin-bottom: 20px;
+  
+}
+.result::-webkit-scrollbar{
+  display: none;
+}
+.result h5{
+  padding: -3px;
+}
+.result p{
+  font-size: 20px;
+  padding: 2px;
+  border-bottom: 2px solid rgb(255, 0, 255);
+  color: black;
+}
+ol{
+  margin: 10px;
+}
+li{
+  margin: -3px;
+}
+.well{
+  background-color: white;
+}
+button {
+  font-size: 18px;
+  border-radius: 5px;
+}
+.btnSalvar{
+  margin-left: -200vh;
+}
+.containersave{
+  display: flex;
+  flex-direction: column;
+  margin-top: -300px;
+  
+}
+.containersave div h1{
+  background-color: white;
+  width: 300px;
+  height: 200px;
+}
+.save{
+ margin-left: 170vh;
+ margin-bottom: -50px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
+   
+    
   }
   to {
     transform: rotate(360deg);
   }
+  
 }

@@ -1,45 +1,56 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
-import { useState , useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { apiURL } from '../Util/apiURL'
-
+import { apiURL } from "../Util/apiURL";
+import { Link } from "react-router-dom";
 import Solution from "./Solution";
+import Came from "./Came";
 
-const API_Dtbased = apiURL()
+const API_Dtbased = apiURL();
 
 export default function Home() {
-  const [input, setInput] = useState('');
-  const [sol, setSol] = useState('');
-  const [tol, setTol] = useState('');
+  const [input, setInput] = useState({ code: "//" });
+  const [sol, setSol] = useState([]);
+  const [fix, setFix] = useState("");
+  const [last, setLast] = useState("");
 
   const handleInput = (value, e) => {
-    setInput(value);
+    setInput({ code: value });
+    setFix(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSol(input);
+    setLast(fix);
+    try {
+      axios.post(`${API_Dtbased}/eslint`, input).then((res) => {
+        setSol(res.data.result[0].messages);
+      });
+    } catch (error) {
+      console.log("Errror in component:", error);
+    }
+    console.log("handleSubmit");
   };
-  
-  useEffect(() => {
-    axios.post(`${API_Dtbased}/eslint`, sol).then((res)=>{
-      const {data} = res
-      console.log(data.payload)
-      setTol(data)
-    })
-  },[])
-
-  console.log(input, "input");
-  console.log(sol, "sol");
 
   return (
-    <div>
+    <div className="resultado">
+      <Link to={"/save"}>
+        <img
+          src={
+            "https://www.vhv.rs/dpng/d/409-4098783_png-file-svg-home-icon-for-navbar-transparent.png"
+          }
+          alt="save"
+          style={{ width: "40px", height: "40px", borderRadius: "5px", marginTop: "-20px"}}
+          className="save"
+        />
+      </Link>
       <h3>Hello Coder</h3>
       <div className="Box">
         <Editor
-          height="70vh"
-          width="70vh"
+          height="45vh"
+          width="80vh"
+          fontSize="15px"
           onChange={handleInput}
           defaultLanguage="javascript"
           className="edit"
@@ -48,8 +59,9 @@ export default function Home() {
         <form onSubmit={handleSubmit}>
           <button type="submit">Submit Code</button>
         </form>
-        <Solution sol={sol} />
+        <Came last={last} />
       </div>
+      <Solution sol={sol} />
     </div>
   );
 }
