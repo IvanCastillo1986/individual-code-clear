@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import { useState } from "react";
 import axios from "axios";
 import { apiURL } from "../Util/apiURL";
-
+import { Link } from "react-router-dom";
 import Solution from "./Solution";
 import Came from "./Came";
 
@@ -33,16 +33,24 @@ export default function Home() {
     console.log("handleSubmit");
   };
 
-  console.log(input, "input");
-  console.log(sol, "sol");
-
   return (
     <div className="resultado">
+      <Link to={"/save"}>
+        <img
+          src={
+            "https://www.vhv.rs/dpng/d/409-4098783_png-file-svg-home-icon-for-navbar-transparent.png"
+          }
+          alt="save"
+          style={{ width: "40px", height: "40px", borderRadius: "5px", marginTop: "-20px"}}
+          className="save"
+        />
+      </Link>
       <h3>Hello Coder</h3>
       <div className="Box">
         <Editor
-          height="50vh"
+          height="45vh"
           width="80vh"
+          fontSize="15px"
           onChange={handleInput}
           defaultLanguage="javascript"
           className="edit"
