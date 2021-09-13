@@ -5,7 +5,7 @@ export default function Came({ last }) {
   return (
     <div>
       <Editor
-        height="50vh"
+        height="45vh"
         width="80vh"
         defaultLanguage="javascript"
         value={last}
