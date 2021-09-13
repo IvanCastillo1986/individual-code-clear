@@ -25,10 +25,15 @@ export default function ParentComponent() {
   };
 
   return (
-    <div className="ParentComponent">
-      <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
-      <Results resultInput={resultInput} />
-      <HistogramStats resultInput={resultInput} />
-    </div>
+    <>
+      <div className="ParentComponent">
+        <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
+        <Results resultInput={resultInput} />
+      </div>
+      <br />
+      <div className="statsComponent">
+        <HistogramStats resultInput={resultInput} />
+      </div>
+    </>
   );
 }
