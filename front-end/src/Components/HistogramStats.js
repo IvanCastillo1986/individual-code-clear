@@ -23,9 +23,11 @@ export default function HistogramStats(props) {
   ];
   const options = { fillColor: "#000000", strokeColor: "#000000" };
   return (
-    <div className="App">
+    <div className="histogram">
+      <div>
+        <p>Frequency</p>
+      </div>
       <div className="chart">
-        <p>Frequency of severity level</p>
         <Histogram
           xLabels={severityLevel}
           yValues={frequency}
