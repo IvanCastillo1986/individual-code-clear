@@ -31,9 +31,13 @@ export default function ParentComponent() {
         <Results resultInput={resultInput} />
       </div>
       <br />
-      <div className="statsComponent">
-        <HistogramStats resultInput={resultInput} />
-      </div>
+      {resultInput.length === 0 ? (
+        ""
+      ) : (
+        <div className="statsComponent">
+          <HistogramStats resultInput={resultInput} />
+        </div>
+      )}
     </>
   );
 }
