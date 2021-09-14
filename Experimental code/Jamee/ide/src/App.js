@@ -1,29 +1,37 @@
 /*eslint-disable*/
 import "./App.css";
-import React, { useState } from "react";
-import Histogram from "react-chart-histogram";
+import React, { useEffect, useState } from "react";
+import Editor from "@monaco-editor/react";
+import axios from "axios";
 
 function App() {
-  const severity = ["1", "2", "3", "4", "5"];
-  const frequency = [3, 4, 5, 1, 0];
-  const options = { fillColor: "#000000", strokeColor: "#000000" };
+  const [input, setInput] = useState({ code: "// your code here" });
+  const [output, setOutput] = useState([]);
+
+  const handleChange = (value, e) => {
+    setInput({ code: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:3333/eslint", input).then((response) => {
+      setOutput(response.data);
+    });
+  };
 
   return (
     <div className="App">
-      <div>
-        <p className="freq">Frequency</p>
-      </div>
-      <div className="chart">
-        <p>Error severity Histogram</p>
-        <Histogram
-          xLabels={severity}
-          yValues={frequency}
-          width="700"
-          height="100"
-          options={options}
+      <h2>Code Editor</h2>
+      <form action="" onSubmit={handleSubmit}>
+        <Editor
+          height="50vh"
+          className="Editor"
+          onChange={handleChange}
+          defaultLanguage="javascript"
+          defaultValue="// your code here"
         />
-        <p>Severity</p>
-      </div>
+        <input type="submit" value="Submit Code" />
+      </form>
     </div>
   );
 }
