@@ -1,0 +1,42 @@
+/* 
+    Use this CSS file to get a map of each component's dimensions
+*/
+
+.Home {
+    border: 2px solid red;
+}
+
+.ParentComponent {
+    border: 2px solid rgb(13, 255, 0);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 60vh;
+}
+
+.CodeEditor {
+    border: 2px solid orange;
+    width: 45%;
+}
+.CodeEditor form {
+    border: 2px solid blue;
+    text-align: center;
+}
+
+.Editor {
+    border: 2px solid rgb(255, 0, 255);
+    width: 100%;
+    height: 40vh;
+}
+
+.Results {
+    border: 2px solid rgb(0, 251, 255);
+    width: 45%;
+    overflow: auto;
+}
+.Results p {
+    border-bottom: 1px solid rgb(255, 0, 255);
+}
+.Results span {
+    display: block;
+}
