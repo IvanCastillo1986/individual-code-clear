@@ -6,15 +6,24 @@ import Editor from '@monaco-editor/react'
 export default function CodeEditor({ handleChange, handleSubmit }) {
 
 
+
+
     return (
         <div className='CodeEditor'>
             <h2>Code Editor</h2>
             <form action="" onSubmit={handleSubmit}>
                 <Editor 
+                // In the React docs, these are props
                     className='Editor'
                     onChange={handleChange}
                     defaultLanguage='javascript'
                     defaultValue='// some comment'
+                    theme='hc-black'
+                    options={{ // In the Monaco docs, this is accessed through IStandAloneEditorConstructionOptions
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        
+                    }}
                 />
                 <input type="submit" value="Submit Code" />
             </form>

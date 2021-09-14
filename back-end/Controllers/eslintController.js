@@ -7,7 +7,7 @@ eslint.get("/", (req, res) => {
 
 eslint.post("/", async (req, res) => {
     const lint = new ESLint();
-    const result = await lint.lintText(req.body.code);
+    const result = await lint.lintText(req.body.input);
     res.json({ result });
 })
 

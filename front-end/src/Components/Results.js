@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-export default function Results({ resultInput: result }) {
+export default function Results({ result }) {
 
     if (result.length === 0) {
         return (
@@ -16,7 +16,7 @@ export default function Results({ resultInput: result }) {
     return (
         <div className='Results'>
             <h2>Results</h2>
-            <ul>
+            <ol>
                 {
                     result ?
                     result.map((item, i) => {
@@ -24,6 +24,7 @@ export default function Results({ resultInput: result }) {
                         <li key={i}>
                             <span>Error on line {item.line}</span>
                             {item.endColumn ? <span>Columns {item.column} - {item.endColumn}</span> : <span>Column {item.column}</span>}
+                            <span>Severity level of {item.severity}</span>
                             <p>{item.message}</p>
                             <hr />
                         </li>
@@ -31,7 +32,7 @@ export default function Results({ resultInput: result }) {
                     })
                     : null
                 }
-            </ul>
+            </ol>
         </div>
     )
 }
