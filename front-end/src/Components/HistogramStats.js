@@ -2,7 +2,7 @@ import React from "react";
 import Histogram from "react-chart-histogram";
 
 export default function HistogramStats(props) {
-  const { resultInput } = props;
+  const { result } = props;
   let frequencyObj = {
     1: 0,
     2: 0,
@@ -10,7 +10,7 @@ export default function HistogramStats(props) {
     4: 0,
     5: 0,
   };
-  resultInput.map((elem) => {
+  result.map((elem) => {
     frequencyObj[elem.severity]++;
   });
   const severityLevel = ["1", "2", "3", "4", "5"];
