@@ -9,7 +9,7 @@ import axios from 'axios'
 export default function ParentComponent() {
 
     const [input, setInput] = useState({
-        name: ''
+        input: ''
     })
     const [resultInput, setResultInput] = useState([])
     const API = apiURL()
@@ -40,3 +40,5 @@ export default function ParentComponent() {
         </div>
     )
 }
+
+const hello = (hey, h) => {}
