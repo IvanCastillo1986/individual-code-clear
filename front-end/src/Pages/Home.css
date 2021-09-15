@@ -70,10 +70,10 @@
 .Results li {
   padding-top: 0;
 }
-.Results hr {
+/* .Results hr {
   border: 3px solid #f706cf;
   border-radius: 5px;
-}
+} */
 .Results p {
   color: #f9c80e;
 }
