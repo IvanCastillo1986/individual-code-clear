@@ -2,6 +2,7 @@ import React from "react";
 import Rating from "../rating/ratingStart";
 
 export default function Solution({ sol }) {
+  const todo = sol.length
   return (
     <div>
       {sol.length === 0 ? (
@@ -9,15 +10,7 @@ export default function Solution({ sol }) {
       ) : (
         <div>
           <div className="starts">
-            {sol
-              ? sol.map((starts, id) => {
-                  return (
-                    <div>
-                      <Rating value={starts} id={id} />
-                    </div>
-                  );
-                })
-              : null}
+              <Rating value={todo}  />
           </div>
           <div className="result">
             <ol>
