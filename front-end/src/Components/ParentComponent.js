@@ -26,7 +26,7 @@ export default function ParentComponent() {
   };
 
   return (
-    <>
+    <div className='part'>
       <div className="ParentComponent">
         <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
         <Results result={result} />
@@ -39,6 +39,7 @@ export default function ParentComponent() {
           <HistogramStats result={result} />
         </div>
       )}
-    </>
+      
+    </div>
   );
 }
