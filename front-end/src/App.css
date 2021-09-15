@@ -2,3 +2,24 @@ h1,
 h2 {
   text-align: center;
 }
+.enside {
+  margin: auto;
+  text-align: start;
+  width: 700px;
+  height: 440px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  color: black;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.enside::-webkit-scrollbar{
+  /* display: none; */
+}
+.enside p {
+  border-bottom: 1px solid rgb(255, 0, 255);
+}
+.enside span {
+  display: block;
+}

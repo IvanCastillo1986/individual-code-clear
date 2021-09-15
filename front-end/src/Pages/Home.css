@@ -51,11 +51,12 @@
 .Results {
   /* border: 2px solid rgb(0, 251, 255); */
   width: 40%;
-  overflow: auto;
+  /* overflow: scroll; */
 }
 .Results h3 {
   color: #f9c80e;
   text-align: center;
+ 
 }
 .Results ol li::marker {
   /* color: #F9C80E; */
@@ -80,6 +81,7 @@
   color: #f9c80e;
   display: block;
   text-align: left;
+  margin: -7px;
 }
 
 .statsComponent {

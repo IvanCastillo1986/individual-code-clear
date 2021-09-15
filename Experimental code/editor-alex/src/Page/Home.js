@@ -2,6 +2,7 @@ import React from "react";
 import Editor from "@monaco-editor/react";
 import { useState } from "react";
 import axios from "axios";
+// import { useHistory } from "react-router-dom";
 import { apiURL } from "../Util/apiURL";
 import { Link } from "react-router-dom";
 import Solution from "./Solution";
@@ -10,15 +11,27 @@ import Came from "./Came";
 const API_Dtbased = apiURL();
 
 export default function Home() {
-  const [input, setInput] = useState({ code: "//" });
+  // const history = useHistory();
+  const [input, setInput] = useState({ input: "//" });
   const [sol, setSol] = useState([]);
   const [fix, setFix] = useState("");
   const [last, setLast] = useState("");
+  // const [date, setDate] = useState({ name: "" });
 
   const handleInput = (value, e) => {
-    setInput({ code: value });
+    setInput({ input: value });
     setFix(value);
+    // setDate(value);
   };
+
+  // const handleInput2 = (value, e) => {
+  //   const {value} = e.target
+  //   setDate({ ...date, name: value});
+  // };
+  // const handleSubmit2 = (e) => {
+  //   e.preventDefault();
+  //   addCards(date);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,15 +46,28 @@ export default function Home() {
     console.log("handleSubmit");
   };
 
+  // const addCards = (new_card) => {
+  //   axios.post(`${API_Dtbased}/code`, new_card).then((res) => {
+  //     history.push("/");
+  //   });
+  // };
+  console.log(last, "da");
+  // console.log(date, "date");
   return (
     <div className="resultado">
-      <Link to={"/save"}>
+      <Link to={"/code"}>
         <img
           src={
             "https://www.vhv.rs/dpng/d/409-4098783_png-file-svg-home-icon-for-navbar-transparent.png"
           }
           alt="save"
-          style={{ width: "40px", height: "40px", borderRadius: "5px", marginTop: "-20px"}}
+          style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "5px",
+            marginTop: "-20px",
+          }}
+          // last={last}
           className="save"
         />
       </Link>
@@ -56,12 +82,18 @@ export default function Home() {
           className="edit"
         />
         {""}
-        <form onSubmit={handleSubmit}>
-          <button type="submit">Submit Code</button>
-        </form>
-        <Came last={last} />
+        <div>
+          <form onSubmit={handleSubmit}>
+            <button type="submit">Submit Code</button>
+          </form>
+          {/* <form onSubmit={handleSubmit2} >
+            <button type="submit">Save</button>
+          </form> */}
+        </div>
+        <Solution sol={sol} />
       </div>
-      <Solution sol={sol} />
+      <Came last={last} />
+     
     </div>
   );
 }
