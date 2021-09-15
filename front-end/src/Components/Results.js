@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Results({ result }) {
 
-
+  
   return (
     <div className="Results">
       {result.length === 0 ? (
@@ -19,8 +19,8 @@ export default function Results({ result }) {
       ) : (
         <div>
           <h2>Results</h2>
-          {/* <div className="enside"> */}
-            <ol className='enside'>
+          <div className="enside">
+            <ol>
               {result
                 ? result.map((item, id) => {
                     return (
@@ -41,7 +41,7 @@ export default function Results({ result }) {
                   })
                 : null}
             </ol>
-          {/* </div> */}
+          </div>
         </div>
       )}
     </div>
