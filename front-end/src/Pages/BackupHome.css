@@ -5,11 +5,7 @@
 .Home {
     border: 2px solid red;
 }
-.part{
 
-display: flex;
-flex-direction: column;
-}
 .ParentComponent {
     border: 2px solid rgb(13, 255, 0);
     display: flex;

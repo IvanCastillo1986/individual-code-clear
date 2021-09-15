@@ -51,7 +51,7 @@
 .Results {
   /* border: 2px solid rgb(0, 251, 255); */
   width: 40%;
-  overflow: auto;
+  /* overflow: scroll; */
 }
 .Results h3 {
   color: #f9c80e;

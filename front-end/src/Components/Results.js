@@ -6,9 +6,9 @@ export default function Results({ result }) {
       {result.length === 0 ? (
         <div>
           <h2>Results</h2>
-          <div style={{color: 'yellow',   marginTop: '20vh'}}>
-            <h3>Congrats! You have no errors.</h3>
-            <h3>You are a great coder!</h3>
+          <div style={{ marginTop: "20vh" }}>
+             <h3>Congrats! You have no errors.</h3>
+             <h3>You are a great coder!</h3>
           </div>
         </div>
       ) : (
