@@ -57,31 +57,15 @@
   color: #f9c80e;
   text-align: center;
 }
-.Results ul {
-  /* position: relative; */
-  /* list-style: none; */
-}
-ol li::marker {
+.Results ol li::marker {
   /* color: #F9C80E; */
   color: #F706CF;
   font-style: normal;
 }
-ol li {
+.Results ol li {
   padding-left: 15px;
 }
-/* ul li::before {
-    content: '\2022';
-    color: #F9C80E;
-    font-weight: bold;
-    display: inline-block;
-    margin-left: -1em;
-    width: 0;
-    top: 10px;
-    font-size: 30px;
-    font-style: normal;
-    position: absolute;
-    top: 1px;
-} */
+
 .Results li {
   padding-top: 0;
 }

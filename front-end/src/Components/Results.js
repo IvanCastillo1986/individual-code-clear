@@ -13,6 +13,7 @@ export default function Results({ result }) {
         </div>)
     }
     
+    
     return (
         <div className='Results'>
             <h2>Results</h2>
