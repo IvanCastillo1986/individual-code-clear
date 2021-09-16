@@ -12,7 +12,9 @@ export default function Home() {
 
     return (
         <div className='Home'>
-            <h1>Welcome to Code Clear!</h1>
+            <div className='Topbar'>
+                <h1>Welcome to Code Clear</h1>
+            </div>
             <ParentComponent />
         </div>
     )
