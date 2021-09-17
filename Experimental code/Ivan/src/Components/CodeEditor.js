@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Editor, { loader } from '@monaco-editor/react'
 
 
@@ -6,15 +6,33 @@ import Editor, { loader } from '@monaco-editor/react'
 export default function CodeEditor({ handleChange, handleSubmit }) {
 
     const editorRef = useRef(null)
+    const monacoRef = useRef(null)
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor
-        console.log(editorRef.current)
+        monacoRef.current = monaco
+        console.log('This is the Editor Instance: ', editorRef.current)
+        console.log('This is ALSO the monaco instance:: ', monacoRef.current)
+        monacoRef.current.editor.defineTheme('teamTheme', {
+            base: 'vs',
+            inherit: true,
+            rules: [{
+                // token: '',
+                // foreground: '',
+                // background: '',
+                // fontStyle: ''
+            }],
+            colors: {
+                'editor.background': '#000000',
+            }
+        })
     }
-    loader.init()
-    .then(monaco => console.log('This is the Monaco instance: ', monaco.editor))
 
-    console.log(Editor)
+    function showValue() {
+        alert(editorRef.current.getValue())
+        console.log(editorRef.current.getValue())
+    }
+
 
     return (
         <div className='CodeEditor'>
@@ -28,7 +46,7 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
                     defaultLanguage='javascript'
                     defaultValue='// some comment'
                     loading='Our App Will Change Your Life...'
-                    theme='hc-black'
+                    theme='teamTheme'
                     // theme='vs-dark'
                     options={{ // In the Monaco docs, this is accessed through IStandAloneEditorConstructionOptions
                         fontSize: '18px',
@@ -43,6 +61,7 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
                     onMount={handleEditorDidMount}
                 />
                 <input type="submit" value="Submit Code" />
+                <button onClick={showValue}>Get Value</button>
             </form>
         </div>
     )
