@@ -96,9 +96,11 @@ function DropdownMenu(props) {
         try {
             const { email, password } = userInfo;
             await userAccountSignIn(email, password);
+            // console.log(result, "==============")
             // if (!result)
             //     return;
-            // need to check
+            // need to look into here
+
             props.setOpen(false);
         } catch (error) {
             console.log(error);
