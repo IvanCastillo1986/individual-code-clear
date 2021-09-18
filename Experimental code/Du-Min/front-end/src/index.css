@@ -1,15 +1,14 @@
 html {
-  /* background: linear-gradient(#261447, #541388); */
-  height: 100%;
+  background: linear-gradient(#261447, #541388);
+  min-height: 100%;
 }
 
 body {
   margin: 0;
-  /* font: italic 1.5em impact; */
-  /* color: white; */
+  font: italic 1.5em impact;
   /* color: #F9C80E; */
   /* color: #FF4365; */
-  /* color: #FD1D53; */
+  color: #FD1D53;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
