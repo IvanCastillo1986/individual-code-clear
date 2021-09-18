@@ -8,9 +8,7 @@ export default function HistogramStats(props) {
     1: 0,
     2: 0,
   };
-  result.map((elem) => {
-    frequencyObj[elem.severity]++;
-  });
+  result.forEach(elem => frequencyObj[elem.severity]++);
   const severityLevel = ["0", "1", "2"];
   const frequency = [frequencyObj[0], frequencyObj[1], frequencyObj[2]];
   const options = { fillColor: "#000000", strokeColor: "#000000" };

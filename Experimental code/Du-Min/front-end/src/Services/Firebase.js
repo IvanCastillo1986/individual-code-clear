@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -10,3 +12,45 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+
+export const auth = getAuth();
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
+
+export const userSignUp = async (name, email, password, url) => {
+    try {
+        const credential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(credential.user, {
+            displayName: name,
+            photoURL: url
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const userAccountSignIn = async (email, password) => {
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const userProviderSignIn = async (providerName) => {
+    try {
+        const provider = providerName === "google" ? googleProvider : githubProvider;
+        await signInWithPopup(auth, provider);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const userSignOut = async () => {
+    try {
+        await signOut(auth);
+    } catch (err) {
+        console.log(err);
+    }
+}

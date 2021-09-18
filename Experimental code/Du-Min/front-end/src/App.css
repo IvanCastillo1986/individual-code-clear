@@ -20,7 +20,7 @@ Also we need to remove the vertical scrollbar from the bottom of the page.
   padding: 10px;
 }
 
-.enside::-webkit-scrollbar{
+.enside::-webkit-scrollbar {
   /* display: none; */
 }
 .enside p {
