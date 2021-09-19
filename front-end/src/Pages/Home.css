@@ -2,11 +2,13 @@
   color: #2ed2e6;
   background-color: rgb(13, 2, 33);
   box-shadow: 0 10px 15px #2ed2e6;
+  position: relative;
+  z-index: -1;
 }
 
 .Topbar h1 {
   margin-top: 0;
-  padding: 30px 0 20px 0;
+  padding-bottom: 20px;
   text-shadow: 3px 5px 2px #177a87, 4px 6px 2px #2ed2e6;
 }
 
@@ -56,40 +58,23 @@
 .Results h3 {
   color: #f9c80e;
   text-align: center;
- 
 }
-.Results ul {
-  /* position: relative; */
-  /* list-style: none; */
-}
-ol li::marker {
+.Results ol li::marker {
   /* color: #F9C80E; */
-  color: #F706CF;
+  color: #f706cf;
   font-style: normal;
 }
-ol li {
+.Results ol li {
   padding-left: 15px;
 }
-/* ul li::before {
-    content: '\2022';
-    color: #F9C80E;
-    font-weight: bold;
-    display: inline-block;
-    margin-left: -1em;
-    width: 0;
-    top: 10px;
-    font-size: 30px;
-    font-style: normal;
-    position: absolute;
-    top: 1px;
-} */
+
 .Results li {
   padding-top: 0;
 }
-.Results hr {
+/* .Results hr {
   border: 3px solid #f706cf;
   border-radius: 5px;
-}
+} */
 .Results p {
   color: #f9c80e;
 }

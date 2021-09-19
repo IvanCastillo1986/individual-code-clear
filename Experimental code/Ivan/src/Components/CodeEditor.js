@@ -1,11 +1,37 @@
-import React from 'react'
-import Editor from '@monaco-editor/react'
+import React, { useState, useRef, useEffect } from 'react'
+import Editor, { useMonaco } from '@monaco-editor/react'
 
 
 
-export default function CodeEditor({ handleChange, handleSubmit }) {
+export default function CodeEditor({ handleChange, handleSubmit, input }) {
 
+    const monacoObjects = useRef(null)
 
+    function handleEditorDidMount(editor, monaco) {
+        monacoObjects.current = { editor, monaco }
+        console.log('This is the monacoObjects useRef: ', monacoObjects)
+
+        monacoObjects.current.monaco.editor.defineTheme('teamTheme', {
+            base: 'hc-black',
+            inherit: true,
+            rules: [],
+            colors: {
+                'editor.background': '#261447',
+            }
+        })
+
+        monacoObjects.current.monaco.editor.setTheme('teamTheme')
+    }
+
+    const handleSelectionButton = () => {
+        monacoObjects.current.editor.setSelection({
+            startLineNumber: 1,
+            startColumn: 3,
+            endLineNumber: 1,
+            endColumn: 9
+        })
+        monacoObjects.current.editor.focus()
+    }
 
 
     return (
@@ -13,20 +39,23 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
             <h2>Code Editor</h2>
             <form action="" onSubmit={handleSubmit}>
                 <Editor 
-                // In the React docs, these are props
                     className='Editor'
+                    wrapperClassName='EditorWrapper'
                     onChange={handleChange}
                     defaultLanguage='javascript'
                     defaultValue='// some comment'
-                    theme='hc-black'
+                    loading='Our App Will Change Your Life...'
                     options={{ // In the Monaco docs, this is accessed through IStandAloneEditorConstructionOptions
                         fontSize: '18px',
                         fontWeight: 'bold',
-                        
+                        renderLineHighlight: 'gutter',
+                        rulers: [{column: 0, color: 'violet'}]
                     }}
+                    onMount={handleEditorDidMount}
                 />
                 <input type="submit" value="Submit Code" />
             </form>
+            <button onClick={handleSelectionButton}>Selection</button>
         </div>
     )
 }
@@ -58,8 +87,6 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
 
 
 
-
-
 // refs are used when we need to establish a direct connection between components and DOM elements
     // OR child components and their parent components.
 // refs can also be misused, so it's recommended that you use it sparingly.
@@ -67,3 +94,16 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
     // Manage focus, text selection, or media playback
     // Perform imperative animations
     // Integrate with third-party DOM libraries
+
+
+
+// The Editor border only appears after the Editor is done being loaded.
+    // My theory to display Splash Screen is that:
+    // When you pause the browser during Loading... , you can inspect the element
+    // You can see that the 'Loading...' is displayed inside of a div
+        // This div is the first child of EditorWrapper
+        // It is the sibling of the Editor <div>, which is not displayed yet
+    // If we can access the firstChild of EditorWrapper, we might be able to access the node
+    // at the point of which we can diplsya what we want with a ternary, before the 
+    // Editor is done being Loaded.
+

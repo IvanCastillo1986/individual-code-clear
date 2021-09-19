@@ -1,32 +1,108 @@
-.Home {
-    border: 2px solid red;
+.Topbar {
+  color: #2ed2e6;
+  background-color: rgb(13, 2, 33);
+  box-shadow: 0 10px 15px #2ed2e6;
+  position: relative;
+  z-index: -1;
+}
+
+.Topbar h1 {
+  margin-top: 0;
+  padding-bottom: 20px;
+  text-shadow: 3px 5px 2px #177a87, 4px 6px 2px #2ed2e6;
 }
 
 .ParentComponent {
-    border: 2px solid rgb(13, 255, 0);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    height: 60vh;
+  /* border: 2px solid rgb(13, 255, 0); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
 }
 
 .CodeEditor {
-    border: 2px solid orange;
-    width: 45%;
+  /* border: 2px solid orange; */
+  width: 50%;
 }
-
 .CodeEditor form {
-    border: 2px solid blue;
-    text-align: center;
+  /* border: 2px solid blue; */
+  text-align: center;
+  border: 5px ridge #f706cf;
+  padding: 0 0 15px 0;
+  box-sizing: border-box;
+}
+.CodeEditor form input[type="submit"] {
+  padding: 10px;
+  background-color: #f706cf;
+  /* color: #261447; */
+  /* color: rgb(13, 2, 33); */
+  color: white;
+  /* font: .8em impact; */
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
 }
 
 .Editor {
-    border: 2px solid rgb(255, 0, 255);
-    width: 100%;
-    height: 40vh;
+  /* border: 2px solid rgb(255, 0, 255); */
+  width: 100%;
+  height: 45vh;
+  padding: 5px;
 }
 
 .Results {
-    border: 2px solid rgb(0, 251, 255);
-    width: 45%;
+  /* border: 2px solid rgb(0, 251, 255); */
+  width: 40%;
+  /* overflow: scroll; */
+}
+.Results h3 {
+  color: #f9c80e;
+  text-align: center;
+}
+.Results ol li::marker {
+  /* color: #F9C80E; */
+  color: #f706cf;
+  font-style: normal;
+}
+.Results ol li {
+  padding-left: 15px;
+}
+
+.Results li {
+  padding-top: 0;
+}
+/* .Results hr {
+  border: 3px solid #f706cf;
+  border-radius: 5px;
+} */
+.Results p {
+  color: #f9c80e;
+}
+.Results span {
+  color: #f9c80e;
+  display: block;
+  text-align: left;
+  margin: -7px;
+}
+
+.statsComponent {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.histogram {
+  width: 900px;
+  background-color: honeydew;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
