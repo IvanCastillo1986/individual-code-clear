@@ -35,10 +35,8 @@ export default function ParentComponent() {
 
     return (
         <div className='ParentComponent'>
-            <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
+            <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} input={input}/>
             <Results resultInput={resultInput} />
         </div>
     )
 }
-
-const hello = (hey, h) => {}

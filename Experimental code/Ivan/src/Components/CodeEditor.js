@@ -1,36 +1,36 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Editor, { loader } from '@monaco-editor/react'
+import Editor, { useMonaco } from '@monaco-editor/react'
 
 
 
-export default function CodeEditor({ handleChange, handleSubmit }) {
+export default function CodeEditor({ handleChange, handleSubmit, input }) {
 
-    const editorRef = useRef(null)
-    const monacoRef = useRef(null)
+    const monacoObjects = useRef(null)
 
     function handleEditorDidMount(editor, monaco) {
-        editorRef.current = editor
-        monacoRef.current = monaco
-        console.log('This is the Editor Instance: ', editorRef.current)
-        console.log('This is ALSO the monaco instance:: ', monacoRef.current)
-        monacoRef.current.editor.defineTheme('teamTheme', {
-            base: 'vs',
+        monacoObjects.current = { editor, monaco }
+        console.log('This is the monacoObjects useRef: ', monacoObjects)
+
+        monacoObjects.current.monaco.editor.defineTheme('teamTheme', {
+            base: 'hc-black',
             inherit: true,
-            rules: [{
-                // token: '',
-                // foreground: '',
-                // background: '',
-                // fontStyle: ''
-            }],
+            rules: [],
             colors: {
-                'editor.background': '#000000',
+                'editor.background': '#261447',
             }
         })
+
+        monacoObjects.current.monaco.editor.setTheme('teamTheme')
     }
 
-    function showValue() {
-        alert(editorRef.current.getValue())
-        console.log(editorRef.current.getValue())
+    const handleSelectionButton = () => {
+        monacoObjects.current.editor.setSelection({
+            startLineNumber: 1,
+            startColumn: 3,
+            endLineNumber: 1,
+            endColumn: 9
+        })
+        monacoObjects.current.editor.focus()
     }
 
 
@@ -39,30 +39,23 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
             <h2>Code Editor</h2>
             <form action="" onSubmit={handleSubmit}>
                 <Editor 
-                // In the React docs, these are props
                     className='Editor'
                     wrapperClassName='EditorWrapper'
                     onChange={handleChange}
                     defaultLanguage='javascript'
                     defaultValue='// some comment'
                     loading='Our App Will Change Your Life...'
-                    theme='teamTheme'
-                    // theme='vs-dark'
                     options={{ // In the Monaco docs, this is accessed through IStandAloneEditorConstructionOptions
                         fontSize: '18px',
                         fontWeight: 'bold',
                         renderLineHighlight: 'gutter',
-                        rulers: [{column: 3, color: 'purple'}],
-                        selectionHighlight: false, // not sure
-                        columnSelection: false, // not sure
-                        // model: null  // This option stops React from automatically creating new model onMount
-                        showUnused: true, // not sure
+                        rulers: [{column: 0, color: 'violet'}]
                     }}
                     onMount={handleEditorDidMount}
                 />
                 <input type="submit" value="Submit Code" />
-                <button onClick={showValue}>Get Value</button>
             </form>
+            <button onClick={handleSelectionButton}>Selection</button>
         </div>
     )
 }
