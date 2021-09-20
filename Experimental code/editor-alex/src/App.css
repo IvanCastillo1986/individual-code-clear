@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #3d74e2;
 }
 
 .App-logo {
@@ -20,7 +21,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -59,7 +60,9 @@
   margin-bottom: 20px;
 }
 .resultado{
-  margin-top: -30px;;
+  margin-top: 90px;
+  background-color: #282c34;
+
 }
 .result{
   margin:auto;

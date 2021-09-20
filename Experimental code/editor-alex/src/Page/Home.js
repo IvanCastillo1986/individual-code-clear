@@ -12,15 +12,15 @@ const API_Dtbased = apiURL();
 
 export default function Home() {
   // const history = useHistory();
-  const [input, setInput] = useState({ input: "//" });
+  const [input, setInput] = useState({ input: "" });
   const [sol, setSol] = useState([]);
-  const [fix, setFix] = useState("");
+  // const [fix, setFix] = useState("");
   const [last, setLast] = useState("");
   // const [date, setDate] = useState({ name: "" });
 
   const handleInput = (value, e) => {
     setInput({ input: value });
-    setFix(value);
+    // setFix(value);
     // setDate(value);
   };
 
@@ -35,7 +35,6 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setLast(fix);
     try {
       axios.post(`${API_Dtbased}/eslint`, input).then((res) => {
         setSol(res.data.result[0].messages);
@@ -58,8 +57,7 @@ export default function Home() {
   //     history.push("/");
   //   });
   // };
-  console.log(sol, "da");
-  // console.log(date, "date");
+ 
   return (
     <div className="resultado">
       <Link to={"/code"}>
@@ -99,7 +97,7 @@ export default function Home() {
         </div>
         <div>
           <form onSubmit={handleFixSubmit}>
-            <button type="submit"> Code Fix</button>
+            <button type="submit"> Show </button>
           </form>
           {/* <form onSubmit={handleSubmit2} >
             <button type="submit">Save</button>
