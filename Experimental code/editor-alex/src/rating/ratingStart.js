@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react"
 import gray from "../images/startgray.png";
 import blue from "../images/startBlue.png";
 import yelow from "../images/startYelow.png";
@@ -23,7 +22,7 @@ export default function ratingStart({ value }) {
     const [whole, part] = parseFloat(value).toString().split(".");
     for (let i = 0; i < whole ; i++) starts.push(100) ;
 
-    if (part % 2 !== 0){} starts.push(50);
+    if (part % 2 !== 0){}starts.push(50);
     for (let i = whole; i < ( part ? 9 : 10); i++) starts.push(0);
     return starts
   };

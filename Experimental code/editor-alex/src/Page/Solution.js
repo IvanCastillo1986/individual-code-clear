@@ -3,6 +3,7 @@ import Rating from "../rating/ratingStart";
 
 export default function Solution({ sol }) {
   const todo = sol.length
+  console.log(sol.length)
   return (
     <div>
       {sol.length === 0 ? (
