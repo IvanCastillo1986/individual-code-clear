@@ -35,7 +35,7 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLast(fix);
+    // setLast(fix);
     try {
       axios.post(`${API_Dtbased}/eslint`, input).then((res) => {
         setSol(res.data.result[0].messages);
@@ -46,12 +46,19 @@ export default function Home() {
     console.log("handleSubmit");
   };
 
+  const handleFixSubmit = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:3333/eslint/fix", input).then((response) => {
+      setLast(response.data.fixedResult[0].output);
+    });
+  };
+
   // const addCards = (new_card) => {
   //   axios.post(`${API_Dtbased}/code`, new_card).then((res) => {
   //     history.push("/");
   //   });
   // };
-  console.log(last, "da");
+  console.log(sol, "da");
   // console.log(date, "date");
   return (
     <div className="resultado">
@@ -90,9 +97,17 @@ export default function Home() {
             <button type="submit">Save</button>
           </form> */}
         </div>
+        <div>
+          <form onSubmit={handleFixSubmit}>
+            <button type="submit"> Code Fix</button>
+          </form>
+          {/* <form onSubmit={handleSubmit2} >
+            <button type="submit">Save</button>
+          </form> */}
+        </div>
         <Solution sol={sol} />
       </div>
-      <Came last={last} />
+      {last ? <Came last={last} /> : null}
      
     </div>
   );
