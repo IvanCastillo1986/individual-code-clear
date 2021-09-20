@@ -1,0 +1,18 @@
+h1, h2 {
+  text-align: center;
+}
+img {
+  height: 100px;
+  width: auto;
+}
+.Navbar{
+  background-color: cyan;
+  display: flex;
+  align-items: center;
+}
+
+.Navbar-About{
+  color: aliceblue;
+  margin-left: 20px;
+  font-size: 100px;
+}
