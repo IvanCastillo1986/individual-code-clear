@@ -1,0 +1,19 @@
+html {
+  background: linear-gradient(#261447, #541388);
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font: italic 1.5em impact;
+  /* color: #F9C80E; */
+  /* color: #FF4365; */
+  color: #FD1D53;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
