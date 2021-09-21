@@ -90,19 +90,3 @@
   display: flex;
   justify-content: space-around;
 }
-
-.histogram {
-  width: 900px;
-  background-color: honeydew;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px;
-}
-
-.chart {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}

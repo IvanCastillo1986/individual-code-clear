@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import CodeEditor from "./CodeEditor";
 import Results from "./Results";
-import HistogramStats from "./HistogramStats";
+import Stats from "./Stats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
-
 export default function ParentComponent() {
-  const [input, setInput] = useState({ input: "// your code here" });
+  const [input, setInput] = useState({ input: "// your code here", date: "" });
   const [result, setResult] = useState([]);
   const API = apiURL();
   const handleChange = (value, e) => {
-    setInput({ input: value });
+    setInput({
+      ...input,
+      input: value,
+    });
+  };
+  const handleDateChange = (e) => {
+    setInput({
+      ...input,
+      date: e.target.value,
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,9 +34,14 @@ export default function ParentComponent() {
   };
 
   return (
-    <div className='part'>
+    <div className="part">
       <div className="ParentComponent">
-        <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
+        <CodeEditor
+          input={input}
+          handleChange={handleChange}
+          handleDateChange={handleDateChange}
+          handleSubmit={handleSubmit}
+        />
         <Results result={result} />
       </div>
       <br />
@@ -36,10 +49,9 @@ export default function ParentComponent() {
         ""
       ) : (
         <div className="statsComponent">
-          <HistogramStats result={result} />
+          <Stats result={result} />
         </div>
       )}
-      
     </div>
   );
 }
