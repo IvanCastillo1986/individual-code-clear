@@ -85,7 +85,7 @@ function App() {
           ]}
           options={{
             chart: {
-              title: "Annual Code quality chart",
+              title: "Annual 2021 code quality chart",
               subtitle: "Frequency",
             },
           }}
@@ -107,7 +107,7 @@ function App() {
             ["Unexpected spaces", 11],
           ]}
           options={{
-            title: "Daily Error/Warning breakdown",
+            title: "Daily code quality breakdown",
           }}
           rootProps={{ "data-testid": "1" }}
         />
@@ -119,11 +119,11 @@ function App() {
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Severity", "Warning", "Error"],
+            ["Severity", "Error", "Warning"],
             ["", 12, 23],
           ]}
           options={{
-            title: "Population of Largest U.S. Cities",
+            title: "Code issue severity",
             chartArea: { width: "50%" },
             colors: ["#b0120a", "#ffab91"],
             hAxis: {
