@@ -5,19 +5,13 @@ import axios from "axios";
 
 const API = apiURL();
 
-export default function Stats(props) {
+export default function GuestStats(props) {
   const { result } = props;
-  const [stats, setStats] = useState([]);
-  useEffect(() => {
-    axios.get(`${API}/stats`).then((response) => {
-      setStats(response.data.payload);
-    });
-  }, [result]);
   let frequencyObj = {
     1: 0,
     2: 0,
   };
-  stats.map((elem) => {
+  result.map((elem) => {
     frequencyObj[elem.severity]++;
   });
   return (
