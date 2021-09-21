@@ -1,7 +1,11 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
 
-export default function CodeEditor({ handleChange, handleSubmit }) {
+export default function CodeEditor({
+  handleChange,
+  handleSubmit,
+  handleEditorDidMount,
+}) {
   return (
     <div className="CodeEditor">
       <h2>Code Editor</h2>
