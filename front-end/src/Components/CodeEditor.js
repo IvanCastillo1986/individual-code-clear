@@ -6,6 +6,7 @@ export default function CodeEditor({
   handleChange,
   handleDateChange,
   handleSubmit,
+  handleEditorDidMount
 }) {
   return (
     <div className="CodeEditor">
@@ -16,6 +17,7 @@ export default function CodeEditor({
           onChange={handleChange}
           defaultLanguage="javascript"
           defaultValue="// your code here"
+          onMount={handleEditorDidMount}
         />
         <input
           type="date"
