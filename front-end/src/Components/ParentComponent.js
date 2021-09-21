@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CodeEditor from "./CodeEditor";
 import Results from "./Results";
-import Stats from "./Stats";
+import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
@@ -49,7 +49,7 @@ export default function ParentComponent() {
         ""
       ) : (
         <div className="statsComponent">
-          <Stats result={result} />
+          <GuestStats result={result} />
         </div>
       )}
     </div>
