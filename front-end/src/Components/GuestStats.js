@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
 import { apiURL } from "../util/apiURL";
-import axios from "axios";
 
 const API = apiURL();
 

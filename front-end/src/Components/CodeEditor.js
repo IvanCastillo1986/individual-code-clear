@@ -1,12 +1,7 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
 
-export default function CodeEditor({
-  input,
-  handleChange,
-  handleDateChange,
-  handleSubmit,
-}) {
+export default function CodeEditor({ handleChange, handleSubmit }) {
   return (
     <div className="CodeEditor">
       <h2>Code Editor</h2>
@@ -17,14 +12,6 @@ export default function CodeEditor({
           defaultLanguage="javascript"
           defaultValue="// your code here"
         />
-        <input
-          type="date"
-          id="date"
-          value={input.date}
-          onChange={handleDateChange}
-        />
-        <br />
-        <br />
         <input type="submit" value="Submit Code" />
       </form>
     </div>

@@ -9,9 +9,9 @@ eslint.get("/", (req, res) => {
 eslint.post("/", async (req, res) => {
   const lint = new ESLint();
   const result = await lint.lintText(req.body.input);
-  result[0].messages.forEach((elem) => {
-    elem.date = req.body.date;
-  });
+  // result[0].messages.forEach((elem) => {
+  //   elem.date = req.body.date;
+  // });
   await createStats(result[0].messages);
   res.json({ result });
 });

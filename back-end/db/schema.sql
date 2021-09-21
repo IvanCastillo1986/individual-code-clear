@@ -9,7 +9,7 @@ CREATE TABLE stats (
   email VARCHAR(100) UNIQUE,
   messageId TEXT NOT NULL,
   message TEXT NOT NULL,
-  date TEXT NOT NULL,
+  date TEXT,
   severity INT,
   rating INT
 );

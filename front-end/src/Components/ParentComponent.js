@@ -6,19 +6,13 @@ import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
 export default function ParentComponent() {
-  const [input, setInput] = useState({ input: "// your code here", date: "" });
+  const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState([]);
   const API = apiURL();
   const handleChange = (value, e) => {
     setInput({
       ...input,
       input: value,
-    });
-  };
-  const handleDateChange = (e) => {
-    setInput({
-      ...input,
-      date: e.target.value,
     });
   };
   const handleSubmit = (e) => {
@@ -36,12 +30,7 @@ export default function ParentComponent() {
   return (
     <div className="part">
       <div className="ParentComponent">
-        <CodeEditor
-          input={input}
-          handleChange={handleChange}
-          handleDateChange={handleDateChange}
-          handleSubmit={handleSubmit}
-        />
+        <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
         <Results result={result} />
       </div>
       <br />
