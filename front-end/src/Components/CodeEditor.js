@@ -11,6 +11,7 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
           onChange={handleChange}
           defaultLanguage="javascript"
           defaultValue="// your code here"
+          onMount={handleEditorDidMount}
         />
         <input type="submit" value="Submit Code" />
       </form>
