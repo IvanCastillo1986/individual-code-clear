@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-export default function Results({ resultInput }) {
+export default function Results({ resultInput, handleErrorClick }) {
 
     
     return (
@@ -12,7 +12,16 @@ export default function Results({ resultInput }) {
                 {
                     resultInput ?
                     resultInput.map((item, i) => {
-                        return <li key={i}>{item.message}</li>
+                        return (
+                        <li key={i} 
+                        data-column={item.column} 
+                        data-line={item.line} 
+                        data-end-line={item.endLine}
+                        data-end-column={item.endColumn}
+                        onClick={handleErrorClick}>
+                            {item.message}
+                        </li>
+                        )
                     })
                     : null
                 }

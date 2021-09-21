@@ -1,37 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Editor, { useMonaco } from '@monaco-editor/react'
+import React, { useRef } from 'react'
+import Editor from '@monaco-editor/react'
 
 
 
-export default function CodeEditor({ handleChange, handleSubmit, input }) {
-
-    const monacoObjects = useRef(null)
-
-    function handleEditorDidMount(editor, monaco) {
-        monacoObjects.current = { editor, monaco }
-        console.log('This is the monacoObjects useRef: ', monacoObjects)
-
-        monacoObjects.current.monaco.editor.defineTheme('teamTheme', {
-            base: 'hc-black',
-            inherit: true,
-            rules: [],
-            colors: {
-                'editor.background': '#261447',
-            }
-        })
-
-        monacoObjects.current.monaco.editor.setTheme('teamTheme')
-    }
-
-    const handleSelectionButton = () => {
-        monacoObjects.current.editor.setSelection({
-            startLineNumber: 1,
-            startColumn: 3,
-            endLineNumber: 1,
-            endColumn: 9
-        })
-        monacoObjects.current.editor.focus()
-    }
+export default function CodeEditor({ handleChange, handleSubmit, input, handleEditorDidMount }) {
 
 
     return (
@@ -55,7 +27,6 @@ export default function CodeEditor({ handleChange, handleSubmit, input }) {
                 />
                 <input type="submit" value="Submit Code" />
             </form>
-            <button onClick={handleSelectionButton}>Selection</button>
         </div>
     )
 }
