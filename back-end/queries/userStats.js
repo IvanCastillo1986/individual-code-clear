@@ -18,13 +18,18 @@ const getStat = async (id) => {
   }
 };
 
-const createStat = async (stat) => {
+const createStats = async (stats) => {
   try {
-    const newStat = await db.one(
-      "INSERT INTO stats (name, date, severity_level, rating) VALUES ($1, $2, $3, $4) RETURNING *",
-      [stat.name, stat.date, stat.severity_level, stat.rating]
-    );
-    return newStat;
+    const newStats = stats.map((elem) => {
+      const newStat = async () => {
+        return await db.one(
+          "INSERT INTO stats (messageId, message, date, severity, rating) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+          [elem.messageId, elem.message, elem.date, elem.severity, elem.rating]
+        );
+      };
+      return newStat();
+    });
+    return newStats;
   } catch (error) {
     return error;
   }
@@ -45,8 +50,8 @@ const deleteStat = async (id) => {
 const updateStat = async (id, stat) => {
   try {
     const updatedStat = await db.one(
-      "UPDATE stats SET name=$1, date=$2, severity_level=$3, rating=$4 WHERE id=$5 RETURNING *",
-      [stat.name, stat.date, stat.severity_level, stat.rating, id]
+      "UPDATE stats SET messageId=$1, message=$2, date=$3, severity=$4, rating=$5 WHERE id=$6 RETURNING *",
+      [stat.messageId, stat.message, stat.date, stat.severity, stat.rating, id]
     );
     return updatedStat;
   } catch (error) {
@@ -57,7 +62,7 @@ const updateStat = async (id, stat) => {
 module.exports = {
   getAllStats,
   getStat,
-  createStat,
+  createStats,
   deleteStat,
   updateStat,
 };

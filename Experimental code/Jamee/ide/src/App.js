@@ -6,14 +6,24 @@ import Chart from "react-google-charts";
 import axios from "axios";
 
 function App() {
-  const [input, setInput] = useState({ input: "// your code here" });
+  const [input, setInput] = useState({ input: "// your code here", date: "" });
   const [errorResult, setErrorResult] = useState([]);
   const [fixedCode, setFixedCode] = useState(
     "// your fixed code will show here"
   );
 
   const handleChange = (value, e) => {
-    setInput({ input: value });
+    setInput({
+      ...input,
+      input: value,
+    });
+  };
+
+  const handleDateChange = (e) => {
+    setInput({
+      ...input,
+      date: e.target.value,
+    });
   };
 
   const handleCodeSubmit = (e) => {
@@ -41,6 +51,12 @@ function App() {
             onChange={handleChange}
             defaultLanguage="javascript"
             defaultValue="// your code here"
+          />
+          <input
+            type="date"
+            id="date"
+            value={input.date}
+            onChange={handleDateChange}
           />
           <input type="submit" value="Submit Code" />
         </form>
