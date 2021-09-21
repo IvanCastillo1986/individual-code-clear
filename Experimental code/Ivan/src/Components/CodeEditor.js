@@ -3,7 +3,7 @@ import Editor from '@monaco-editor/react'
 
 
 
-export default function CodeEditor({ handleChange, handleSubmit, input, handleEditorDidMount }) {
+export default function CodeEditor({ handleChange, handleSubmit, handleEditorDidMount }) {
 
 
     return (

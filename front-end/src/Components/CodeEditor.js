@@ -3,7 +3,7 @@ import Editor from '@monaco-editor/react'
 
 
 
-export default function CodeEditor({ handleChange, handleSubmit }) {
+export default function CodeEditor({ handleChange, handleSubmit, handleEditorDidMount }) {
 
 
     return (
@@ -15,6 +15,7 @@ export default function CodeEditor({ handleChange, handleSubmit }) {
                     onChange={handleChange}
                     defaultLanguage='javascript'
                     defaultValue='// your code here'
+                    onMount={handleEditorDidMount}
                 />
                 <input type="submit" value="Submit Code" />
             </form>
