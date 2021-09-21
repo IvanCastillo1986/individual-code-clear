@@ -1,20 +1,27 @@
 import React, { useState, useRef } from "react";
 import CodeEditor from "./CodeEditor";
 import Results from "./Results";
-import HistogramStats from "./HistogramStats";
+import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
-
 export default function ParentComponent() {
-  const [test, setTest] = useState(null)
-  const [input, setInput] = useState({ input: "// your code here" });
+  const [input, setInput] = useState({ input: "// your code here", date: "" });
   const [result, setResult] = useState([]);
   const API = apiURL();
   const monacoObjects = useRef(null)
 
   const handleChange = (value, e) => {
-    setInput({ input: value });
+    setInput({
+      ...input,
+      input: value,
+    });
+  };
+  const handleDateChange = (e) => {
+    setInput({
+      ...input,
+      date: e.target.value,
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,11 +57,13 @@ export default function ParentComponent() {
   }
 
   return (
-    <div className='part'>
+    <div className="part">
       <div className="ParentComponent">
-        <CodeEditor 
-          handleChange={handleChange} 
-          handleSubmit={handleSubmit} 
+        <CodeEditor
+          input={input}
+          handleChange={handleChange}
+          handleDateChange={handleDateChange}
+          handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount} 
         />
         <Results result={result} handleErrorClick={handleErrorClick} />
@@ -64,10 +73,9 @@ export default function ParentComponent() {
         ""
       ) : (
         <div className="statsComponent">
-          <HistogramStats result={result} />
+          <GuestStats result={result} />
         </div>
       )}
-      
     </div>
   );
 }

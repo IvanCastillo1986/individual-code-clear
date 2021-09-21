@@ -1,9 +1,15 @@
-DROP DATABASE IF EXISTS test_dev;
-CREATE DATABASE test_dev;
-\c test_dev;
+DROP DATABASE IF EXISTS code_clear_dev;
+CREATE DATABASE code_clear_dev;
+\c code_clear_dev;
 
-DROP TABLE IF EXISTS test;
-CREATE TABLE test (
-    id SERIAL PRIMARY KEY, 
-    name TEXT
+DROP TABLE IF EXISTS stats;
+CREATE TABLE stats (
+  id SERIAL PRIMARY KEY, 
+  uid TEXT,
+  email VARCHAR(100) UNIQUE,
+  messageId TEXT NOT NULL,
+  message TEXT NOT NULL,
+  date TEXT NOT NULL,
+  severity INT,
+  rating INT
 );
