@@ -6,21 +6,15 @@ import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
 export default function ParentComponent() {
-  const [input, setInput] = useState({ input: "// your code here", date: "" });
+  const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState([]);
   const API = apiURL();
-  const monacoObjects = useRef(null)
+  const monacoObjects = useRef(null);
 
   const handleChange = (value, e) => {
     setInput({
       ...input,
       input: value,
-    });
-  };
-  const handleDateChange = (e) => {
-    setInput({
-      ...input,
-      date: e.target.value,
     });
   };
   const handleSubmit = (e) => {
@@ -35,7 +29,7 @@ export default function ParentComponent() {
     }
   };
   function handleEditorDidMount(editor, monaco) {
-    monacoObjects.current = { editor, monaco }
+    monacoObjects.current = { editor, monaco };
   }
 
   const handleErrorClick = (e) => {
@@ -44,29 +38,23 @@ export default function ParentComponent() {
         startLineNumber: Number(e.currentTarget.dataset.line),
         startColumn: Number(e.currentTarget.dataset.column),
         endLineNumber: Number(e.currentTarget.dataset.endLine),
-        endColumn: Number(e.currentTarget.dataset.endColumn)
-      })
+        endColumn: Number(e.currentTarget.dataset.endColumn),
+      });
     } else {
       monacoObjects.current.editor.setSelection({
         startLineNumber: Number(e.currentTarget.dataset.line),
         startColumn: Number(e.currentTarget.dataset.column),
         endLineNumber: Number(e.currentTarget.dataset.line),
-        endColumn: Number(e.currentTarget.dataset.column) + 1
-      })
+        endColumn: Number(e.currentTarget.dataset.column) + 1,
+      });
     }
-  }
+  };
 
   return (
     <div className="part">
       <div className="ParentComponent">
-        <CodeEditor
-          input={input}
-          handleChange={handleChange}
-          handleDateChange={handleDateChange}
-          handleSubmit={handleSubmit}
-          handleEditorDidMount={handleEditorDidMount} 
-        />
-        <Results result={result} handleErrorClick={handleErrorClick} />
+        <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} />
+        <Results result={result} />
       </div>
       <br />
       {result.length === 0 ? (
