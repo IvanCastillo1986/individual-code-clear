@@ -58,7 +58,7 @@ export default function ParentComponent() {
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
         />
-        <Results result={result} />
+        <Results result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
       {result.length === 0 ? (
