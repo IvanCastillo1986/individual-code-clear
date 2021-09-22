@@ -16,15 +16,16 @@ export default function ratingStart({ value }) {
     }
   };
 
-
   const getStart = (value) => {
     const starts = [];
     const [whole, part] = parseFloat(value).toString().split(".");
-    for (let i = 0; i < whole ; i++) starts.push(100) ;
+    for (let i = 0; i < whole; i++) starts.push(100);
 
-    if (part % 2 !== 0){}starts.push(50);
-    for (let i = whole; i < ( part ? 9 : 10); i++) starts.push(0);
-    return starts
+    if (part % 2 !== 0) {
+    }
+    starts.push(50);
+    for (let i = whole; i < (part ? 9 : 10); i++) starts.push(0);
+    return starts;
   };
 
   return (
