@@ -4,10 +4,12 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import Display from "./Display"
 
 export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState([]);
+  const [show, setShow] = useState("Show")
   const API = apiURL();
   const monacoObjects = useRef(null);
 
@@ -49,7 +51,14 @@ export default function ParentComponent() {
       });
     }
   };
-
+  const showButton = (e) => {
+    if (show === "Show"){
+      setShow("Hide")
+    }
+    else {
+      setShow("Show")
+    }
+  }  
   return (
     <div className="part">
       <div className="ParentComponent">
@@ -64,8 +73,15 @@ export default function ParentComponent() {
       {result.length === 0 ? (
         ""
       ) : (
-        <div className="statsComponent">
-          <GuestStats result={result} />
+        <div>
+          <div>
+            <input type="button" id="showbutton" value={show} onClick={showButton}/>
+          </div>
+          <div className="statsComponent">
+          
+            <Display show={show}/>
+            <GuestStats result={result} />
+          </div>
         </div>
       )}
     </div>
