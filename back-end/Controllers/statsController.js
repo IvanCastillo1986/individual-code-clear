@@ -2,7 +2,6 @@ const stats = require("express").Router();
 const {
   getAllStats,
   getStat,
-  createStat,
   deleteStat,
   updateStat,
 } = require("../queries/userStats");
@@ -22,26 +21,6 @@ stats.get("/", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       error: "Error",
-      message: e,
-    });
-  }
-});
-
-stats.post("/", async (req, res) => {
-  try {
-    const newStat = await createStat(req.body);
-    if (newStat["id"]) {
-      res.status(200).json({
-        success: true,
-        payload: newStat,
-      });
-    } else {
-      console.log(`Database error: ${newStat}`);
-      throw `Error adding ${req.body} to the database`;
-    }
-  } catch (e) {
-    res.status(404).json({
-      error: "Statistic not added",
       message: e,
     });
   }

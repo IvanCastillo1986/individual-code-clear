@@ -7,8 +7,9 @@ CREATE TABLE stats (
   id SERIAL PRIMARY KEY, 
   uid TEXT,
   email VARCHAR(100) UNIQUE,
-  name TEXT NOT NULL,
-  date TEXT NOT NULL,
-  severity_level INT,
+  messageId TEXT NOT NULL,
+  message TEXT NOT NULL,
+  date TEXT,
+  severity INT,
   rating INT
 );

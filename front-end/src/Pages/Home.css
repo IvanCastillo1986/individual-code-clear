@@ -27,16 +27,16 @@
 .CodeEditor form {
   /* border: 2px solid blue; */
   text-align: center;
-  border: 5px ridge #f706cf;
+  border: 5px ridge #2ed2e6;
   padding: 0 0 15px 0;
   box-sizing: border-box;
 }
 .CodeEditor form input[type="submit"] {
   padding: 10px;
-  background-color: #f706cf;
+  background-color: #2ed2e6;
   /* color: #261447; */
   /* color: rgb(13, 2, 33); */
-  color: white;
+  color: black;
   /* font: .8em impact; */
   font-weight: bold;
   border: none;
@@ -53,18 +53,17 @@
 .Results {
   /* border: 2px solid rgb(0, 251, 255); */
   width: 40%;
-  /* overflow: scroll; */
 }
 .Results h3 {
-  color: #f9c80e;
+  color: white;
   text-align: center;
 }
 .Results ol li::marker {
   /* color: #F9C80E; */
-  color: #f706cf;
-  font-style: normal;
+  color: #2ed2e6;
 }
 .Results ol li {
+  font-size: 22px;
   padding-left: 15px;
 }
 
@@ -76,33 +75,23 @@
   border-radius: 5px;
 } */
 .Results p {
-  color: #f9c80e;
+  color: white;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2ed2e6;
+  font-family: 'Lato', 'Lucida Grande', sans-serif;
+  font-weight: bold;
 }
 .Results span {
-  color: #f9c80e;
+  color: white;
   display: block;
   text-align: left;
   margin: -7px;
+  font-family: 'Lato', 'Lucida Grande';
+  font-weight: bold;
 }
 
 .statsComponent {
   padding: 10px;
   display: flex;
   justify-content: space-around;
-}
-
-.histogram {
-  width: 900px;
-  background-color: honeydew;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px;
-}
-
-.chart {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 }
