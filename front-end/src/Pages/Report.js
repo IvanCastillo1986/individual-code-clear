@@ -18,7 +18,7 @@ export default function Report(props) {
       <div className="padding">
         <Chart
           width={"1000px"}
-          height={"400px"}
+          height={"500px"}
           padding={"10px"}
           chartType="Line"
           loader={<div>Loading Chart</div>}
@@ -61,17 +61,17 @@ export default function Report(props) {
           <option value="Annually">Annually</option>
         </select>
         <Chart
-          width={"500px"}
-          height={"300px"}
+          width={"700px"}
+          height={"500px"}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={[
             ["Stat", "Frequency"],
-            ["Missing semicolons", 44],
-            ["Wrong string quotes", 23],
-            ["Wrong indentation", 179],
-            ["Unused variable", 22],
-            ["Unexpected spaces", 62],
+            ["Missing semicolons (WARNING)", 44],
+            ["Wrong string quotes (WARNING)", 23],
+            ["Wrong indentation (ERROR)", 179],
+            ["Unused variable (WARNING)", 22],
+            ["Unexpected spaces (ERROR)", 62],
           ]}
           options={{
             title: "Error/warning breakdown",
@@ -89,7 +89,7 @@ export default function Report(props) {
         </select>
         <Chart
           width={"700px"}
-          height={"300px"}
+          height={"500px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
