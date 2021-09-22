@@ -61,7 +61,7 @@ export default function Report(props) {
           <option value="Annually">Annually</option>
         </select>
         <Chart
-          width={"700px"}
+          width={"1000px"}
           height={"500px"}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
@@ -88,7 +88,7 @@ export default function Report(props) {
           <option value="Annually">Annually</option>
         </select>
         <Chart
-          width={"700px"}
+          width={"1000px"}
           height={"500px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
