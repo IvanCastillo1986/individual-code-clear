@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #3d74e2;
 }
 
 .App-logo {
@@ -20,7 +21,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -59,7 +60,9 @@
   margin-bottom: 20px;
 }
 .resultado{
-  margin-top: -30px;;
+  margin-top: 90px;
+  background-color: #282c34;
+
 }
 .result{
   margin:auto;
@@ -98,18 +101,22 @@ button {
   border-radius: 5px;
 }
 .btnSalvar{
-  margin-left: -200vh;
+  margin-left: -150vh;
 }
 .containersave{
   display: flex;
   flex-direction: column;
-  margin-top: -300px;
+  /* margin-top: -100px; */
   
 }
 .containersave div {
   background-color: white;
   width: 300px;
   height: 200px;
+}
+.containersave  p{
+  color: black;
+  font-size: 15px;
 }
 .save{
  margin-left: 170vh;

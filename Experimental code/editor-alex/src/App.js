@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Router>
+        <Router >
           <Switch>
             {!countInTimeout ? (
               <Route exact path="/">
@@ -40,9 +40,9 @@ function App() {
                 <h2 >Code Clear</h2>
               </div>
             )}
-            {/* <Route exact path="/code">
+            <Route exact path="/code">
               <Save />
-            </Route> */}
+            </Route>
           </Switch>
         </Router>
       </header>
