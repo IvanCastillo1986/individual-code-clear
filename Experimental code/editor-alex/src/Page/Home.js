@@ -13,7 +13,8 @@ export default function Home() {
   const [input, setInput] = useState({ input: "" });
   const [sol, setSol] = useState([]);
   const [last, setLast] = useState("");
- 
+  const [show, setShow] = useState('Show');
+
   const handleInput = (value, e) => {
     setInput({ input: value });
   };
@@ -37,11 +38,16 @@ export default function Home() {
     });
   };
 
-
+  const showButton = (e) => {
+    if (show === "Show") {
+      setShow("Hide");
+    } else {
+      setShow("Show");
+    }
+  };
   return (
     <div className="resultado">
-     
-      <Link to={"/code"} >
+      <Link to={"/code"}>
         <img
           src={
             "https://www.vhv.rs/dpng/d/409-4098783_png-file-svg-home-icon-for-navbar-transparent.png"
@@ -56,7 +62,7 @@ export default function Home() {
           className="save"
         />
       </Link>
-     
+
       <h3>Hello Coder</h3>
       <div className="Box">
         <Editor
@@ -73,9 +79,12 @@ export default function Home() {
           </form>
         </div>
         <div>
-          <form onSubmit={handleFixSubmit}>
-            <button type="submit"> Show </button>
-          </form>
+          <input
+            type="button"
+            id="showbutton"
+            value={show}
+            onClick={showButton}
+          />
         </div>
         <Solution sol={sol} />
       </div>
