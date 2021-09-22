@@ -36,11 +36,10 @@ export default function Results({ result, handleErrorClick }) {
                     data-end-column={item.endColumn}
                     onClick={handleErrorClick}
                     >
-                        <span>Error on line {item.line}</span> <br/>
                         {item.endColumn ? (
-                        <span> Columns {item.column} - {item.endColumn}</span>
+                        <span>Error on line {item.line}, columns {item.column} - {item.endColumn}</span>
                         ) : (
-                        <span> Column {item.column}</span>
+                        <span>Error on line {item.line}, column {item.column}</span>
                         )}
                         <br/>
                         <span>Severity level of {item.severity}</span>

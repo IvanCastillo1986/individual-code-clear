@@ -1,11 +1,12 @@
 html {
-  background: linear-gradient(#261447, #541388);
+  /* background: linear-gradient(#261447, #186f8374); */
+  background: linear-gradient(#261447d9, black);
   min-height: 100%;
 }
 
 body {
   margin: 0;
-  font: italic 1.5em impact;
+  font: 1.5em impact;
   /* color: #F9C80E; */
   /* color: #FF4365; */
   color: #FD1D53;

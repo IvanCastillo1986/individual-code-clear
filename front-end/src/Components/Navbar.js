@@ -1,4 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import { CSSTransition } from "react-transition-group";
 
 import { UserContext } from '../Providers/UserProvider';
@@ -30,6 +31,8 @@ export default function Navbar() {
     return (
         <nav className='navbar'>
             <ul className="navbar-nav">
+                <Link to='/'>Home</Link>
+                <Link to='/report'>Report</Link>
                 <li className="nav-item-msg">
                     {user ? `Hi ${user.displayName}!` : "Hello Guest."}
                 </li>
