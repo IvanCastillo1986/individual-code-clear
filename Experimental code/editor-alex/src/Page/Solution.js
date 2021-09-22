@@ -1,32 +1,51 @@
 import React from "react";
-import Rating from "../rating/ratingStart";
-import Rate from '../rating/rat'
+// import Rating from "../rating/ratingStart";
+// import Rate from '../rating/rat'
 import ReactStars from "react-rating-stars-component"
 
 
-export default function Solution({ sol }) {
-  const todo = sol.length
-  let count = 10
-  let total = (Math.round(todo * count)  / 100 ) %2
-  // const all = Math.round(total / 20) 
-  // const ratingChanged = () => {
-  //   if(total === 0){
-  //     return (total - 10)
-      
-  //   }
-  //   else if(total <= 5){
-  //     total = 9
-  //     return
-  //   }
-  //   else if(total <= 10){
-  //     total = 8
-  //     return
-  //   }
-  //   return
-  // }; 
 
-  console.log(total)
+export default function Solution({ sol }) {
  
+  const todo = sol.length
+  let total = (Math.round(todo * 10)  / 10 )
+
+  const ratingChanged = () => { 
+    if(total === 1){ total = 10 }
+    else if(total <= 2){ total = 9.5 }
+    else if(total <= 4){ total = 8.5 }
+    else if(total <= 6){ total = 8.0 }
+    else if(total <= 8){ total = 7.5 }
+    else if(total <= 10){ total = 6.5 }
+    else if(total <= 12){ total = 6.0 }
+    else if(total <= 14){ total = 5.5 }
+    else if(total <= 16){ total = 5.0 }
+    else if(total <= 18){ total = 4.5 }
+    else if(total <= 20){ total = 4.0 }
+    else if(total <= 22){ total = 3.5 }
+    else if(total <= 24){ total = 3.0 }
+    else if(total <= 26){ total = 2.5 }
+    else if(total <= 28){ total = 2.0 }
+    else if(total <= 30){ total = 1.5 }
+    else if(total <= 40){ total = 1.0 }
+    else if(total <= 50){ total = 0.5 }
+    else if(total <= 60){ total = 0.0 }
+    return 
+  }; 
+
+  const direct = ratingChanged(total)
+  let cuenta = `${total}%` 
+  const prueba = ()=>{
+    let level = '';
+    if(total <= 10 ){ level = "Great Job"}
+    if(total <= 8.0  && total > 6.0 ){ level = "Good"}
+    if(total <= 6.0 && total > 4.0 ){ level = "Fair"}
+    if(total <= 4.0 && total > 2.0 ){ level = "poor"}
+    if(total <= 2.0 && total > 0.5 ){ level = "Warnnig"}
+    if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again 👍🏽`)}
+    return level
+  }
+
   return (
     <div>
       {sol.length === 0 ? (
@@ -34,12 +53,9 @@ export default function Solution({ sol }) {
       ) : (
         <div>
           <div className="starts">
-              {/* <Rating value={todo}  /> */}
-              {/* <Rate value={todo} /> */}
               <ReactStars 
               count={10}
               value={total}
-             
               // char={''}
               color='gray'
               // activeColor='yelow'
@@ -49,9 +65,11 @@ export default function Solution({ sol }) {
               // emptyIcon={true}
               // filledIcon={true}
               // a11y={true}
-              // onChange={ratingChanged}
+              onChange={direct}
               />
-            
+           {/* {level} */}
+           <p style={{fontSize: '30px', marginTop: '4px', padding: '5px', marginLeft: '10px'}}>{cuenta}</p>
+           <p style={{fontSize: '25px',marginTop: '8px', padding: '4px'}}>{prueba()}</p>
           </div>
           <div className="result">
             <ol>
@@ -78,3 +96,17 @@ export default function Solution({ sol }) {
     </div>
   );
 }
+// switch(level){
+//   case 8.0: 
+//   return "Great Job";
+//   case 6.0: 
+//   return "Good";
+//   case 4.0: 
+//   return "Fair";
+//   case 2.0: 
+//   return "Poor";
+//   case 1.0: 
+//   return "Warnning";
+//   default:
+// }
+// return
