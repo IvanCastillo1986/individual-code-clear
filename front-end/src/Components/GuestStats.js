@@ -13,6 +13,7 @@ export default function GuestStats(props) {
   result.map((elem) => {
     frequencyObj[elem.severity]++;
   });
+  const total = frequencyObj["1"] + frequencyObj["2"];
   return (
     <div>
       <div>
@@ -22,13 +23,13 @@ export default function GuestStats(props) {
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Severity", "Error", "Warning"],
-            ["", frequencyObj["2"], frequencyObj["1"]],
+            ["Severity", "Error", "Warning", "Combined Total"],
+            ["", frequencyObj["2"], frequencyObj["1"], total],
           ]}
           options={{
-            title: "Code issue severity",
+            title: "Error/warning frequency chart",
             chartArea: { width: "50%" },
-            colors: ["#b0120a", "#ffab91"],
+            colors: ["#b0120a", "#ffab91", "#faebd7"],
             hAxis: {
               title: "Frequency",
               minValue: 0,
