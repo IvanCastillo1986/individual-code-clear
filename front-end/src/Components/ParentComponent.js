@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import CodeEditor from "./CodeEditor";
+import Editor from "@monaco-editor/react";
 import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
@@ -8,6 +9,8 @@ import axios from "axios";
 export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState([]);
+  const [last, setLast] = useState("");
+  const [show, setShow] = useState("Show");
   const API = apiURL();
   const monacoObjects = useRef(null);
 
@@ -31,6 +34,12 @@ export default function ParentComponent() {
   function handleEditorDidMount(editor, monaco) {
     monacoObjects.current = { editor, monaco };
   }
+  const handleFixSubmit = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:3333/eslint/fix", input).then((res) => {
+      setLast(res.data.fixedResult[0].output);
+    });
+  };
 
   const handleErrorClick = (e) => {
     if (e.currentTarget.dataset.endColumn) {
@@ -50,6 +59,14 @@ export default function ParentComponent() {
     }
   };
 
+  const showButton = (e) => {
+    if (show === "Show") {
+      setShow("Hide");
+    } else {
+      setShow("Show");
+    }
+  };
+
   return (
     <div className="part">
       <div className="ParentComponent">
@@ -61,6 +78,25 @@ export default function ParentComponent() {
         <Results result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
+
+      <form onSubmit={handleFixSubmit} >
+        <button type="submit" value={show} onClick={showButton} className="btnbtn-"> 
+          {show}
+        </button>
+      </form>
+
+      <div className='bothcomponent'>
+        <div>
+        {show === "Hide" ? (
+          <Editor
+            height="35vh"
+            width="70vh"
+            defaultLanguage="javascript"
+            value={last}
+            className="solution"
+          />
+        ) : null}</div>
+     
       {result.length === 0 ? (
         ""
       ) : (
@@ -68,6 +104,7 @@ export default function ParentComponent() {
           <GuestStats result={result} />
         </div>
       )}
+       </div>
     </div>
   );
 }

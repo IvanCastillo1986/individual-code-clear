@@ -85,7 +85,7 @@
   color: white;
   display: block;
   text-align: left;
-  margin: -7px;
+  /* margin: -7px; */
   font-family: "Lato", "Lucida Grande";
   font-weight: bold;
 }
@@ -94,6 +94,7 @@
   padding: 10px;
   display: flex;
   justify-content: space-around;
+ 
 }
 
 .charts {
@@ -101,4 +102,44 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.starts{
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  margin-left: 80px;
+  /* padding: 10px; */
+  width: 100%;
+}
+.bothcomponent{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-left: 30px;
+  position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+}
+
+.solution{
+  margin-top: 10px;
+}
+
+@keyframes example {
+  0%   {background-color:red; left:0px; top:0px;}
+  /* 25%  {background-color:yellow; left:200px; top:0px;} */
+  50%  {background-color:blue; left:200px; top:0px;}
+  /* 75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:200px;} */
+  /* 100%  {background-color:rgb(53, 209, 13); left:0px; right:200px;} */
+}
+.btnbtn-{
+  margin-left:30px;
+  border-radius: 15px;
+  font-size: 20px;
+}
+.btnbtn-::after{
+ background-color: purple transparent;
 }
