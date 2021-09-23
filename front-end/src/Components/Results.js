@@ -30,7 +30,7 @@ export default function Results({ result, handleErrorClick }) {
     else if(total <= 60){ total = 0.0 }
     return 
   }; 
-const img = (<img src={'https://youtu.be/MfylJy_nMbM'}alt="gift" />)
+
   const direct = ratingChanged(total)
   let cuenta = `${total}%` 
   const prueba = ()=>{
