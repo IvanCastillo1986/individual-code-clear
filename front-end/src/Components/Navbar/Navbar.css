@@ -40,11 +40,16 @@
 .navbar-nav a {
   font-weight: bold;
 }
+.navbar-nav > a:hover {
+  color: cornflowerblue;
+}
 .navbar-nav a:first-of-type {
   margin: 10px 0 0 25px;
 }
 .navbar-nav a:nth-of-type(2n) {
   margin: 10px 0 0 20px;
+}
+.navbar-center-space {
   flex-grow: 1;
 }
 
@@ -57,11 +62,19 @@
   font-size: larger;
 }
 
-.nav-item-msg {
+.msg-welcome,
+.msg-login {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
+}
+.msg-login {
+  cursor: pointer;
+  transition: filter 300ms;
+}
+.msg-login:hover {
+  color: cornflowerblue;
 }
 
 .icon-button {
@@ -182,7 +195,7 @@
 }
 
 .btn-new-acc {
-  margin: 20px 0px;
+  margin: 25px 0px;
   height: 35px;
   border-radius: 10px;
   font-size: large;
@@ -190,4 +203,58 @@
   background: none;
   background-color: #7bd3df;
   cursor: pointer;
+}
+.btn-new-acc:hover {
+  background-color: #59ecff;
+}
+
+.nav-hr {
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  padding: 0px;
+}
+
+.msg-error,
+.msg-success {
+  text-align: center;
+  margin: auto;
+}
+.msg-error {
+  color: rgb(255, 96, 96);
+}
+.msg-success {
+  color: rgb(96, 255, 152);
+}
+
+.page-delete {
+  display: flex;
+  flex-direction: column;
+  color: rgb(195, 50, 50);
+  gap: 0px;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.page-delete > * {
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+}
+
+.btn-delete-acc {
+  margin: 25px 0px;
+  height: 40px;
+  width: 80%;
+  border-radius: 10px;
+  color: rgb(234, 220, 220);
+  font-size: large;
+  font-weight: bold;
+  background: none;
+  background-color: #d94949;
+  cursor: pointer;
+}
+.btn-delete-acc:hover {
+  background-color: #fe6d6d;
 }
