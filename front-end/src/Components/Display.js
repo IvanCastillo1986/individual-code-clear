@@ -1,16 +1,16 @@
 import Editor from "@monaco-editor/react";
 import axios from "axios";
+import {apiURL} from "../util/apiURL";
 import React, { useEffect, useState } from "react";
 
-export default function Display({show}) {
-    console.log(show)
+export default function Display({show, input}) {
+    const API = apiURL();
     const [fixedCode, setFixedCode] = useState(
         "// your fixed code will show here"
       );
-      const [input, setInput] = useState({ input: "// your code here" });
       const handleFixSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3333/eslint/fix", input).then((response) => {
+        axios.post(`${API}/eslint/fix`, input).then((response) => {
           setFixedCode(response.data.fixedResult[0].output);
           console.log(fixedCode)
         });

@@ -67,7 +67,7 @@ export default function ParentComponent() {
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
         />
-        <Results result={result} handleErrorClick={handleErrorClick} />
+        <Results  result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
       {result.length === 0 ? (
@@ -79,7 +79,7 @@ export default function ParentComponent() {
           </div>
           <div className="statsComponent">
           
-            <Display show={show}/>
+            <Display input = {input} show={show}/>
             <GuestStats result={result} />
           </div>
         </div>
