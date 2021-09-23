@@ -17,6 +17,8 @@ import { ReactComponent as IcAddAcc } from "../../Assets/icons/add_account.svg";
 import { ReactComponent as IcGithub } from "../../Assets/icons/logo_github.svg";
 import { ReactComponent as IcGoogle } from "../../Assets/icons/logo_google.svg";
 import { ReactComponent as IcIdentity } from "../../Assets/icons/identity.svg";
+import { ReactComponent as IcPassword } from "../../Assets/icons/password.svg";
+import { ReactComponent as IcCloseAcc } from "../../Assets/icons/close_account.svg";
 
 export default function DropdownMenu(props) {
     const [activeMenu, setActiveMenu] = useState("main");
@@ -74,19 +76,19 @@ export default function DropdownMenu(props) {
             >
                 <div className="menu">
                     {props.user ? <>
-                        <DropdownItem goToMenu="update-name" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Name</DropdownItem>
+                        <DropdownItem goToMenu="update-name" leftIcon={<IcIdentity />} rightIcon={<IcArrowForward />}>Update Name</DropdownItem>
                         <DropdownItem goToMenu="update-email" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Email</DropdownItem>
                         <DropdownItem goToMenu="update-password" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Password</DropdownItem>
                         <DropdownItem leftIcon={<IcLogout />} clickAction={signOut}>Sign Out</DropdownItem>
-                        <DropdownItem goToMenu="delete-account" leftIcon={<IcIdentity />} rightIcon={<IcArrowForward />}>DELTE ACCOUNT</DropdownItem>
+                        <DropdownItem goToMenu="delete-account" leftIcon={<IcCloseAcc />} rightIcon={<IcArrowForward />}>DELTE ACCOUNT</DropdownItem>
                     </> : <>
                         <ItemSignIn userInfo={userInfo} setUserInfo={setUserInfo} error={error} />
-                        <DropdownItem leftIcon={<IcLogin />} clickAction={signInWithEmail}>Log In</DropdownItem>
-                        <DropdownItem leftIcon={<IcGoogle />} clickAction={() => signInWithProvider("google")}>Log In with Google</DropdownItem>
-                        <DropdownItem leftIcon={<IcGithub />} clickAction={() => signInWithProvider("github")}>Log In with GitHub</DropdownItem>
+                        <DropdownItem leftIcon={<IcLogin />} clickAction={signInWithEmail}>Sign In</DropdownItem>
+                        <DropdownItem leftIcon={<IcGoogle />} clickAction={() => signInWithProvider("google")}>Sign In with Google</DropdownItem>
+                        <DropdownItem leftIcon={<IcGithub />} clickAction={() => signInWithProvider("github")}>Sign In with GitHub</DropdownItem>
                         <DropdownItem goToMenu="sign-up" leftIcon={<IcAddAcc />} rightIcon={<IcArrowForward />}>Sign Up New Account</DropdownItem>
                         <hr className="nav-hr" />
-                        <DropdownItem goToMenu="forget-password" leftIcon={<IcLogin />} rightIcon={<IcArrowForward />}>Forget Password</DropdownItem>
+                        <DropdownItem goToMenu="forget-password" leftIcon={<IcPassword />} rightIcon={<IcArrowForward />}>Forget Password</DropdownItem>
                     </>}
                 </div>
             </CSSTransition >
