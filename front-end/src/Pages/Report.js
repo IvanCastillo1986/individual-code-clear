@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
+import { apiURL } from "../util/apiURL";
 import axios from "axios";
+
+const API = apiURL();
 
 export default function Report(props) {
   const [stats, setStats] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:3333/stats").then((response) => {
+    axios.get(`${API}/stats`).then((response) => {
       setStats(response.data.payload);
     });
   }, []);
