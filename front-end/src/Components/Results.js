@@ -30,7 +30,7 @@ export default function Results({ result, handleErrorClick }) {
     else if(total <= 60){ total = 0.0 }
     return 
   }; 
-
+const img = (<img src={'https://youtu.be/MfylJy_nMbM'}alt="gift" />)
   const direct = ratingChanged(total)
   let cuenta = `${total}%` 
   const prueba = ()=>{
@@ -40,7 +40,7 @@ export default function Results({ result, handleErrorClick }) {
     if(total <= 6.0 && total > 4.0 ){ level = "Fair"}
     if(total <= 4.0 && total > 2.0 ){ level = "poor"}
     if(total <= 2.0 && total > 0.5 ){ level = "Warnnig"}
-    if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again 👍🏽`)}
+    if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
   }
 
