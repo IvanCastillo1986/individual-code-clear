@@ -80,7 +80,7 @@ export default function DropdownMenu(props) {
                         <DropdownItem goToMenu="update-email" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Email</DropdownItem>
                         <DropdownItem goToMenu="update-password" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Password</DropdownItem>
                         <DropdownItem leftIcon={<IcLogout />} clickAction={signOut}>Sign Out</DropdownItem>
-                        <DropdownItem goToMenu="delete-account" leftIcon={<IcCloseAcc />} rightIcon={<IcArrowForward />}>DELTE ACCOUNT</DropdownItem>
+                        <DropdownItem goToMenu="delete-account" leftIcon={<IcCloseAcc />} rightIcon={<IcArrowForward />}>DELETE ACCOUNT</DropdownItem>
                     </> : <>
                         <ItemSignIn userInfo={userInfo} setUserInfo={setUserInfo} error={error} />
                         <DropdownItem leftIcon={<IcLogin />} clickAction={signInWithEmail}>Sign In</DropdownItem>
