@@ -15,7 +15,7 @@ export default function Report(props) {
   return (
     <div>
       <h1>Report Page</h1>
-      <div className="padding">
+      <div className="charts">
         <Chart
           width={"1000px"}
           height={"500px"}
@@ -53,7 +53,7 @@ export default function Report(props) {
         />
       </div>
       <br />
-      <div className="padding">
+      <div className="charts">
         <select name="" id="" value="">
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
@@ -80,7 +80,7 @@ export default function Report(props) {
         />
       </div>
       <br />
-      <div className="padding">
+      <div className="charts">
         <select name="" id="" value="">
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
