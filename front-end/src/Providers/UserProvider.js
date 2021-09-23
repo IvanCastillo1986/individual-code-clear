@@ -14,8 +14,7 @@ export const UserProvider = (props) => {
             while (!user.displayName) {
                 await user.reload();
             }
-            const { email, displayName, photoURL, uid } = user;
-            setUser({ email, displayName, photoURL, uid });
+            setUser(user);
         });
     }, []);
 

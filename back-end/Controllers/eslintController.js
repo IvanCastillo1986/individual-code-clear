@@ -9,9 +9,16 @@ eslint.get("/", (req, res) => {
 eslint.post("/", async (req, res) => {
   const lint = new ESLint();
   const result = await lint.lintText(req.body.input);
-  // result[0].messages.forEach((elem) => {
-  //   elem.date = req.body.date;
-  // });
+  result[0].messages.forEach((elem) => {
+    let dd = new Date().getDate() + "" + "/";
+    let mm = new Date().getMonth() + 1 + "" + "/";
+    let yyyy = new Date().getFullYear() + " ";
+    let hours = new Date().getHours() + "";
+    let minutes = new Date().getMinutes() + "";
+    let amPm = hours >= 12 ? " PM" : " AM";
+    let time = hours + ":" + minutes + amPm + " EST";
+    elem.date = mm + dd + yyyy + time;
+  });
   await createStats(result[0].messages);
   res.json({ result });
 });

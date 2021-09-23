@@ -105,7 +105,7 @@
   color: white;
   padding-bottom: 10px;
   border-bottom: 1px solid #2ed2e6;
-  font-family: 'Lato', 'Lucida Grande', sans-serif;
+  font-family: "Lato", "Lucida Grande", sans-serif;
   font-weight: bold;
 }
 .Results span {
@@ -113,7 +113,7 @@
   display: block;
   text-align: left;
   margin: -7px;
-  font-family: 'Lato', 'Lucida Grande';
+  font-family: "Lato", "Lucida Grande";
   font-weight: bold;
 }
 
@@ -123,4 +123,11 @@
   display: flex;
   justify-content: space-around;
   height:fit-content;
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
