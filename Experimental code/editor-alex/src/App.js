@@ -36,7 +36,7 @@ function App() {
             ) : (
               <div >
                 <h1>Welcome</h1>
-                {countInTimeout}
+               <div className='infinite'>{countInTimeout}</div>
                 <h2 >Code Clear</h2>
               </div>
             )}

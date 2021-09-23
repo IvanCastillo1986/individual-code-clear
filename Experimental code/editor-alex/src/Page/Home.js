@@ -13,7 +13,7 @@ export default function Home() {
   const [input, setInput] = useState({ input: "" });
   const [sol, setSol] = useState([]);
   const [last, setLast] = useState("");
-  const [show, setShow] = useState('Show');
+  const [show, setShow] = useState("Show");
 
   const handleInput = (value, e) => {
     setInput({ input: value });
@@ -45,6 +45,7 @@ export default function Home() {
       setShow("Show");
     }
   };
+
   return (
     <div className="resultado">
       <Link to={"/code"}>
@@ -77,18 +78,15 @@ export default function Home() {
           <form onSubmit={handleSubmit}>
             <button type="submit">Submit Code</button>
           </form>
+          <form onSubmit={handleFixSubmit}>
+            <button type="submit" value={show} onClick={showButton}>
+              {show}
+            </button>
+          </form>
         </div>
-        <div>
-          <input
-            type="button"
-            id="showbutton"
-            value={show}
-            onClick={showButton}
-          />
-        </div>
+        <div>{show === "Hide" ? <Came last={last} /> : null}</div>
         <Solution sol={sol} />
       </div>
-      {last ? <Came last={last} /> : null}
     </div>
   );
 }
