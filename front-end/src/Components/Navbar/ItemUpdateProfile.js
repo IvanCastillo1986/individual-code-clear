@@ -26,7 +26,7 @@ export default function ItemUpdateProfile({ user, profile, setOpen }) {
                 break;
             case "Password":
                 if (property.length < 6 || property !== confirmPassword)
-                    return setNotice({ ...notice, error: true, msg: "Invalid password" });
+                    return setNotice({ ...notice, error: true, msg: "Invalid password (Min 6 chars)" });
 
                 errorResult = await userUpdatePassword(user, property);
                 break;
