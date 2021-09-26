@@ -23,8 +23,14 @@ const createStats = async (stats) => {
     const newStats = stats.map((elem) => {
       const newStat = async () => {
         return await db.one(
-          "INSERT INTO stats (messageId, message, date, severity, rating) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-          [elem.messageId, elem.message, elem.date, elem.severity, elem.rating]
+          "INSERT INTO stats (messageId, message, source_code, severity, rating) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+          [
+            elem.messageId,
+            elem.message,
+            elem.source_code,
+            elem.severity,
+            elem.rating,
+          ]
         );
       };
       return newStat();
@@ -50,8 +56,15 @@ const deleteStat = async (id) => {
 const updateStat = async (id, stat) => {
   try {
     const updatedStat = await db.one(
-      "UPDATE stats SET messageId=$1, message=$2, date=$3, severity=$4, rating=$5 WHERE id=$6 RETURNING *",
-      [stat.messageId, stat.message, stat.date, stat.severity, stat.rating, id]
+      "UPDATE stats SET messageId=$1, message=$2, source_code=$3, severity=$4, rating=$5 WHERE id=$6 RETURNING *",
+      [
+        stat.messageId,
+        stat.message,
+        stat.source_code,
+        stat.severity,
+        stat.rating,
+        id,
+      ]
     );
     return updatedStat;
   } catch (error) {

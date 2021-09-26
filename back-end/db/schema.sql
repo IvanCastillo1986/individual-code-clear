@@ -9,7 +9,16 @@ CREATE TABLE stats (
   email VARCHAR(100) UNIQUE,
   messageId TEXT NOT NULL,
   message TEXT NOT NULL,
-  date TEXT,
+  source_code TEXT,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   severity INT,
   rating INT
 );
+
+-- DROP TABLE IF EXISTS projects;
+-- CREATE TABLE projects (
+--   id SERIAL PRIMARY KEY, 
+--   project_name TEXT NOT NULL,
+--   contents TEXT NOT NULL,
+--   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+-- )
