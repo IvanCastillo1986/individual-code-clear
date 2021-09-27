@@ -33,6 +33,17 @@ export default function ParentComponent() {
   };
   function handleEditorDidMount(editor, monaco) {
     monacoObjects.current = { editor, monaco };
+
+    console.log(monaco)
+    monaco.editor.defineTheme('TeamCodeClearDark', {
+      base: 'hc-black',
+      colors: {'editor.background': '#2E2735'},
+      inherit: true,
+      rules: [
+
+      ]
+    })
+    monaco.editor.setTheme('TeamCodeClearDark')
   }
   const handleFixSubmit = (e) => {
     e.preventDefault();
