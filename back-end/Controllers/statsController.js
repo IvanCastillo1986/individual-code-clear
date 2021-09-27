@@ -2,6 +2,7 @@ const stats = require("express").Router();
 const {
   getAllStats,
   getStat,
+  getByWeek,
   deleteStat,
   updateStat,
 } = require("../queries/userStats");
@@ -24,6 +25,16 @@ stats.get("/", async (req, res) => {
       message: e,
     });
   }
+});
+
+stats.post("/weekly", async (req, res) => {
+  try {
+    const weekly = await getByWeek(req.body);
+    res.status(200).json({
+      success: true,
+      payload: weekly,
+    });
+  } catch (error) {}
 });
 
 stats.get("/:id", async (req, res) => {

@@ -7,7 +7,7 @@ CREATE TABLE stats (
   id SERIAL PRIMARY KEY, 
   uid TEXT,
   email VARCHAR(100) UNIQUE,
-  messageId TEXT,
+  message_id TEXT,
   message TEXT,
   source_code TEXT,
   date TEXT DEFAULT CURRENT_DATE,
