@@ -10,7 +10,9 @@ CREATE TABLE stats (
   messageId TEXT NOT NULL,
   message TEXT NOT NULL,
   source_code TEXT,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date TEXT DEFAULT CURRENT_DATE,
+  week TEXT DEFAULT TO_CHAR(CURRENT_DATE, 'WW'),
+  time TEXT DEFAULT CURRENT_TIME,
   severity INT,
   rating INT
 );
