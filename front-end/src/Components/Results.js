@@ -7,7 +7,7 @@ export default function Results({ result, handleErrorClick }) {
 
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
-  
+  console.log(total)
   const ratingChanged = () => { 
     if(total === 1){ total = 10 }
     else if(total <= 2){ total = 9.5 }
@@ -28,17 +28,17 @@ export default function Results({ result, handleErrorClick }) {
     else if(total <= 40){ total = 1.0 }
     else if(total <= 50){ total = 0.5 }
     else if(total <= 60){ total = 0.0 }
-    return 
+    return
   }; 
-const img = (<img src={'https://youtu.be/MfylJy_nMbM'}alt="gift" />)
-  const direct = ratingChanged(total)
-  let cuenta = `${total}%` 
+
+  const direct = ratingChanged()
+  let cuenta = `${total}` 
   const prueba = ()=>{
     let level = '';
     if(total <= 10 ){ level = "Great Job"}
     if(total <= 8.0  && total > 6.0 ){ level = "Good"}
     if(total <= 6.0 && total > 4.0 ){ level = "Fair"}
-    if(total <= 4.0 && total > 2.0 ){ level = "poor"}
+    if(total <= 4.0 && total > 2.0 ){ level = "Poor"}
     if(total <= 2.0 && total > 0.5 ){ level = "Warnnig"}
     if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
@@ -99,7 +99,12 @@ const img = (<img src={'https://youtu.be/MfylJy_nMbM'}alt="gift" />)
               /> 
             
               <h6 style={{fontSize: '20px', marginTop: '4px', padding: '8px', marginLeft: '10px'}}>{cuenta}</h6>
-               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}}>{prueba()}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Great Job' ? "green-text" : null} >{prueba() === 'Great Job' ? "Great Job" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Good' ? "green-yelow-text" : null} >{prueba() === 'Good' ? "Good" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
+
               
               </div>
         </div>
