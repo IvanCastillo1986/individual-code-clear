@@ -1,3 +1,23 @@
+.red-text{
+color: red;
+}
+
+.green-text{
+  color: rgb(18, 247, 18);
+}
+
+.orange-text{
+  color: rgb(246, 135, 9);
+}
+
+.yelow-text{
+  color: rgb(227, 243, 6);
+}
+
+.green-yelow-text{
+  color: green;
+}
+
 .Topbar {
   color: #2ed2e6;
   background-color: rgb(13, 2, 33);
