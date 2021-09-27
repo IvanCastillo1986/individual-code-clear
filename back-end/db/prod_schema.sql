@@ -1,8 +1,11 @@
-\c production_database_name;
-
-DROP TABLE IF EXISTS test;
-
-CREATE TABLE test (
-    id SERIAL PRIMARY KEY, 
-    name TEXT
+DROP TABLE IF EXISTS stats;
+CREATE TABLE stats (
+  id SERIAL PRIMARY KEY, 
+  uid TEXT,
+  email VARCHAR(100) UNIQUE,
+  messageId TEXT NOT NULL,
+  message TEXT NOT NULL,
+  date TEXT,
+  severity INT,
+  rating INT
 );

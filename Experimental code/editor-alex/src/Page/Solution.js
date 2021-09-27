@@ -96,17 +96,3 @@ export default function Solution({ sol }) {
     </div>
   );
 }
-// switch(level){
-//   case 8.0: 
-//   return "Great Job";
-//   case 6.0: 
-//   return "Good";
-//   case 4.0: 
-//   return "Fair";
-//   case 2.0: 
-//   return "Poor";
-//   case 1.0: 
-//   return "Warnning";
-//   default:
-// }
-// return
