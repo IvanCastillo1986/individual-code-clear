@@ -1,6 +1,6 @@
 \c code_clear_dev;
 
-INSERT INTO stats ( messageId, message, date, week, severity, rating ) VALUES
+INSERT INTO stats ( message_id, message, date, week, severity, rating ) VALUES
 ('missingSemi', 'Missing semicolon.', '2021-01-02', '01', 1, 3),
 ('missingSemi', 'Missing semicolon.', '2021-01-03', '01', 1, 3),
 ('missingSemi', 'Missing semicolon.', '2021-01-05', '01', 1, 3),

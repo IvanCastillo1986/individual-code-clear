@@ -6,11 +6,21 @@ const API = apiURL();
 
 export default function Report(props) {
   const [stats, setStats] = useState([]);
+  const [input, setInput] = useState({
+    select: "",
+    date: "",
+  });
   useEffect(() => {
     axios.get(`${API}/stats`).then((response) => {
       setStats(response.data.payload);
     });
   }, []);
+  const handleChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.id]: [e.target.value],
+    });
+  };
   let errors = 241;
   let warnings = 89;
   const total = errors + warnings;
@@ -56,12 +66,23 @@ export default function Report(props) {
       </div>
       <br />
       <div className="charts">
-        <select name="" id="" value="">
+        <select
+          name=""
+          id="select"
+          value={input.select}
+          onChange={handleChange}
+        >
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
           <option value="Monthly">Monthly</option>
           <option value="Annually">Annually</option>
         </select>
+        <input
+          type="date"
+          id="date"
+          value={input.date}
+          onChange={handleChange}
+        />
         <Chart
           width={"1000px"}
           height={"500px"}
@@ -83,12 +104,23 @@ export default function Report(props) {
       </div>
       <br />
       <div className="charts">
-        <select name="" id="" value="">
+        <select
+          name=""
+          id="select"
+          value={input.select}
+          onChange={handleChange}
+        >
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
           <option value="Monthly">Monthly</option>
           <option value="Annually">Annually</option>
         </select>
+        <input
+          type="date"
+          id="date"
+          value={input.date}
+          onChange={handleChange}
+        />
         <Chart
           width={"1000px"}
           height={"500px"}
