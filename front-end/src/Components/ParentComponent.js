@@ -5,6 +5,7 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import Display from "./Display"
 
 export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
@@ -86,7 +87,7 @@ export default function ParentComponent() {
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
         />
-        <Results result={result} handleErrorClick={handleErrorClick} />
+        <Results  result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
 
@@ -111,8 +112,15 @@ export default function ParentComponent() {
       {result.length === 0 ? (
         ""
       ) : (
-        <div className="statsComponent">
-          <GuestStats result={result} />
+        <div>
+          <div>
+            <input type="button" id="showbutton" value={show} onClick={showButton}/>
+          </div>
+          <div className="statsComponent">
+          
+            <Display input = {input} show={show}/>
+            <GuestStats result={result} />
+          </div>
         </div>
       )}
        </div>
