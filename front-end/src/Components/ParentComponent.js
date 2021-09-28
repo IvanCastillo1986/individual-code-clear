@@ -6,8 +6,22 @@ import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 import Display from "./Display"
+import styled, { ThemeProvider } from 'styled-components'
+
+import { GlobalStyle , lightTheme, darkTheme } from "../styles/globalStyles"
+//import  Content  from './Components/Content.js' 
+import Toggle from "../styles/toggle"
+import Containered from './Containered'
+
+const Container = styled.div`
+
+max-width: 100%;
+margin: 10px auto 0;
+  
+`;
 
 export default function ParentComponent() {
+  
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
@@ -79,7 +93,9 @@ export default function ParentComponent() {
   };
 
   return (
-    <div className="part">
+   
+      <div className="part">
+     
       <div className="ParentComponent">
         <CodeEditor
           handleChange={handleChange}
@@ -104,6 +120,7 @@ export default function ParentComponent() {
             width="88vh"
             theme="vs-dark"
             defaultLanguage="javascript"
+            theme="vs-dark"
             value={last}
             className="solution"
           />
@@ -113,17 +130,19 @@ export default function ParentComponent() {
         ""
       ) : (
         <div>
-          {/* <div>
-            <input type="button" id="showbutton" value={show} onClick={showButton}/>
-          </div> */}
+          
           <div className="statsComponent">
           
-            {/* <Display input = {input} show={show}/> */}
+           
             <GuestStats result={result} />
           </div>
         </div>
       )}
        </div>
+ 
     </div>
+   
+        
+           
   );
 }

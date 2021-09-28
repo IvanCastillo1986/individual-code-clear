@@ -7,7 +7,7 @@ export default function Results({ result, handleErrorClick }) {
 
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
-  console.log(total)
+  
   const ratingChanged = () => { 
     if(total === 1){ total = 10 }
     else if(total <= 2){ total = 9.5 }
@@ -32,7 +32,7 @@ export default function Results({ result, handleErrorClick }) {
   }; 
 
   const direct = ratingChanged()
-  let cuenta = `${total}` 
+  let cuenta = `${total * 10}% ` 
   const prueba = ()=>{
     let level = '';
     if(total <= 10 ){ level = "Great Job"}
@@ -43,7 +43,7 @@ export default function Results({ result, handleErrorClick }) {
     if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
   }
-
+console.log(cuenta)
   return (
     <div className="Results">
       { result[0] === "Please submit your code" 

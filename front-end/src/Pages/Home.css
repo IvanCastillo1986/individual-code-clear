@@ -17,6 +17,9 @@
 .green-yelow-text {
   color: green;
 }
+.prueba:hover{ 
+  color: purple;
+}
 
 .Topbar {
   color: #2ed2e6;
@@ -119,12 +122,10 @@
   border: 3px solid #f706cf;
   border-radius: 5px;
 } */
-
 .Results span {
-  color: white;
   display: block;
   text-align: left;
-  /* margin: -7px; */
+
   font-family: "Lato", "Lucida Grande, sans-serif";
   font-weight: bold;
 }
@@ -157,10 +158,10 @@
 .starts {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
-  margin-left: 80px;
-  /* padding: 10px; */
+  flex-wrap: wrap;
+  margin-left: 130px;
   width: 100%;
+
 }
 .bothcomponent {
   display: flex;
@@ -178,31 +179,35 @@
   border: 5px ridge #2ed2e6;
 }
 
-@keyframes example {
+/* @keyframes example {
   0% {
     background-color: red;
     left: 0px;
     top: 0px;
   }
-  /* 25%  {background-color:yellow; left:200px; top:0px;} */
+  25%  {background-color:yellow; left:200px; top:0px;} 
   50% {
     background-color: blue;
     left: 200px;
     top: 0px;
   }
-  /* 75%  {background-color:green; left:0px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
   100% {background-color:red; left:0px; top:200px;} */
-  /* 100%  {background-color:rgb(53, 209, 13); left:0px; right:200px;} */
-}
+  /*100%  {background-color:rgb(53, 209, 13); left:0px; right:200px;}
+} */
 .btnbtn- {
   margin-left: 60px;
   border-radius: 15px;
   font-size: 20px;
 }
+
 .btnbtn-::after {
   background-color: purple transparent;
 }
-
+/* .btnbtn{ 
+  border-radius: 35px;
+  font-size: 20px;
+} */
 .reportForms {
   width: 500px;
   display: flex;

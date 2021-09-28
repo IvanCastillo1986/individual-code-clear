@@ -2,8 +2,8 @@
     Use this CSS file to get a map of each component's dimensions
 */
 
-.Home {
-    border: 2px solid red;
+.App {
+ background: linear-gradient(#261447d9, black);
 }
 
 .ParentComponent {
