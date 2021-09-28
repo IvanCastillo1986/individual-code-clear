@@ -40,9 +40,7 @@ export default function ParentComponent() {
       base: 'hc-black',
       colors: {'editor.background': '#2E2735'},
       inherit: true,
-      rules: [
-
-      ]
+      rules: []
     })
     monaco.editor.setTheme('TeamCodeClearDark')
   }
@@ -69,6 +67,7 @@ export default function ParentComponent() {
         endColumn: Number(e.currentTarget.dataset.column) + 1,
       });
     }
+    monacoObjects.current.editor.focus()
   };
 
   const showButton = (e) => {
