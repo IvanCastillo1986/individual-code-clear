@@ -7,7 +7,7 @@ export default function Results({ result, handleErrorClick }) {
 
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
-  console.log(total)
+  
   const ratingChanged = () => { 
     if(total === 1){ total = 10 }
     else if(total <= 2){ total = 9.5 }
@@ -32,7 +32,7 @@ export default function Results({ result, handleErrorClick }) {
   }; 
 
   const direct = ratingChanged()
-  let cuenta = `${total}` 
+  let cuenta = `${total * 10}% ` 
   const prueba = ()=>{
     let level = '';
     if(total <= 10 ){ level = "Great Job"}
@@ -43,10 +43,21 @@ export default function Results({ result, handleErrorClick }) {
     if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
   }
-
+console.log(cuenta)
   return (
     <div className="Results">
-      {result.length === 0 
+      { result[0] === "Please submit your code" 
+      ? 
+      (
+        <div>
+        <h2>Results</h2>
+        <div style={{ marginTop: "20vh" }}>
+           <h3>Please submit your code</h3>
+           <h3>in the code editor</h3>
+        </div>
+        </div>
+      ) :
+      result.length === 0 
       
       ? (
 
@@ -62,32 +73,6 @@ export default function Results({ result, handleErrorClick }) {
 
         <div>
           <h2>Results</h2>
-          <div className="enside">
-            <ol>
-              {result
-                ? result.map((item, id) => {
-                    return (
-                    <li key={id}
-                    data-column={item.column} 
-                    data-line={item.line} 
-                    data-end-line={item.endLine}
-                    data-end-column={item.endColumn}
-                    onClick={handleErrorClick}
-                    >
-                        {item.endColumn ? (
-                        <span>Error on line {item.line}, columns {item.column} - {item.endColumn}</span>
-                        ) : (
-                        <span>Error on line {item.line}, column {item.column}</span>
-                        )}
-                        <br/>
-                        <span>Severity level of {item.severity}</span>
-                        <p>{item.message}</p>
-                    </li>
-                    );
-                  })
-                : null}
-            </ol>
-          </div>
           <div className="starts" >
               <ReactStars 
               count={10}
@@ -104,9 +89,34 @@ export default function Results({ result, handleErrorClick }) {
                <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
                <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
                <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
+          </div>
 
-              
-              </div>
+          <div className="enside">
+            <ol>
+              {result
+                ? result.map((item, id) => {
+                    return (
+                    <li key={id}
+                    data-column={item.column} 
+                    data-line={item.line} 
+                    data-end-line={item.endLine}
+                    data-end-column={item.endColumn}
+                    onClick={handleErrorClick}
+                    >
+                        <span>{item.message}</span>
+                        {item.endColumn ? (
+                          <span>Line {item.line}, &nbsp; columns {item.column} - {item.endColumn}</span>
+                          ) : (
+                          <span>Line {item.line}, &nbsp; column {item.column}</span>
+                        )}
+                        <br />
+                        <span>Severity level of {item.severity}</span>
+                    </li>
+                    );
+                  })
+                : null}
+            </ol>
+          </div>
         </div>
       )}
     </div>
