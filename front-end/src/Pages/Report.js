@@ -9,7 +9,8 @@ export default function Report(props) {
   const [input, setInput] = useState({
     pieChart: "",
     barChart: "",
-    date: "",
+    pieDate: "",
+    barDate: "",
   });
   const [pieChart, setPieChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
@@ -21,12 +22,12 @@ export default function Report(props) {
   const handleChange = (e) => {
     setInput({
       ...input,
-      [e.target.id]: [e.target.value],
+      [e.target.id]: e.target.value,
     });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input[e.target.id][0] === "Weekly") {
+    if (input[e.target.id] === "Weekly") {
       axios.post(`${API}/stats/weekly`, input.date).then((response) => {
         e.target.id === "pieChart"
           ? setPieChart(response.data)
@@ -81,7 +82,7 @@ export default function Report(props) {
       <br />
       <div className="charts">
         <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
-          <select id="pieChart" value={input.select1} onChange={handleChange}>
+          <select id="pieChart" value={input.pieChart} onChange={handleChange}>
             <option value="--">--</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
@@ -90,8 +91,8 @@ export default function Report(props) {
           </select>
           <input
             type="date"
-            id="date"
-            value={input.date}
+            id="pieDate"
+            value={input.pieDate}
             onChange={handleChange}
           />
           <input type="submit" value="Get Data" />
@@ -119,7 +120,7 @@ export default function Report(props) {
       <br />
       <div className="charts">
         <form className="reportForms" id="barChart" onSubmit={handleSubmit}>
-          <select id="barChart" value={input.select2} onChange={handleChange}>
+          <select id="barChart" value={input.barChart} onChange={handleChange}>
             <option value="--">--</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
@@ -128,8 +129,8 @@ export default function Report(props) {
           </select>
           <input
             type="date"
-            id="date"
-            value={input.date}
+            id="barDate"
+            value={input.barDate}
             onChange={handleChange}
           />
           <input type="submit" value="Get Data" />
