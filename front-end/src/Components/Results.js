@@ -7,7 +7,7 @@ export default function Results({ result, handleErrorClick }) {
 
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
-  console.log(total)
+  
   const ratingChanged = () => { 
     if(total === 1){ total = 10 }
     else if(total <= 2){ total = 9.5 }
@@ -61,7 +61,23 @@ export default function Results({ result, handleErrorClick }) {
       ) : (
 
         <div>
-          <h2>Results</h2>
+          <h2>Results</h2><div className="starts" >
+              <ReactStars 
+              count={10}
+              value={total}
+              color='gray'
+              size={35}
+              isHalf={true}
+              onChange={direct}
+              /> 
+            
+              <h6 style={{fontSize: '20px', marginTop: '4px', padding: '8px', marginLeft: '10px'}}>{cuenta}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Great Job' ? "green-text" : null} >{prueba() === 'Great Job' ? "Great Job" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Good' ? "green-yelow-text" : null} >{prueba() === 'Good' ? "Good" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
+               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
+              </div>
           <div className="enside">
             <ol>
               {result
@@ -88,25 +104,7 @@ export default function Results({ result, handleErrorClick }) {
                 : null}
             </ol>
           </div>
-          <div className="starts" >
-              <ReactStars 
-              count={10}
-              value={total}
-              color='gray'
-              size={35}
-              isHalf={true}
-              onChange={direct}
-              /> 
-            
-              <h6 style={{fontSize: '20px', marginTop: '4px', padding: '8px', marginLeft: '10px'}}>{cuenta}</h6>
-               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Great Job' ? "green-text" : null} >{prueba() === 'Great Job' ? "Great Job" : null}</h6>
-               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Good' ? "green-yelow-text" : null} >{prueba() === 'Good' ? "Good" : null}</h6>
-               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
-               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
-               <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
-
-              
-              </div>
+          
         </div>
       )}
     </div>

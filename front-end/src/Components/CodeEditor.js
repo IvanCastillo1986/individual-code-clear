@@ -14,6 +14,7 @@ export default function CodeEditor({
           className="Editor"
           onChange={handleChange}
           defaultLanguage="javascript"
+          theme="vs-dark"
           defaultValue="// your code here"
           onMount={handleEditorDidMount}
         />

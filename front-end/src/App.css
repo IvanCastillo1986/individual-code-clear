@@ -2,18 +2,21 @@ h1,
 h2 {
   text-align: center;
 }
-
+.toggle {
+  margin-left: 150px;
+}
 /* 
 Can we merge this CSS into the Home.css file so that they aren't competing?
 */
 .enside {
-  margin: auto;
+  margin: -15px;
+  margin-left: 50px;
   text-align: start;
   width: 500px;
-  height: 440px;
+  height: 400px;
   overflow-y: scroll;
   border-radius: 5px;
-  color: black;
+  /* color: black; */
   margin-bottom: 20px;
   padding: 10px;
 }
@@ -26,11 +29,11 @@ Can we merge this CSS into the Home.css file so that they aren't competing?
   box-shadow: inset 0 0 5px grey; 
   border-radius: 8px;
 }
-.enside::-webkit-scrollbar-thumb{
+/* .enside::-webkit-scrollbar-thumb{
   background: red; 
   border-radius: 10px;
   height: 100px;
-}
+} */
 .enside::-webkit-scrollbar-thumb:hover{
   background: linear-gradient(gray, red, white) ;
 }
