@@ -62,32 +62,6 @@ export default function Results({ result, handleErrorClick }) {
 
         <div>
           <h2>Results</h2>
-          <div className="enside">
-            <ol>
-              {result
-                ? result.map((item, id) => {
-                    return (
-                    <li key={id}
-                    data-column={item.column} 
-                    data-line={item.line} 
-                    data-end-line={item.endLine}
-                    data-end-column={item.endColumn}
-                    onClick={handleErrorClick}
-                    >
-                        {item.endColumn ? (
-                        <span>Error on line {item.line}, columns {item.column} - {item.endColumn}</span>
-                        ) : (
-                        <span>Error on line {item.line}, column {item.column}</span>
-                        )}
-                        <br/>
-                        <span>Severity level of {item.severity}</span>
-                        <p>{item.message}</p>
-                    </li>
-                    );
-                  })
-                : null}
-            </ol>
-          </div>
           <div className="starts" >
               <ReactStars 
               count={10}
@@ -104,9 +78,34 @@ export default function Results({ result, handleErrorClick }) {
                <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
                <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
                <h6 style={{fontSize: '20px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
+          </div>
 
-              
-              </div>
+          <div className="enside">
+            <ol>
+              {result
+                ? result.map((item, id) => {
+                    return (
+                    <li key={id}
+                    data-column={item.column} 
+                    data-line={item.line} 
+                    data-end-line={item.endLine}
+                    data-end-column={item.endColumn}
+                    onClick={handleErrorClick}
+                    >
+                        <span>{item.message}</span>
+                        {item.endColumn ? (
+                          <span>Line {item.line}, &nbsp; columns {item.column} - {item.endColumn}</span>
+                          ) : (
+                          <span>Line {item.line}, &nbsp; column {item.column}</span>
+                        )}
+                        <br />
+                        <span>Severity level of {item.severity}</span>
+                    </li>
+                    );
+                  })
+                : null}
+            </ol>
+          </div>
         </div>
       )}
     </div>
