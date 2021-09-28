@@ -46,7 +46,18 @@ export default function Results({ result, handleErrorClick }) {
 
   return (
     <div className="Results">
-      {result.length === 0 
+      { result[0] === "Please submit your code" 
+      ? 
+      (
+        <div>
+        <h2>Results</h2>
+        <div style={{ marginTop: "20vh" }}>
+           <h3>Please submit your code</h3>
+           <h3>in the code editor</h3>
+        </div>
+        </div>
+      ) :
+      result.length === 0 
       
       ? (
 

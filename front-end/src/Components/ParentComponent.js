@@ -9,7 +9,7 @@ import Display from "./Display"
 
 export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
   const [show, setShow] = useState("Show");
   const API = apiURL();
@@ -86,7 +86,7 @@ export default function ParentComponent() {
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
         />
-        <Results  result={result} handleErrorClick={handleErrorClick} />
+        <Results  input = {input} result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
 
