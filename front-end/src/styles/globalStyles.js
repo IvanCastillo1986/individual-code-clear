@@ -4,16 +4,19 @@ export const GlobalStyle = createGlobalStyle`
  body{
      background: ${({ theme}) => theme.body};
      color: ${({ theme}) => theme.text};
-     transition: all 7s linear;
+     transition: all 1s linear;
      color: ${({ theme}) => theme.h2};
-     marginTop: 300px;
+     
  }
 
 ::-webkit-scrollbar-thumb{
     background: ${({ theme}) => theme.backgroundcolor};
     border-radius: 8px;
-    transition: all 3s linear;
     
+}
+::-webkit-scrollbar-track {
+    background: #a9a9a96e;
+    border-radius: 8px;
 }
 p {
     color: ${({ theme}) => theme.text};
@@ -21,11 +24,14 @@ p {
 }
 span {
     color: ${({ theme}) => theme.text};
+    margin: auto;
 }
 Containered {
-    background-color: ${({ theme }) => theme.background};
-    background: 'white';
-
+    background: ${({ theme}) => theme.backgroundcolor};
+}
+button {
+    border-radius: 35px;
+    font-size: 20px;
 }
 `;
 
@@ -33,7 +39,7 @@ export const lightTheme = {
     body: 'linear-gradient( #261447d9, black)',
     text: '#fff',
     textshadow: '3px 5px 2px #177a87, 4px 6px 2px #2ed2e6',
-    backgroundcolor: 'red',
+    backgroundcolor: 'gray',
     background: "black",
     h2: 'red',
     boxshadow: 'inset 0 0 5px grey',

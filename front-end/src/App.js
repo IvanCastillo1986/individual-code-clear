@@ -42,18 +42,11 @@ export default function App() {
       <UserProvider>
         <Router>
           <Navbar />
-          {/* <Containered /> */}
           <Switch>
             {!countInTimeout ? (
-              // <ThemeProvider theme={ themeMode }>
-              //     <Container>
-              //     <GlobalStyle />
-              //     <Toggle theme={theme} toggleTheme={toggleTheme} />
-                  <Route exact path="/" component={Home} />
-              // </Container>
-              // </ThemeProvider>
+                  <Route exact path="/"  component={Home}  className="App" />  
             ) : (
-              <div className="Home">
+              <div className="App" >
                 <h1>Welcome</h1>
                 <div className="infinite">{countInTimeout}</div>
                 <h2>Code Clear</h2>

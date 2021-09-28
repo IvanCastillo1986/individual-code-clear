@@ -21,15 +21,16 @@ export default function Home() {
 
   return (
     <>
-      <Containered />
-      <div>
+      <>
+        <Containered />
+      </>
+
+      <div className="Home">
         <ThemeProvider theme={themeMode}>
           <Container>
             <GlobalStyle />
             <Toggle theme={theme} toggleTheme={toggleTheme} />
-            <div className="Home">
-              <ParentComponent />
-            </div>
+            <ParentComponent />
           </Container>
         </ThemeProvider>
       </div>

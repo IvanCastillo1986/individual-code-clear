@@ -3,8 +3,7 @@
 */
 
 .App {
-    /* border: 2px solid red; */
-      background: linear-gradient(#261447d9, black);
+ background: linear-gradient(#261447d9, black);
 }
 
 .ParentComponent {

@@ -26,7 +26,7 @@ Can we merge this CSS into the Home.css file so that they aren't competing?
   width: 20px;
 }
 .enside::-webkit-scrollba-track{
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px #a9a9a96e; 
   border-radius: 8px;
 }
 /* .enside::-webkit-scrollbar-thumb{

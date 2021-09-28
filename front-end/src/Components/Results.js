@@ -32,7 +32,7 @@ export default function Results({ result, handleErrorClick }) {
   }; 
 
   const direct = ratingChanged()
-  let cuenta = `${total}` 
+  let cuenta = `${total * 10}% ` 
   const prueba = ()=>{
     let level = '';
     if(total <= 10 ){ level = "Great Job"}
@@ -43,10 +43,21 @@ export default function Results({ result, handleErrorClick }) {
     if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
   }
-
+console.log(cuenta)
   return (
     <div className="Results">
-      {result.length === 0 
+      { result[0] === "Please submit your code" 
+      ? 
+      (
+        <div>
+        <h2>Results</h2>
+        <div style={{ marginTop: "20vh" }}>
+           <h3>Please submit your code</h3>
+           <h3>in the code editor</h3>
+        </div>
+        </div>
+      ) :
+      result.length === 0 
       
       ? (
 
@@ -61,7 +72,8 @@ export default function Results({ result, handleErrorClick }) {
       ) : (
 
         <div>
-          <h2>Results</h2><div className="starts" >
+          <h2>Results</h2>
+          <div className="starts" >
               <ReactStars 
               count={10}
               value={total}

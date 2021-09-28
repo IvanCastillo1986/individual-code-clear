@@ -67,6 +67,7 @@ export default function ParentComponent() {
                 endColumn: Number(e.target.dataset.column) + 1
             })
         }
+        monacoObjects.current.editor.focus()
     }
 
 

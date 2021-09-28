@@ -23,7 +23,7 @@ margin: 10px auto 0;
 export default function ParentComponent() {
   
   const [input, setInput] = useState({ input: "// your code here" });
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
   const [show, setShow] = useState("Show");
   const API = apiURL();
@@ -54,9 +54,7 @@ export default function ParentComponent() {
       base: 'hc-black',
       colors: {'editor.background': '#2E2735'},
       inherit: true,
-      rules: [
-
-      ]
+      rules: []
     })
     monaco.editor.setTheme('TeamCodeClearDark')
   }
@@ -83,6 +81,7 @@ export default function ParentComponent() {
         endColumn: Number(e.currentTarget.dataset.column) + 1,
       });
     }
+    monacoObjects.current.editor.focus()
   };
 
   const showButton = (e) => {
@@ -103,7 +102,7 @@ export default function ParentComponent() {
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
         />
-        <Results  result={result} handleErrorClick={handleErrorClick} />
+        <Results  input = {input} result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
 
@@ -118,7 +117,8 @@ export default function ParentComponent() {
         {show === "Hide" ? (
           <Editor
             height="35vh"
-            width="70vh"
+            width="88vh"
+            theme="vs-dark"
             defaultLanguage="javascript"
             theme="vs-dark"
             value={last}
@@ -130,18 +130,16 @@ export default function ParentComponent() {
         ""
       ) : (
         <div>
-          {/* <div>
-            <input type="button" id="showbutton" value={show} onClick={showButton}/>
-          </div> */}
+          
           <div className="statsComponent">
-     
-        {/* <Display input = {input} show={show}/> */}
-        <GuestStats result={result} />
+          
+           
+            <GuestStats result={result} />
           </div>
         </div>
       )}
        </div>
-      
+ 
     </div>
    
         
