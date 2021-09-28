@@ -29,7 +29,7 @@ stats.get("/", async (req, res) => {
 
 stats.post("/weekly", async (req, res) => {
   try {
-    const weekly = await getByWeek(req.body);
+    const weekly = await getByWeek(req.body.date);
     res.status(200).json({
       success: true,
       payload: weekly,
