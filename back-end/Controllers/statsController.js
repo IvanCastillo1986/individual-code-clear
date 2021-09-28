@@ -34,7 +34,12 @@ stats.post("/weekly", async (req, res) => {
       success: true,
       payload: weekly,
     });
-  } catch (error) {}
+  } catch (e) {
+    res.status(404).json({
+      error: "Error",
+      message: e,
+    });
+  }
 });
 
 stats.get("/:id", async (req, res) => {
