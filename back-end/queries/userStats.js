@@ -42,12 +42,15 @@ const getByWeek = async (date) => {
   try {
     const week = await db.one(`SELECT TO_CHAR(DATE '${date}', 'WW')`);
     const allStats = await db.any("SELECT * FROM stats");
+
     const wordArr = allStats.map((elem) => {
       return elem.message_id;
     });
+
     let filter = wordArr.filter((elem, i) => {
       return wordArr.indexOf(elem) === i;
     });
+
     const stats = filter.map((elem) => {
       const count = async () => {
         return await db.one(
@@ -57,8 +60,8 @@ const getByWeek = async (date) => {
       };
       return count();
     });
-    stats;
-    return stats;
+
+    return Promise.all(stats);
   } catch (error) {
     return error;
   }
@@ -66,8 +69,6 @@ const getByWeek = async (date) => {
 
 // const log = async () => {
 //   let data = await getByWeek("2021-09-27");
-//   await getAllStats();
-//   await getAllStats();
 //   console.log(data);
 // };
 
@@ -90,7 +91,7 @@ const createStats = async (stats) => {
       };
       return newStat();
     });
-    return newStats;
+    return Promise.all(newStats);
   } catch (error) {
     return error;
   }
