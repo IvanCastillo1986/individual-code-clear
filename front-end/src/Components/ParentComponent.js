@@ -101,7 +101,8 @@ export default function ParentComponent() {
         {show === "Hide" ? (
           <Editor
             height="35vh"
-            width="70vh"
+            width="88vh"
+            theme="vs-dark"
             defaultLanguage="javascript"
             value={last}
             className="solution"
@@ -112,12 +113,12 @@ export default function ParentComponent() {
         ""
       ) : (
         <div>
-          <div>
+          {/* <div>
             <input type="button" id="showbutton" value={show} onClick={showButton}/>
-          </div>
+          </div> */}
           <div className="statsComponent">
           
-            <Display input = {input} show={show}/>
+            {/* <Display input = {input} show={show}/> */}
             <GuestStats result={result} />
           </div>
         </div>

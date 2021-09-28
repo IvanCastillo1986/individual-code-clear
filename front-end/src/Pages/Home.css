@@ -170,6 +170,7 @@
 
 .solution {
   margin-top: 10px;
+  border: 5px ridge #2ed2e6;
 }
 
 @keyframes example {
@@ -189,7 +190,7 @@
   /* 100%  {background-color:rgb(53, 209, 13); left:0px; right:200px;} */
 }
 .btnbtn- {
-  margin-left: 30px;
+  margin-left: 60px;
   border-radius: 15px;
   font-size: 20px;
 }
