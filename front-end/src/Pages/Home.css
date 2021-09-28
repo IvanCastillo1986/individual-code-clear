@@ -1,20 +1,20 @@
-.red-text{
-color: red;
+.red-text {
+  color: red;
 }
 
-.green-text{
+.green-text {
   color: rgb(18, 247, 18);
 }
 
-.orange-text{
+.orange-text {
   color: rgb(246, 135, 9);
 }
 
-.yelow-text{
+.yelow-text {
   color: rgb(227, 243, 6);
 }
 
-.green-yelow-text{
+.green-yelow-text {
   color: green;
 }
 
@@ -44,9 +44,8 @@ color: red;
   width: 50%;
 }
 .CodeEditor2 {
-
   width: 100%;
-  height:430px;
+  height: 430px;
   margin-left: 30px;
 }
 .CodeEditor form {
@@ -88,7 +87,6 @@ color: red;
   border: none;
   border-radius: 5px;
   margin-top: 135px;
-
 }
 .Editor {
   /* border: 2px solid rgb(255, 0, 255); */
@@ -138,11 +136,10 @@ color: red;
 }
 
 .statsComponent {
-
   padding: 10px;
   display: flex;
   justify-content: space-around;
-  height:fit-content;
+  height: fit-content;
 }
 
 .charts {
@@ -152,7 +149,7 @@ color: red;
   align-items: center;
 }
 
-.starts{
+.starts {
   display: flex;
   flex-direction: row;
   /* flex-wrap: wrap; */
@@ -160,7 +157,7 @@ color: red;
   /* padding: 10px; */
   width: 100%;
 }
-.bothcomponent{
+.bothcomponent {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -171,23 +168,37 @@ color: red;
   animation-duration: 4s;
 }
 
-.solution{
+.solution {
   margin-top: 10px;
 }
 
 @keyframes example {
-  0%   {background-color:red; left:0px; top:0px;}
+  0% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
   /* 25%  {background-color:yellow; left:200px; top:0px;} */
-  50%  {background-color:blue; left:200px; top:0px;}
+  50% {
+    background-color: blue;
+    left: 200px;
+    top: 0px;
+  }
   /* 75%  {background-color:green; left:0px; top:200px;}
   100% {background-color:red; left:0px; top:200px;} */
   /* 100%  {background-color:rgb(53, 209, 13); left:0px; right:200px;} */
 }
-.btnbtn-{
-  margin-left:30px;
+.btnbtn- {
+  margin-left: 30px;
   border-radius: 15px;
   font-size: 20px;
 }
-.btnbtn-::after{
- background-color: purple transparent;
+.btnbtn-::after {
+  background-color: purple transparent;
+}
+
+.reportForms {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
 }
