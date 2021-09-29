@@ -129,7 +129,7 @@ export default function Report(props) {
             ["Unexpected spaces (ERROR)", 62],
           ]}
           options={{
-            title: "Error/warning breakdown",
+            title: "Linter error/warning breakdown",
           }}
           rootProps={{ "data-testid": "1" }}
         />
@@ -167,7 +167,7 @@ export default function Report(props) {
             ["", errors, warnings, total],
           ]}
           options={{
-            title: "Error/warning frequency chart",
+            title: "Linter error/warning frequency chart",
             chartArea: { width: "50%" },
             colors: ["#b0120a", "#ffab91", "#faebd7"],
             hAxis: {
