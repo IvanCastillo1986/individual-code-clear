@@ -5,9 +5,6 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
-<<<<<<< HEAD
-
-=======
 import Display from "./Display";
 import styled, { ThemeProvider } from "styled-components";
 
@@ -20,7 +17,6 @@ const Container = styled.div`
   max-width: 100%;
   margin: 10px auto 0;
 `;
->>>>>>> 61310c216f487899f953fbed23e2cc130207b5e0
 
 export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
@@ -108,38 +104,6 @@ export default function ParentComponent() {
         />
       </div>
       <br />
-<<<<<<< HEAD
-      <form onSubmit={handleFixSubmit} >
-        <button type="submit" value={show} onClick={showButton} className="btnbtn-primary" > 
-          {show}
-        </button>
-      </form>
-      <div className='bothcomponent'>
-        <div>
-        {show === "Hide" ? (
-          <Editor
-            height="35vh"
-            width="88vh"
-            theme="vs-dark"
-            defaultLanguage="javascript"
-            value={last}
-            className="solution"
-          />
-        ) : null}</div>
-     
-      {result.length === 0 ? (
-        ""
-      ) : (
-        <div>
-          <div className="statsComponent">
-            <GuestStats result={result} />
-          </div>
-        </div>
-      )}
-       </div>
-    </div>       
-=======
-
       <form onSubmit={handleFixSubmit}>
         <button
           type="submit"
@@ -153,7 +117,7 @@ export default function ParentComponent() {
 
       <div className="bothcomponent">
         <div>
-          {show === "Hide" ? (
+          {show === "Hide" && (
             <Editor
               height="35vh"
               width="88vh"
@@ -163,12 +127,10 @@ export default function ParentComponent() {
               value={last}
               className="solution"
             />
-          ) : null}
+          )}
         </div>
 
-        {result[0] === "Please submit your code" ? (
-          ""
-        ) : (
+        {result[0] !== "Please submit your code" && (
           <div>
             <div className="statsComponent">
               <GuestStats result={result} />
@@ -177,6 +139,5 @@ export default function ParentComponent() {
         )}
       </div>
     </div>
->>>>>>> 61310c216f487899f953fbed23e2cc130207b5e0
   );
 }
