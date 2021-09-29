@@ -2,12 +2,13 @@ h1,
 h2 {
   text-align: center;
 }
-.toggle {
-  margin-left: 150px;
-}
+
 /* 
 Can we merge this CSS into the Home.css file so that they aren't competing?
 */
+.CodeClear {
+  margin-top: 200px;
+}
 .enside {
   margin: -15px;
   margin-left: 50px;
@@ -16,30 +17,19 @@ Can we merge this CSS into the Home.css file so that they aren't competing?
   height: 400px;
   overflow-y: scroll;
   border-radius: 5px;
-  /* color: black; */
   margin-bottom: 20px;
   padding: 10px;
 }
 
 .enside::-webkit-scrollbar{
-  /* display: none; */
   width: 20px;
 }
-.enside::-webkit-scrollba-track{
-  box-shadow: inset 0 0 5px #a9a9a96e; 
-  border-radius: 8px;
-}
-/* .enside::-webkit-scrollbar-thumb{
-  background: red; 
-  border-radius: 10px;
-  height: 100px;
-} */
 .enside::-webkit-scrollbar-thumb:hover{
   background: linear-gradient(gray, red, white) ;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 35vmin;
   pointer-events: none;
 }
 @keyframes App-logo-spin {
