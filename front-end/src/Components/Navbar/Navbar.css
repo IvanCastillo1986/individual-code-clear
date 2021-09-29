@@ -37,6 +37,7 @@
   justify-content: flex-start;
   gap: 10px;
 }
+
 .navbar-nav a {
   font-weight: bold;
 }

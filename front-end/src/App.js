@@ -19,7 +19,7 @@ import Report from "./Pages/Report";
 
 const Container = styled.div`
   max-width: 100%;
-  margin: 10px auto 0;
+  margin-top: 500px auto 0;
 `;
 
 export default function App() {
@@ -42,14 +42,21 @@ export default function App() {
       <UserProvider>
         <Router>
           <Navbar />
+          <Containered />
           <Switch>
             {!countInTimeout ? (
-                  <Route exact path="/"  component={Home}  className="App" />  
+              <ThemeProvider theme={themeMode}>
+                <Container>
+                  <GlobalStyle />
+                  <Toggle theme={theme} toggleTheme={toggleTheme} />
+                  <Route exact path="/" component={Home} className="App" />
+                </Container>
+              </ThemeProvider>
             ) : (
-              <div className="App" >
+              <div className="App">
                 <h1>Welcome</h1>
                 <div className="infinite">{countInTimeout}</div>
-                <h2>Code Clear</h2>
+                <h2 className='CodeClear'>Code Clear</h2>
               </div>
             )}
             <Route path="/report" component={Report} />

@@ -5,20 +5,7 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
-import Display from "./Display"
-import styled, { ThemeProvider } from 'styled-components'
 
-import { GlobalStyle , lightTheme, darkTheme } from "../styles/globalStyles"
-//import  Content  from './Components/Content.js' 
-import Toggle from "../styles/toggle"
-import Containered from './Containered'
-
-const Container = styled.div`
-
-max-width: 100%;
-margin: 10px auto 0;
-  
-`;
 
 export default function ParentComponent() {
   
@@ -105,13 +92,11 @@ export default function ParentComponent() {
         <Results  input = {input} result={result} handleErrorClick={handleErrorClick} />
       </div>
       <br />
-
       <form onSubmit={handleFixSubmit} >
-        <button type="submit" value={show} onClick={showButton} className="btnbtn-"> 
+        <button type="submit" value={show} onClick={showButton} className="btnbtn-primary" > 
           {show}
         </button>
       </form>
-
       <div className='bothcomponent'>
         <div>
         {show === "Hide" ? (
@@ -120,7 +105,6 @@ export default function ParentComponent() {
             width="88vh"
             theme="vs-dark"
             defaultLanguage="javascript"
-            theme="vs-dark"
             value={last}
             className="solution"
           />
@@ -130,19 +114,12 @@ export default function ParentComponent() {
         ""
       ) : (
         <div>
-          
           <div className="statsComponent">
-          
-           
             <GuestStats result={result} />
           </div>
         </div>
       )}
        </div>
- 
-    </div>
-   
-        
-           
+    </div>       
   );
 }
