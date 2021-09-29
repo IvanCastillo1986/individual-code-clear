@@ -5,10 +5,24 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+<<<<<<< HEAD
 
+=======
+import Display from "./Display";
+import styled, { ThemeProvider } from "styled-components";
+
+import { GlobalStyle, lightTheme, darkTheme } from "../styles/globalStyles";
+//import  Content  from './Components/Content.js'
+import Toggle from "../styles/toggle";
+import Containered from "./Containered";
+
+const Container = styled.div`
+  max-width: 100%;
+  margin: 10px auto 0;
+`;
+>>>>>>> 61310c216f487899f953fbed23e2cc130207b5e0
 
 export default function ParentComponent() {
-  
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
@@ -36,14 +50,14 @@ export default function ParentComponent() {
   function handleEditorDidMount(editor, monaco) {
     monacoObjects.current = { editor, monaco };
 
-    console.log(monaco)
-    monaco.editor.defineTheme('TeamCodeClearDark', {
-      base: 'hc-black',
-      colors: {'editor.background': '#2E2735'},
+    console.log(monaco);
+    monaco.editor.defineTheme("TeamCodeClearDark", {
+      base: "hc-black",
+      colors: { "editor.background": "#2E2735" },
       inherit: true,
-      rules: []
-    })
-    monaco.editor.setTheme('TeamCodeClearDark')
+      rules: [],
+    });
+    monaco.editor.setTheme("TeamCodeClearDark");
   }
   const handleFixSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +82,7 @@ export default function ParentComponent() {
         endColumn: Number(e.currentTarget.dataset.column) + 1,
       });
     }
-    monacoObjects.current.editor.focus()
+    monacoObjects.current.editor.focus();
   };
 
   const showButton = (e) => {
@@ -80,18 +94,21 @@ export default function ParentComponent() {
   };
 
   return (
-   
-      <div className="part">
-     
+    <div className="part">
       <div className="ParentComponent">
         <CodeEditor
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
         />
-        <Results  input = {input} result={result} handleErrorClick={handleErrorClick} />
+        <Results
+          input={input}
+          result={result}
+          handleErrorClick={handleErrorClick}
+        />
       </div>
       <br />
+<<<<<<< HEAD
       <form onSubmit={handleFixSubmit} >
         <button type="submit" value={show} onClick={showButton} className="btnbtn-primary" > 
           {show}
@@ -121,5 +138,45 @@ export default function ParentComponent() {
       )}
        </div>
     </div>       
+=======
+
+      <form onSubmit={handleFixSubmit}>
+        <button
+          type="submit"
+          value={show}
+          onClick={showButton}
+          className="btnbtn-"
+        >
+          {show}
+        </button>
+      </form>
+
+      <div className="bothcomponent">
+        <div>
+          {show === "Hide" ? (
+            <Editor
+              height="35vh"
+              width="88vh"
+              theme="vs-dark"
+              defaultLanguage="javascript"
+              theme="vs-dark"
+              value={last}
+              className="solution"
+            />
+          ) : null}
+        </div>
+
+        {result[0] === "Please submit your code" ? (
+          ""
+        ) : (
+          <div>
+            <div className="statsComponent">
+              <GuestStats result={result} />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+>>>>>>> 61310c216f487899f953fbed23e2cc130207b5e0
   );
 }

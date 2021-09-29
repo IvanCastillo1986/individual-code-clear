@@ -6,33 +6,46 @@ const API = apiURL();
 
 export default function Report(props) {
   const [stats, setStats] = useState([]);
-  const [input, setInput] = useState({
-    pieChart: "",
-    barChart: "",
-    pieDate: "",
-    barDate: "",
-  });
   const [pieChart, setPieChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
+
+  const [select, setSelect] = useState({
+    pieChart: "",
+    barChart: "",
+  });
+
+  const [date, setDate] = useState({
+    pieChart: "",
+    barChart: "",
+  });
+
   useEffect(() => {
     axios.get(`${API}/stats`).then((response) => {
       setStats(response.data.payload);
     });
   }, []);
-  const handleChange = (e) => {
-    setInput({
-      ...input,
+  const handleSelectChange = (e) => {
+    setSelect({
+      ...select,
+      [e.target.id]: e.target.value,
+    });
+  };
+  const handleDateChange = (e) => {
+    setDate({
+      ...date,
       [e.target.id]: e.target.value,
     });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input[e.target.id] === "Weekly") {
-      axios.post(`${API}/stats/weekly`, input.date).then((response) => {
-        e.target.id === "pieChart"
-          ? setPieChart(response.data)
-          : setBarChart(response.data);
-      });
+    if (select[e.target.id] === "Weekly") {
+      axios
+        .post(`${API}/stats/weekly`, { date: date[e.target.id] })
+        .then((response) => {
+          e.target.id === "pieChart"
+            ? setPieChart(response.data)
+            : setBarChart(response.data);
+        });
     }
   };
 
@@ -82,7 +95,11 @@ export default function Report(props) {
       <br />
       <div className="charts">
         <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
-          <select id="pieChart" value={input.pieChart} onChange={handleChange}>
+          <select
+            id="pieChart"
+            value={select.pieChart}
+            onChange={handleSelectChange}
+          >
             <option value="--">--</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
@@ -91,9 +108,9 @@ export default function Report(props) {
           </select>
           <input
             type="date"
-            id="pieDate"
-            value={input.pieDate}
-            onChange={handleChange}
+            id="pieChart"
+            value={date.pieChart}
+            onChange={handleDateChange}
           />
           <input type="submit" value="Get Data" />
         </form>
@@ -112,7 +129,7 @@ export default function Report(props) {
             ["Unexpected spaces (ERROR)", 62],
           ]}
           options={{
-            title: "Error/warning breakdown",
+            title: "Linter error/warning breakdown",
           }}
           rootProps={{ "data-testid": "1" }}
         />
@@ -120,7 +137,11 @@ export default function Report(props) {
       <br />
       <div className="charts">
         <form className="reportForms" id="barChart" onSubmit={handleSubmit}>
-          <select id="barChart" value={input.barChart} onChange={handleChange}>
+          <select
+            id="barChart"
+            value={select.barChart}
+            onChange={handleSelectChange}
+          >
             <option value="--">--</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
@@ -129,9 +150,9 @@ export default function Report(props) {
           </select>
           <input
             type="date"
-            id="barDate"
-            value={input.barDate}
-            onChange={handleChange}
+            id="barChart"
+            value={date.barChart}
+            onChange={handleDateChange}
           />
           <input type="submit" value="Get Data" />
         </form>
@@ -146,7 +167,7 @@ export default function Report(props) {
             ["", errors, warnings, total],
           ]}
           options={{
-            title: "Error/warning frequency chart",
+            title: "Linter error/warning frequency chart",
             chartArea: { width: "50%" },
             colors: ["#b0120a", "#ffab91", "#faebd7"],
             hAxis: {

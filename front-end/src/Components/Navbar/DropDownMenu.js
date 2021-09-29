@@ -79,16 +79,19 @@ export default function DropdownMenu(props) {
                         <DropdownItem goToMenu="update-name" leftIcon={<IcIdentity />} rightIcon={<IcArrowForward />}>Update Name</DropdownItem>
                         <DropdownItem goToMenu="update-email" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Email</DropdownItem>
                         <DropdownItem goToMenu="update-password" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Password</DropdownItem>
+                        <hr className="nav-hr" />
                         <DropdownItem leftIcon={<IcLogout />} clickAction={signOut}>Sign Out</DropdownItem>
+                        <hr className="nav-hr" />
                         <DropdownItem goToMenu="delete-account" leftIcon={<IcCloseAcc />} rightIcon={<IcArrowForward />}>DELETE ACCOUNT</DropdownItem>
                     </> : <>
                         <ItemSignIn userInfo={userInfo} setUserInfo={setUserInfo} error={error} />
                         <DropdownItem leftIcon={<IcLogin />} clickAction={signInWithEmail}>Sign In</DropdownItem>
+                        <DropdownItem goToMenu="forget-password" leftIcon={<IcPassword />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Forget Password</h5></DropdownItem>
+                        <hr className="nav-hr" />
                         <DropdownItem leftIcon={<IcGoogle />} clickAction={() => signInWithProvider("google")}>Sign In with Google</DropdownItem>
                         <DropdownItem leftIcon={<IcGithub />} clickAction={() => signInWithProvider("github")}>Sign In with GitHub</DropdownItem>
-                        <DropdownItem goToMenu="sign-up" leftIcon={<IcAddAcc />} rightIcon={<IcArrowForward />}>Sign Up New Account</DropdownItem>
                         <hr className="nav-hr" />
-                        <DropdownItem goToMenu="forget-password" leftIcon={<IcPassword />} rightIcon={<IcArrowForward />}>Forget Password</DropdownItem>
+                        <DropdownItem goToMenu="sign-up" leftIcon={<IcAddAcc />} rightIcon={<IcArrowForward />}>Create New Account</DropdownItem>
                     </>}
                 </div>
             </CSSTransition >
@@ -103,7 +106,7 @@ export default function DropdownMenu(props) {
                 <div className="menu">
                     <ItemRegister {...props} />
                     <DropdownItem goToMenu="main" leftIcon={<IcArrowBack />}>
-                        <h4>Go Back</h4>
+                        <h4 className="dropdown-h4">Go Back</h4>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -118,7 +121,7 @@ export default function DropdownMenu(props) {
                 <div className="menu">
                     <ItemForgetPassword {...props} />
                     <DropdownItem goToMenu="main" leftIcon={<IcArrowBack />}>
-                        <h4>Go Back</h4>
+                        <h4 className="dropdown-h4">Go Back</h4>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -133,7 +136,7 @@ export default function DropdownMenu(props) {
                 <div className="menu">
                     <ItemUpdateProfile user={props.user} setOpen={props.setOpen} profile="Name" />
                     <DropdownItem goToMenu="main" leftIcon={<IcArrowBack />}>
-                        <h4>Go Back</h4>
+                        <h4 className="dropdown-h4">Go Back</h4>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -148,7 +151,7 @@ export default function DropdownMenu(props) {
                 <div className="menu">
                     <ItemUpdateProfile user={props.user} setOpen={props.setOpen} profile="Email" />
                     <DropdownItem goToMenu="main" leftIcon={<IcArrowBack />}>
-                        <h4>Go Back</h4>
+                        <h4 className="dropdown-h4">Go Back</h4>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -163,7 +166,7 @@ export default function DropdownMenu(props) {
                 <div className="menu">
                     <ItemUpdateProfile user={props.user} setOpen={props.setOpen} profile="Password" />
                     <DropdownItem goToMenu="main" leftIcon={<IcArrowBack />}>
-                        <h4>Go Back</h4>
+                        <h4 className="dropdown-h4">Go Back</h4>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -178,7 +181,7 @@ export default function DropdownMenu(props) {
                 <div className="menu">
                     <ItemDeleteUser user={props.user} setOpen={props.setOpen} />
                     <DropdownItem goToMenu="main" leftIcon={<IcArrowBack />}>
-                        <h4>Go Back</h4>
+                        <h4 className="dropdown-h4">Go Back</h4>
                     </DropdownItem>
                 </div>
             </CSSTransition>
