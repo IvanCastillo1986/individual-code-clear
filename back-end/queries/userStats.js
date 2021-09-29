@@ -38,7 +38,36 @@ const getStat = async (id) => {
 //   }
 // };
 
-const getByWeek = async (date) => {
+const getByDayPieChart = async (date) => {
+  try {
+    const day = await db.one(`SELECT TO_CHAR(DATE '${date}', 'DD')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        return await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%-${day.to_char}%'`,
+          [elem]
+        );
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByWeekPieChart = async (date) => {
   try {
     const week = await db.one(`SELECT TO_CHAR(DATE '${date}', 'WW')`);
     const allStats = await db.any("SELECT * FROM stats");
@@ -67,8 +96,115 @@ const getByWeek = async (date) => {
   }
 };
 
+const getByMonthPieChart = async (date) => {
+  try {
+    const month = await db.one(`SELECT TO_CHAR(DATE '${date}', 'MM')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        return await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%-${month.to_char}-%'`,
+          [elem]
+        );
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByYearPieChart = async (date) => {
+  try {
+    const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        return await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-%'`,
+          [elem]
+        );
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByDayBarChart = async (date) => {
+  try {
+    const day = await db.one(`SELECT TO_CHAR(DATE '${date}', 'DD')`);
+    let dayData = await db.any(
+      `SELECT message_id, severity FROM stats WHERE date LIKE '%-${day.to_char}%'`
+    );
+    return dayData;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByWeekBarChart = async (date) => {
+  try {
+    const week = await db.one(`SELECT TO_CHAR(DATE '${date}', 'WW')`);
+    let weekData = await db.any(
+      "SELECT message_id, severity FROM stats WHERE week=$1",
+      week.to_char
+    );
+    return weekData;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByMonthBarChart = async (date) => {
+  try {
+    const month = await db.one(`SELECT TO_CHAR(DATE '${date}', 'MM')`);
+    let monthData = await db.any(
+      `SELECT message_id, severity FROM stats WHERE date LIKE '%-${month.to_char}-%'`
+    );
+    return monthData;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByYearBarChart = async (date) => {
+  try {
+    const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
+    let yearData = await db.any(
+      `SELECT message_id, severity FROM stats WHERE date LIKE '%${year.to_char}-%'`
+    );
+    return yearData;
+  } catch (error) {
+    return error;
+  }
+};
+
 // const log = async () => {
-//   let data = await getByWeek("2021-09-27");
+//   let data = await getByYearPieChart("2021-09-29");
 //   console.log(data);
 // };
 
@@ -131,7 +267,14 @@ const updateStat = async (id, stat) => {
 module.exports = {
   getAllStats,
   getStat,
-  getByWeek,
+  getByDayPieChart,
+  getByDayBarChart,
+  getByWeekPieChart,
+  getByWeekBarChart,
+  getByMonthPieChart,
+  getByMonthBarChart,
+  getByYearPieChart,
+  getByYearBarChart,
   createStats,
   deleteStat,
   updateStat,

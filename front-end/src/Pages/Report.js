@@ -38,20 +38,99 @@ export default function Report(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (select[e.target.id] === "Weekly") {
-      axios
-        .post(`${API}/stats/weekly`, { date: date[e.target.id] })
-        .then((response) => {
-          e.target.id === "pieChart"
-            ? setPieChart(response.data)
-            : setBarChart(response.data);
-        });
+    switch (select[e.target.id]) {
+      case "Daily":
+        axios
+          .post(`${API}/stats/daily`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+      case "Weekly":
+        axios
+          .post(`${API}/stats/weekly`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+      case "Monthly":
+        axios
+          .post(`${API}/stats/monthly`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+      case "Annually":
+        axios
+          .post(`${API}/stats/annually`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
     }
   };
 
-  let errors = 241;
-  let warnings = 89;
-  const total = errors + warnings;
+  const pieChartData = () => {
+    if (pieChart.length > 0) {
+      let allStats = stats.map((elem) => {
+        return {
+          name: elem.message_id,
+          message: elem.message,
+          severity: elem.severity,
+        };
+      });
+      const uniqueValuesSet = new Set();
+
+      let filter = allStats.filter((obj, i) => {
+        const isPresentInSet = uniqueValuesSet.has(obj.name);
+        uniqueValuesSet.add(obj.name);
+        return !isPresentInSet;
+      });
+      let data = filter.map((elem, i) => {
+        return [
+          elem.name + `: (${elem.severity})`,
+          Number(pieChart[0].payload[i][`'${elem.name}'`]),
+        ];
+      });
+      data.unshift(["Stat", "Frequency"]);
+      return data;
+    } else {
+      return [["Stat", "Frequency"]];
+    }
+  };
+
+  let frequencyObj = {
+    1: 0,
+    2: 0,
+  };
+
+  if (barChart.length > 0) {
+    barChart[0].payload.forEach((elem) => {
+      frequencyObj[elem.severity]++;
+    });
+  }
+
+  const total = frequencyObj["1"] + frequencyObj["2"];
   return (
     <div>
       <h1>Report Page</h1>
@@ -120,14 +199,7 @@ export default function Report(props) {
           height={"500px"}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
-          data={[
-            ["Stat", "Frequency"],
-            ["Missing semicolons (WARNING)", 44],
-            ["Wrong string quotes (WARNING)", 23],
-            ["Wrong indentation (ERROR)", 179],
-            ["Unused variable (WARNING)", 22],
-            ["Unexpected spaces (ERROR)", 62],
-          ]}
+          data={pieChartData()}
           options={{
             title: "Linter error/warning breakdown",
           }}
@@ -163,8 +235,8 @@ export default function Report(props) {
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Severity", "Error", "Warning", "Combined Total"],
-            ["", errors, warnings, total],
+            ["Severity", "2 (Error)", "1 (Warning)", "Combined Total"],
+            ["", frequencyObj["2"], frequencyObj["1"], total],
           ]}
           options={{
             title: "Linter error/warning frequency chart",
