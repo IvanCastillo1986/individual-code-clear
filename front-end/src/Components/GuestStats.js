@@ -10,7 +10,7 @@ export default function GuestStats(props) {
     1: 0,
     2: 0,
   };
-  result.map((elem) => {
+  result.forEach((elem) => {
     frequencyObj[elem.severity]++;
   });
   const total = frequencyObj["1"] + frequencyObj["2"];
@@ -23,7 +23,7 @@ export default function GuestStats(props) {
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Severity", "Error", "Warning", "Combined Total"],
+            ["Severity", "2 (Error)", "1 (Warning)", "Combined Total"],
             ["", frequencyObj["2"], frequencyObj["1"], total],
           ]}
           options={{
