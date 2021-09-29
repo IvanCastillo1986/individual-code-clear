@@ -69,11 +69,13 @@
   align-items: center;
   justify-content: center;
 }
-.msg-login {
+.msg-login,
+.msg-username {
   cursor: pointer;
   transition: filter 300ms;
 }
-.msg-login:hover {
+.msg-login:hover,
+.msg-username:hover {
   color: cornflowerblue;
 }
 
@@ -209,7 +211,6 @@
 }
 
 .nav-hr {
-  text-align: center;
   width: 90%;
   margin: auto;
   padding: 0px;
@@ -257,4 +258,10 @@
 }
 .btn-delete-acc:hover {
   background-color: #fe6d6d;
+}
+
+.dropdown-h4,
+.dropdown-h5 {
+  margin: 0px;
+  padding: 0px 5px;
 }

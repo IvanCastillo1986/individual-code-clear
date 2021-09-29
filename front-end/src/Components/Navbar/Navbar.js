@@ -24,7 +24,7 @@ export default function Navbar() {
                 <Link to='/report'>Report</Link>
                 <div className="navbar-center-space"></div>
                 <li className="msg-welcome">
-                    {user ? `Hi ${user.displayName}!` : "Hello Guest."}
+                    {user ? <span>Hi <span className="msg-username" onClick={() => setOpen(!open)}>{user.displayName}!</span></span> : "Hello Guest."}
                 </li>
                 {!user && (
                     <li className="msg-login" onClick={() => setOpen(!open)}>Sign In/Register</li>
@@ -35,7 +35,7 @@ export default function Navbar() {
                     </div>
                     {open && <DropdownMenu setOpen={setOpen} handleInfoChange={handleInfoChange} user={user} />}
                 </li>
-                
+
             </ul>
         </nav>
     )
