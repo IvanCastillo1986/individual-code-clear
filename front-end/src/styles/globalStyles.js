@@ -4,18 +4,18 @@ export const GlobalStyle = createGlobalStyle`
  body{
      background: ${({ theme}) => theme.body};
      color: ${({ theme}) => theme.text};
-     transition: all 1s linear;
+     transition: all 2s linear;
      color: ${({ theme}) => theme.h2};
      
  }
 
 ::-webkit-scrollbar-thumb{
-    background: ${({ theme}) => theme.backgroundcolor};
+    background: ${({ theme}) => theme.scrollbarthumb};
     border-radius: 8px;
     
 }
 ::-webkit-scrollbar-track {
-    background: #a9a9a96e;
+    background: ${({ theme}) => theme.scrollbar};
     border-radius: 8px;
 }
 p {
@@ -33,6 +33,20 @@ button {
     border-radius: 35px;
     font-size: 20px;
 }
+h3 {
+    color: ${({ theme}) => theme.h3};
+}
+.btnbtn-primary {
+ background: ${({ theme}) => theme.primary};
+ color: ${({ theme}) => theme.color};
+ margin-left: 60px;
+ border-radius: 15px;
+ font-size: 17px;
+ padding: 4px;
+}
+.CodeClear {
+    marginTop: 400px;
+}
 `;
 
 export const lightTheme = {
@@ -44,11 +58,15 @@ export const lightTheme = {
     h2: 'red',
     boxshadow: 'inset 0 0 5px grey',
     backgroundtext: 'red',
-  
+    h3: 'white',
+   scrollbar: '#c7c3c38c',
+   scrollbarthumb: ' #35020285',
+   primary: 'white',
+   color: 'black',
 }
 
 export const darkTheme = {
-    body: 'linear-gradient( white, #975fff, white)',
+    body: 'linear-gradient( #c7c3c3, #975fff)',
     text: '#121212',
     textshadow: '3px 5px 2px #177a87, 4px 6px 2px #2ed2e6',
     h2: 'blue',
@@ -56,7 +74,10 @@ export const darkTheme = {
     backgroundtext: 'blue',
     backgroundcolor: '#2ed2e6',
     background: "black",
-   
-    
+    h3: 'black',
+    scrollbar: '#3131312c',
+    scrollbarthumb: '#2ed2e6',
+    primary: 'black',
+    color: 'white',
 }
 

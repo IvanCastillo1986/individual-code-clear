@@ -1,6 +1,4 @@
 html {
-  /* background: linear-gradient(#261447, #186f8374); */
-  background: linear-gradient(#261447d9, black);
   min-height: 100%;
 }
 
@@ -12,6 +10,7 @@ body {
   color: #FD1D53;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(#261447d9, black); 
 }
 
 code {

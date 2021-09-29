@@ -43,7 +43,6 @@
 }
 
 .CodeEditor {
-  /* border: 2px solid orange; */
   width: 50%;
 }
 .CodeEditor2 {
@@ -52,14 +51,12 @@
   margin-left: 30px;
 }
 .CodeEditor form {
-  /* border: 2px solid blue; */
   text-align: center;
   border: 5px ridge #2ed2e6;
   padding: 0 0 15px 0;
   box-sizing: border-box;
 }
 .CodeEditor2 form {
-  /* border: 2px solid blue; */
   margin-left: 55px;
   margin-right: 10px;
   text-align: center;
@@ -72,42 +69,36 @@
 .CodeEditor form input[type="submit"] {
   padding: 10px;
   background-color: #2ed2e6;
-  /* color: #261447; */
-  /* color: rgb(13, 2, 33); */
   color: black;
-  /* font: .8em impact; */
   font-weight: bold;
   border: none;
   border-radius: 5px;
+  
 }
+
 .CodeEditor2 form input[type="submit"] {
   padding: 10px;
   background-color: #2ed2e6;
-  /* color: #261447; */
-  /* color: rgb(13, 2, 33); */
   color: black;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   margin-top: 135px;
+
 }
 .Editor {
-  /* border: 2px solid rgb(255, 0, 255); */
   width: 100%;
   height: 55vh;
   padding: 5px;
 }
 
 .Results {
-  /* border: 2px solid rgb(0, 251, 255); */
   width: 40%;
 }
 .Results h3 {
-  color: white;
   text-align: center;
 }
 .Results ol li::marker {
-  /* color: #F9C80E; */
   color: #2ed2e6;
 }
 .Results ol li {
@@ -118,10 +109,7 @@
 .Results li {
   padding-top: 0;
 }
-/* .Results hr {
-  border: 3px solid #f706cf;
-  border-radius: 5px;
-} */
+
 .Results span {
   display: block;
   text-align: left;
@@ -179,35 +167,6 @@
   border: 5px ridge #2ed2e6;
 }
 
-/* @keyframes example {
-  0% {
-    background-color: red;
-    left: 0px;
-    top: 0px;
-  }
-  25%  {background-color:yellow; left:200px; top:0px;} 
-  50% {
-    background-color: blue;
-    left: 200px;
-    top: 0px;
-  }
-  75%  {background-color:green; left:0px; top:200px;}
-  100% {background-color:red; left:0px; top:200px;} */
-  /*100%  {background-color:rgb(53, 209, 13); left:0px; right:200px;}
-} */
-.btnbtn- {
-  margin-left: 60px;
-  border-radius: 15px;
-  font-size: 20px;
-}
-
-.btnbtn-::after {
-  background-color: purple transparent;
-}
-/* .btnbtn{ 
-  border-radius: 35px;
-  font-size: 20px;
-} */
 .reportForms {
   width: 500px;
   display: flex;

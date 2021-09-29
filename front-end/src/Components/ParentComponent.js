@@ -104,7 +104,6 @@ export default function ParentComponent() {
         />
       </div>
       <br />
-
       <form onSubmit={handleFixSubmit}>
         <button
           type="submit"
@@ -118,7 +117,7 @@ export default function ParentComponent() {
 
       <div className="bothcomponent">
         <div>
-          {show === "Hide" ? (
+          {show === "Hide" && (
             <Editor
               height="35vh"
               width="88vh"
@@ -128,12 +127,10 @@ export default function ParentComponent() {
               value={last}
               className="solution"
             />
-          ) : null}
+          )}
         </div>
 
-        {result[0] === "Please submit your code" ? (
-          ""
-        ) : (
+        {result[0] !== "Please submit your code" && (
           <div>
             <div className="statsComponent">
               <GuestStats result={result} />
