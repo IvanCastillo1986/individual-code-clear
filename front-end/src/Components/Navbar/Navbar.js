@@ -18,7 +18,6 @@ export default function Navbar() {
     }
 
     return (
-
         <nav className='navbar'>
             <ul className="navbar-nav">
                 <Link to='/'>Home</Link>
@@ -36,12 +35,7 @@ export default function Navbar() {
                     </div>
                     {open && <DropdownMenu setOpen={setOpen} handleInfoChange={handleInfoChange} user={user} />}
                 </li>
-<<<<<<< HEAD
-=======
-
->>>>>>> 61310c216f487899f953fbed23e2cc130207b5e0
             </ul>
-          
         </nav>
     )
 }
