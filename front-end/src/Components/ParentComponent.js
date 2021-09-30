@@ -5,24 +5,24 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
-import Display from "./Display";
-import styled, { ThemeProvider } from "styled-components";
+// import Display from "./Display";
+// import styled, { ThemeProvider } from "styled-components";
 
-import { GlobalStyle, lightTheme, darkTheme } from "../styles/globalStyles";
-//import  Content  from './Components/Content.js'
-import Toggle from "../styles/toggle";
-import Containered from "./Containered";
+// import { GlobalStyle, lightTheme, darkTheme } from "../styles/globalStyles";
+// //import  Content  from './Components/Content.js'
+// import Toggle from "../styles/toggle";
+// import Containered from "./Containered";
 
-const Container = styled.div`
-  max-width: 100%;
-  margin: 10px auto 0;
-`;
+// const Container = styled.div`
+//   max-width: 100%;
+//   margin: 10px auto 0;
+// `;
 
 export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
-  const [show, setShow] = useState("Show");
+  const [show, setShow] = useState("Fix Code");
   const API = apiURL();
   const monacoObjects = useRef(null);
 
@@ -82,10 +82,10 @@ export default function ParentComponent() {
   };
 
   const showButton = (e) => {
-    if (show === "Show") {
+    if (show === "Fix Code") {
       setShow("Hide");
     } else {
-      setShow("Show");
+      setShow("Fix Code");
     }
   };
 
@@ -109,7 +109,7 @@ export default function ParentComponent() {
           type="submit"
           value={show}
           onClick={showButton}
-          className="btnbtn-"
+          className="btnbtn-primary"
         >
           {show}
         </button>
@@ -120,11 +120,9 @@ export default function ParentComponent() {
           {show === "Hide" && (
             <Editor
               height="36.5vh"
-              // height="35vh"
               width="88vh"
               theme="vs-dark"
               defaultLanguage="javascript"
-              theme="vs-dark"
               value={last}
               className="solution"
             />

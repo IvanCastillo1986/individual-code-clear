@@ -41,7 +41,7 @@ h3 {
  color: ${({ theme}) => theme.color};
  margin-left: 60px;
  border-radius: 15px;
- font-size: 17px;
+ font-size: 20px;
  padding: 4px;
 }
 .CodeClear {
@@ -77,7 +77,7 @@ export const darkTheme = {
     h3: 'black',
     scrollbar: '#3131312c',
     scrollbarthumb: '#2ed2e6',
-    primary: 'black',
+    primary: '#1e1e1e',
     color: 'white',
 }
 
