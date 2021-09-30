@@ -119,7 +119,8 @@ export default function ParentComponent() {
         <div>
           {show === "Hide" && (
             <Editor
-              height="35vh"
+              height="36.5vh"
+              // height="35vh"
               width="88vh"
               theme="vs-dark"
               defaultLanguage="javascript"

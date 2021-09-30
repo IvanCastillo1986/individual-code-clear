@@ -148,8 +148,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-left: 130px;
-  width: 100%;
-
+  /* width: 100%; */
+  width: 80%;
 }
 .bothcomponent {
   display: flex;
@@ -160,6 +160,7 @@
   position: relative;
   animation-name: example;
   animation-duration: 4s;
+  margin-bottom: 80px;
 }
 
 .solution {
