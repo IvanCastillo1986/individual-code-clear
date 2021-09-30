@@ -24,7 +24,7 @@ export default function Navbar() {
                 <Link to='/report'>Report</Link>
                 <div className="navbar-center-space"></div>
                 <li className="msg-welcome">
-                    {user ? <span>Hi <span className="msg-username" onClick={() => setOpen(!open)}>{user.displayName}!</span></span> : "Hello Guest."}
+                    {user ? <span className="txt-white">Hi <span className="msg-username" onClick={() => setOpen(!open)}>{user.displayName}!</span></span> : <span className="txt-white">Hello Guest.</span>}
                 </li>
                 {!user && (
                     <li className="msg-login" onClick={() => setOpen(!open)}>Sign In/Register</li>

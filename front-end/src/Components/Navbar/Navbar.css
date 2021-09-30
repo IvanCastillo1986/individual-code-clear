@@ -72,6 +72,7 @@
 }
 .msg-login,
 .msg-username {
+  color: whitesmoke;
   cursor: pointer;
   transition: filter 300ms;
 }
@@ -128,10 +129,12 @@
 
 .menu-item .icon-button {
   margin-right: 0.5rem;
+  color: whitesmoke;
 }
 
 .menu-item-name {
   flex-grow: 1;
+  color: whitesmoke;
 }
 .menu-item .icon-button:hover {
   filter: none;
@@ -265,4 +268,8 @@
 .dropdown-h5 {
   margin: 0px;
   padding: 0px 5px;
+}
+
+.txt-white {
+  color: whitesmoke;
 }
