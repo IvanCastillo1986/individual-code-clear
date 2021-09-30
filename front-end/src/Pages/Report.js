@@ -8,7 +8,8 @@ export default function Report() {
   const [stats, setStats] = useState([]);
   const [pieChart, setPieChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
-
+  const [lineChart, setLineChart] = useState([]);
+  const [annualDate, setAnnualDate] = useState("");
   const [select, setSelect] = useState({
     pieChart: "",
     barChart: "",
@@ -35,6 +36,9 @@ export default function Report() {
       ...date,
       [e.target.id]: e.target.value,
     });
+  };
+  const handleAnnualDateChange = (e) => {
+    setAnnualDate(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,6 +94,69 @@ export default function Report() {
     }
   };
 
+  const handleLineChartSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${API}/stats/annual-chart`, { date: annualDate })
+      .then((res) => {
+        setLineChart([res.data]);
+      });
+  };
+
+  const lineChartData = () => {
+    if (lineChart.length > 0) {
+      let allStats = stats.map((elem) => {
+        return elem.message_id;
+      });
+      let labels = allStats.filter((elem, i) => {
+        return allStats.indexOf(elem) === i;
+      });
+      let monthObj = {
+        0: ["JAN"],
+        1: ["FEB"],
+        2: ["MAR"],
+        3: ["APR"],
+        4: ["MAY"],
+        5: ["JUN"],
+        6: ["JUL"],
+        7: ["AUG"],
+        8: ["SEP"],
+        9: ["OCT"],
+        10: ["NOV"],
+        11: ["DEC"],
+      };
+
+      labels.forEach((elem, i) => {
+        let dataArr = lineChart[0].payload[i];
+        for (let j = 0; j < dataArr.length; j++) {
+          monthObj[j].push(Number(dataArr[j][`'${elem}'`]));
+        }
+      });
+      let arr = [
+        monthObj["0"],
+        monthObj["1"],
+        monthObj["2"],
+        monthObj["3"],
+        monthObj["4"],
+        monthObj["5"],
+        monthObj["6"],
+        monthObj["7"],
+        monthObj["8"],
+        monthObj["9"],
+        monthObj["10"],
+        monthObj["11"],
+      ];
+      labels.unshift("Month");
+      arr.unshift(labels);
+      return arr;
+    } else {
+      return [
+        ["Month", "No Data"],
+        ["No Data", 0],
+      ];
+    }
+  };
+
   const pieChartData = () => {
     if (pieChart.length > 0) {
       let allStats = stats.map((elem) => {
@@ -101,7 +168,7 @@ export default function Report() {
       });
       const uniqueValuesSet = new Set();
 
-      let filter = allStats.filter((obj, i) => {
+      let filter = allStats.filter((obj) => {
         const isPresentInSet = uniqueValuesSet.has(obj.name);
         uniqueValuesSet.add(obj.name);
         return !isPresentInSet;
@@ -135,36 +202,25 @@ export default function Report() {
     <div>
       <h1>Report Page</h1>
       <div className="charts">
+        <form className="reportForms" onSubmit={handleLineChartSubmit}>
+          <input
+            type="date"
+            id="annualDate"
+            value={annualDate}
+            onChange={handleAnnualDateChange}
+          />
+          <input type="submit" value="Get Data" />
+        </form>
         <Chart
           width={"1000px"}
           height={"500px"}
           padding={"10px"}
           chartType="Line"
           loader={<div>Loading Chart</div>}
-          data={[
-            [
-              "Month",
-              "Wrong string quotes",
-              "Missing semicolons",
-              "Wrong indentation",
-              "Trailing spaces",
-            ],
-            ["JAN", 13333, 12343, 16782, 9220],
-            ["FEB", 12324, 9563, 12357, 7345],
-            ["MAR", 10234, 8345, 11324, 8005],
-            ["APR", 9546, 6789, 8703, 5678],
-            ["MAY", 7845, 5674, 7834, 4567],
-            ["JUN", 7344, 5466, 6799, 4401],
-            ["JUL", 6774, 4556, 5667, 4138],
-            ["AUG", 4123, 3234, 4788, 4018],
-            ["SEP", 3444, 2342, 3456, 3888],
-            ["OCT", 2345, 2123, 2334, 2538],
-            ["NOV", 1233, 1799, 1435, 1658],
-            ["DEC", 1060, 904, 782, 658],
-          ]}
+          data={lineChartData()}
           options={{
             chart: {
-              title: "2021 code quality chart",
+              title: "Annual code quality chart",
               subtitle: "Frequency",
             },
           }}

@@ -10,6 +10,7 @@ const {
   getByMonthBarChart,
   getByYearPieChart,
   getByYearBarChart,
+  getAnnualStats,
   deleteStat,
   updateStat,
 } = require("../queries/userStats");
@@ -118,6 +119,21 @@ stats.post("/annually", async (req, res) => {
         payload: yearly,
       });
     }
+  } catch (e) {
+    res.status(404).json({
+      error: "Error",
+      message: e,
+    });
+  }
+});
+
+stats.post("/annual-chart", async (req, res) => {
+  try {
+    const annual = await getAnnualStats(req.body.date);
+    res.status(200).json({
+      success: true,
+      payload: annual,
+    });
   } catch (e) {
     res.status(404).json({
       error: "Error",
