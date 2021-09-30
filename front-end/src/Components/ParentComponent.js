@@ -57,7 +57,7 @@ export default function ParentComponent() {
   }
   const handleFixSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3333/eslint/fix", input).then((res) => {
+    axios.post(`${API}/eslint/fix`, input).then((res) => {
       setLast(res.data.fixedResult[0].output);
     });
   };
