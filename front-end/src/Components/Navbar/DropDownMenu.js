@@ -76,9 +76,9 @@ export default function DropdownMenu(props) {
             >
                 <div className="menu">
                     {props.user ? <>
-                        <DropdownItem goToMenu="update-name" leftIcon={<IcIdentity />} rightIcon={<IcArrowForward />}>Update Name</DropdownItem>
-                        <DropdownItem goToMenu="update-email" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Email</DropdownItem>
-                        <DropdownItem goToMenu="update-password" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}>Update Password</DropdownItem>
+                        <DropdownItem goToMenu="update-name" leftIcon={<IcIdentity />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Update Name</h5></DropdownItem>
+                        <DropdownItem goToMenu="update-email" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Update Email</h5></DropdownItem>
+                        <DropdownItem goToMenu="update-password" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Update Password</h5></DropdownItem>
                         <hr className="nav-hr" />
                         <DropdownItem leftIcon={<IcLogout />} clickAction={signOut}>Sign Out</DropdownItem>
                         <hr className="nav-hr" />
