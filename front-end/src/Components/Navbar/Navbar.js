@@ -36,10 +36,6 @@ export default function Navbar() {
                     </div>
                     {open && <DropdownMenu setOpen={setOpen} handleInfoChange={handleInfoChange} user={user} />}
                 </li>
-<<<<<<< HEAD
-=======
-
->>>>>>> 61310c216f487899f953fbed23e2cc130207b5e0
             </ul>
           
         </nav>
