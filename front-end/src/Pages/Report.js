@@ -4,7 +4,7 @@ import { apiURL } from "../util/apiURL";
 import axios from "axios";
 const API = apiURL();
 
-export default function Report(props) {
+export default function Report() {
   const [stats, setStats] = useState([]);
   const [pieChart, setPieChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
