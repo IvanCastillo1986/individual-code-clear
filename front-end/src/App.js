@@ -33,7 +33,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setCountInTimeout(count);
-    }, 5000);
+    }, 3000);
     setCount();
   }, [count]);
 

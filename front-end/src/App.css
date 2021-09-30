@@ -20,6 +20,7 @@ Can we merge this CSS into the Home.css file so that they aren't competing?
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 10px;
+  
 }
 
 .enside::-webkit-scrollbar{
