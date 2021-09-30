@@ -33,7 +33,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setCountInTimeout(count);
-    }, 5000);
+    }, 3000);
     setCount();
   }, [count]);
 
@@ -50,16 +50,16 @@ export default function App() {
                   <GlobalStyle />
                   <Toggle theme={theme} toggleTheme={toggleTheme} />
                   <Route exact path="/" component={Home} className="App" />
+                  <Route path="/report" component={Report} />
                 </Container>
               </ThemeProvider>
             ) : (
               <div className="App">
                 <h1>Welcome</h1>
                 <div className="infinite">{countInTimeout}</div>
-                <h2 className='CodeClear'>Code Clear</h2>
+                <h2 className="CodeClear">Code Clear</h2>
               </div>
             )}
-            <Route path="/report" component={Report} />
           </Switch>
         </Router>
       </UserProvider>

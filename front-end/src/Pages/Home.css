@@ -17,7 +17,7 @@
 .green-yelow-text {
   color: green;
 }
-.prueba:hover{ 
+.prueba:hover {
   color: purple;
 }
 
@@ -73,7 +73,6 @@
   font-weight: bold;
   border: none;
   border-radius: 5px;
-  
 }
 
 .CodeEditor2 form input[type="submit"] {
@@ -84,7 +83,6 @@
   border: none;
   border-radius: 5px;
   margin-top: 135px;
-
 }
 .Editor {
   width: 100%;
@@ -141,6 +139,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  margin: 50px;
 }
 
 .starts {
@@ -148,8 +148,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-left: 130px;
-  width: 100%;
-
+  /* width: 100%; */
+  width: 80%;
 }
 .bothcomponent {
   display: flex;
@@ -160,6 +160,7 @@
   position: relative;
   animation-name: example;
   animation-duration: 4s;
+  margin-bottom: 80px;
 }
 
 .solution {
@@ -168,7 +169,7 @@
 }
 
 .reportForms {
-  width: 500px;
+  width: 700px;
   display: flex;
   justify-content: space-between;
 }

@@ -22,7 +22,7 @@ export default function ParentComponent() {
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
-  const [show, setShow] = useState("Show");
+  const [show, setShow] = useState("Fix Code");
   const API = apiURL();
   const monacoObjects = useRef(null);
 
@@ -82,10 +82,10 @@ export default function ParentComponent() {
   };
 
   const showButton = (e) => {
-    if (show === "Show") {
+    if (show === "Fix Code") {
       setShow("Hide");
     } else {
-      setShow("Show");
+      setShow("Fix Code");
     }
   };
 
@@ -104,13 +104,12 @@ export default function ParentComponent() {
         />
       </div>
       <br />
-
       <form onSubmit={handleFixSubmit}>
         <button
           type="submit"
           value={show}
           onClick={showButton}
-          className="btnbtn-"
+          className="btnbtn-primary"
         >
           {show}
         </button>
@@ -118,22 +117,19 @@ export default function ParentComponent() {
 
       <div className="bothcomponent">
         <div>
-          {show === "Hide" ? (
+          {show === "Hide" && (
             <Editor
-              height="35vh"
+              height="36.5vh"
               width="88vh"
               theme="vs-dark"
               defaultLanguage="javascript"
-              theme="vs-dark"
               value={last}
               className="solution"
             />
-          ) : null}
+          )}
         </div>
 
-        {result[0] === "Please submit your code" ? (
-          ""
-        ) : (
+        {result[0] !== "Please submit your code" && (
           <div>
             <div className="statsComponent">
               <GuestStats result={result} />

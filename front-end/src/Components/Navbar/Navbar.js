@@ -18,7 +18,6 @@ export default function Navbar() {
     }
 
     return (
-
         <nav className='navbar'>
             <ul className="navbar-nav">
                 <Link to='/'>Home</Link>
@@ -37,7 +36,6 @@ export default function Navbar() {
                     {open && <DropdownMenu setOpen={setOpen} handleInfoChange={handleInfoChange} user={user} />}
                 </li>
             </ul>
-          
         </nav>
     )
 }

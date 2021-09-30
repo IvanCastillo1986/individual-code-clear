@@ -18,27 +18,109 @@ const getStat = async (id) => {
   }
 };
 
-// const getJanStats = async () => {
-//   try {
-//     const semiColons = await db.one(
-//       `SELECT COUNT(messageId) AS "Missing Semicolons" FROM stats WHERE messageId='missingSemi' AND date LIKE '%-01-%'`
-//     );
-//     const indentations = await db.one(
-//       `SELECT COUNT(messageId) AS "Wrong Indentations" FROM stats WHERE messageId='wrongIndentation' AND date LIKE '%-01-%'`
-//     );
-//     const strQuotes = await db.one(
-//       `SELECT COUNT(messageId) AS "Wrong String Quotes" FROM stats WHERE messageId='wrongQuotes' AND date LIKE '%-01-%'`
-//     );
-//     const trailingSpaces = await db.one(
-//       `SELECT COUNT(messageId) AS "Trailing Spaces" FROM stats WHERE messageId='trailingSpace' AND date LIKE '%-01-%'`
-//     );
-//     return [semiColons, indentations, strQuotes, trailingSpaces];
-//   } catch (error) {
-//     return error;
-//   }
-// };
+const getAnnualStats = async (date) => {
+  try {
+    const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
+    const allStats = await db.any("SELECT * FROM stats");
 
-const getByWeek = async (date) => {
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        const jan = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-01-%'`,
+          [elem]
+        );
+        const feb = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-02-%'`,
+          [elem]
+        );
+        const mar = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-03-%'`,
+          [elem]
+        );
+        const apr = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-04-%'`,
+          [elem]
+        );
+        const may = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-05-%'`,
+          [elem]
+        );
+        const jun = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-06-%'`,
+          [elem]
+        );
+        const jul = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-07-%'`,
+          [elem]
+        );
+        const aug = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-08-%'`,
+          [elem]
+        );
+        const sep = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-09-%'`,
+          [elem]
+        );
+        const oct = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-10-%'`,
+          [elem]
+        );
+        const nov = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-11-%'`,
+          [elem]
+        );
+        const dec = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-12-%'`,
+          [elem]
+        );
+        return [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec];
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByDayPieChart = async (date) => {
+  try {
+    const day = await db.one(`SELECT TO_CHAR(DATE '${date}', 'DD')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        return await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%-${day.to_char}%'`,
+          [elem]
+        );
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByWeekPieChart = async (date) => {
   try {
     const week = await db.one(`SELECT TO_CHAR(DATE '${date}', 'WW')`);
     const allStats = await db.any("SELECT * FROM stats");
@@ -67,8 +149,115 @@ const getByWeek = async (date) => {
   }
 };
 
+const getByMonthPieChart = async (date) => {
+  try {
+    const month = await db.one(`SELECT TO_CHAR(DATE '${date}', 'MM')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        return await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%-${month.to_char}-%'`,
+          [elem]
+        );
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByYearPieChart = async (date) => {
+  try {
+    const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        return await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-%'`,
+          [elem]
+        );
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByDayBarChart = async (date) => {
+  try {
+    const day = await db.one(`SELECT TO_CHAR(DATE '${date}', 'DD')`);
+    let dayData = await db.any(
+      `SELECT message_id, severity FROM stats WHERE date LIKE '%-${day.to_char}%'`
+    );
+    return dayData;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByWeekBarChart = async (date) => {
+  try {
+    const week = await db.one(`SELECT TO_CHAR(DATE '${date}', 'WW')`);
+    let weekData = await db.any(
+      "SELECT message_id, severity FROM stats WHERE week=$1",
+      week.to_char
+    );
+    return weekData;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByMonthBarChart = async (date) => {
+  try {
+    const month = await db.one(`SELECT TO_CHAR(DATE '${date}', 'MM')`);
+    let monthData = await db.any(
+      `SELECT message_id, severity FROM stats WHERE date LIKE '%-${month.to_char}-%'`
+    );
+    return monthData;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getByYearBarChart = async (date) => {
+  try {
+    const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
+    let yearData = await db.any(
+      `SELECT message_id, severity FROM stats WHERE date LIKE '%${year.to_char}-%'`
+    );
+    return yearData;
+  } catch (error) {
+    return error;
+  }
+};
+
 // const log = async () => {
-//   let data = await getByWeek("2021-09-27");
+//   let data = await getAnnualStats("2021-09-29");
 //   console.log(data);
 // };
 
@@ -131,7 +320,15 @@ const updateStat = async (id, stat) => {
 module.exports = {
   getAllStats,
   getStat,
-  getByWeek,
+  getByDayPieChart,
+  getByDayBarChart,
+  getByWeekPieChart,
+  getByWeekBarChart,
+  getByMonthPieChart,
+  getByMonthBarChart,
+  getByYearPieChart,
+  getByYearBarChart,
+  getAnnualStats,
   createStats,
   deleteStat,
   updateStat,

@@ -4,11 +4,12 @@ import { apiURL } from "../util/apiURL";
 import axios from "axios";
 const API = apiURL();
 
-export default function Report(props) {
+export default function Report() {
   const [stats, setStats] = useState([]);
   const [pieChart, setPieChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
-
+  const [lineChart, setLineChart] = useState([]);
+  const [annualDate, setAnnualDate] = useState("");
   const [select, setSelect] = useState({
     pieChart: "",
     barChart: "",
@@ -36,56 +37,196 @@ export default function Report(props) {
       [e.target.id]: e.target.value,
     });
   };
+  const handleAnnualDateChange = (e) => {
+    setAnnualDate(e.target.value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (select[e.target.id] === "Weekly") {
+    switch (select[e.target.id]) {
+      case "Daily":
+        axios
+          .post(`${API}/stats/daily`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+      case "Weekly":
+        axios
+          .post(`${API}/stats/weekly`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+      case "Monthly":
+        axios
+          .post(`${API}/stats/monthly`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+      case "Annually":
+        axios
+          .post(`${API}/stats/annually`, {
+            date: date[e.target.id],
+            type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+          })
+          .then((response) => {
+            e.target.id === "pieChart"
+              ? setPieChart([response.data])
+              : setBarChart([response.data]);
+          });
+        break;
+    }
+  };
+
+  const handleLineChartSubmit = (e) => {
+    e.preventDefault();
+    if (annualDate.length > 0) {
       axios
-        .post(`${API}/stats/weekly`, { date: date[e.target.id] })
-        .then((response) => {
-          e.target.id === "pieChart"
-            ? setPieChart(response.data)
-            : setBarChart(response.data);
+        .post(`${API}/stats/annual-chart`, { date: annualDate })
+        .then((res) => {
+          setLineChart([res.data]);
         });
     }
   };
 
-  let errors = 241;
-  let warnings = 89;
-  const total = errors + warnings;
+  const lineChartData = () => {
+    if (lineChart.length > 0) {
+      let allStats = stats.map((elem) => {
+        return elem.message_id;
+      });
+      let labels = allStats.filter((elem, i) => {
+        return allStats.indexOf(elem) === i;
+      });
+      let monthObj = {
+        0: ["JAN"],
+        1: ["FEB"],
+        2: ["MAR"],
+        3: ["APR"],
+        4: ["MAY"],
+        5: ["JUN"],
+        6: ["JUL"],
+        7: ["AUG"],
+        8: ["SEP"],
+        9: ["OCT"],
+        10: ["NOV"],
+        11: ["DEC"],
+      };
+
+      labels.forEach((elem, i) => {
+        let dataArr = lineChart[0].payload[i];
+        for (let j = 0; j < dataArr.length; j++) {
+          monthObj[j].push(Number(dataArr[j][`'${elem}'`]));
+        }
+      });
+      let arr = [
+        monthObj["0"],
+        monthObj["1"],
+        monthObj["2"],
+        monthObj["3"],
+        monthObj["4"],
+        monthObj["5"],
+        monthObj["6"],
+        monthObj["7"],
+        monthObj["8"],
+        monthObj["9"],
+        monthObj["10"],
+        monthObj["11"],
+      ];
+      labels.unshift("Month");
+      arr.unshift(labels);
+      return arr;
+    } else {
+      return [
+        ["Month", "No Data"],
+        ["No Data", 0],
+      ];
+    }
+  };
+
+  const pieChartData = () => {
+    if (pieChart.length > 0) {
+      let allStats = stats.map((elem) => {
+        return {
+          name: elem.message_id,
+          message: elem.message,
+          severity: elem.severity,
+        };
+      });
+      const uniqueValuesSet = new Set();
+
+      let filter = allStats.filter((obj) => {
+        const isPresentInSet = uniqueValuesSet.has(obj.name);
+        uniqueValuesSet.add(obj.name);
+        return !isPresentInSet;
+      });
+      let data = filter.map((elem, i) => {
+        return [
+          elem.name + `: (${elem.severity})`,
+          Number(pieChart[0].payload[i][`'${elem.name}'`]),
+        ];
+      });
+      data.unshift(["Stat", "Frequency"]);
+      return data;
+    } else {
+      return [["Stat", "Frequency"]];
+    }
+  };
+
+  let frequencyObj = {
+    1: 0,
+    2: 0,
+  };
+
+  if (barChart.length > 0) {
+    barChart[0].payload.forEach((elem) => {
+      frequencyObj[elem.severity]++;
+    });
+  }
+
+  const total = frequencyObj["1"] + frequencyObj["2"];
   return (
     <div>
       <h1>Report Page</h1>
+      <br />
+      <br />
       <div className="charts">
+        <h2>Annual code quality chart</h2>
+        <form className="reportForms" onSubmit={handleLineChartSubmit}>
+          <input
+            type="date"
+            id="annualDate"
+            value={annualDate}
+            onChange={handleAnnualDateChange}
+          />
+          <input type="submit" value="Get Data" />
+        </form>
+        <br />
         <Chart
-          width={"1000px"}
-          height={"500px"}
+          width={"1200px"}
+          height={"700px"}
           padding={"10px"}
           chartType="Line"
           loader={<div>Loading Chart</div>}
-          data={[
-            [
-              "Month",
-              "Wrong string quotes",
-              "Missing semicolons",
-              "Wrong indentation",
-              "Trailing spaces",
-            ],
-            ["JAN", 13333, 12343, 16782, 9220],
-            ["FEB", 12324, 9563, 12357, 7345],
-            ["MAR", 10234, 8345, 11324, 8005],
-            ["APR", 9546, 6789, 8703, 5678],
-            ["MAY", 7845, 5674, 7834, 4567],
-            ["JUN", 7344, 5466, 6799, 4401],
-            ["JUL", 6774, 4556, 5667, 4138],
-            ["AUG", 4123, 3234, 4788, 4018],
-            ["SEP", 3444, 2342, 3456, 3888],
-            ["OCT", 2345, 2123, 2334, 2538],
-            ["NOV", 1233, 1799, 1435, 1658],
-            ["DEC", 1060, 904, 782, 658],
-          ]}
+          data={lineChartData()}
           options={{
             chart: {
-              title: "2021 code quality chart",
+              title: "",
               subtitle: "Frequency",
             },
           }}
@@ -94,6 +235,7 @@ export default function Report(props) {
       </div>
       <br />
       <div className="charts">
+        <h2>Linter error/warning breakdown</h2>
         <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
           <select
             id="pieChart"
@@ -116,26 +258,20 @@ export default function Report(props) {
         </form>
 
         <Chart
-          width={"1000px"}
-          height={"500px"}
+          width={"1200px"}
+          height={"700px"}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
-          data={[
-            ["Stat", "Frequency"],
-            ["Missing semicolons (WARNING)", 44],
-            ["Wrong string quotes (WARNING)", 23],
-            ["Wrong indentation (ERROR)", 179],
-            ["Unused variable (WARNING)", 22],
-            ["Unexpected spaces (ERROR)", 62],
-          ]}
+          data={pieChartData()}
           options={{
-            title: "Linter error/warning breakdown",
+            title: "",
           }}
           rootProps={{ "data-testid": "1" }}
         />
       </div>
       <br />
       <div className="charts">
+        <h2>Linter error/warning frequency chart</h2>
         <form className="reportForms" id="barChart" onSubmit={handleSubmit}>
           <select
             id="barChart"
@@ -158,16 +294,16 @@ export default function Report(props) {
         </form>
 
         <Chart
-          width={"1000px"}
-          height={"500px"}
+          width={"1200px"}
+          height={"700px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Severity", "Error", "Warning", "Combined Total"],
-            ["", errors, warnings, total],
+            ["Severity", "2 (Error)", "1 (Warning)", "Combined Total"],
+            ["", frequencyObj["2"], frequencyObj["1"], total],
           ]}
           options={{
-            title: "Linter error/warning frequency chart",
+            title: "",
             chartArea: { width: "50%" },
             colors: ["#b0120a", "#ffab91", "#faebd7"],
             hAxis: {
