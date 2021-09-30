@@ -18,25 +18,78 @@ const getStat = async (id) => {
   }
 };
 
-// const getJanStats = async () => {
-//   try {
-//     const semiColons = await db.one(
-//       `SELECT COUNT(messageId) AS "Missing Semicolons" FROM stats WHERE messageId='missingSemi' AND date LIKE '%-01-%'`
-//     );
-//     const indentations = await db.one(
-//       `SELECT COUNT(messageId) AS "Wrong Indentations" FROM stats WHERE messageId='wrongIndentation' AND date LIKE '%-01-%'`
-//     );
-//     const strQuotes = await db.one(
-//       `SELECT COUNT(messageId) AS "Wrong String Quotes" FROM stats WHERE messageId='wrongQuotes' AND date LIKE '%-01-%'`
-//     );
-//     const trailingSpaces = await db.one(
-//       `SELECT COUNT(messageId) AS "Trailing Spaces" FROM stats WHERE messageId='trailingSpace' AND date LIKE '%-01-%'`
-//     );
-//     return [semiColons, indentations, strQuotes, trailingSpaces];
-//   } catch (error) {
-//     return error;
-//   }
-// };
+const getAnnualStats = async (date) => {
+  try {
+    const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
+    const allStats = await db.any("SELECT * FROM stats");
+
+    const wordArr = allStats.map((elem) => {
+      return elem.message_id;
+    });
+
+    let filter = wordArr.filter((elem, i) => {
+      return wordArr.indexOf(elem) === i;
+    });
+    const stats = filter.map((elem) => {
+      const count = async () => {
+        const jan = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-01-%'`,
+          [elem]
+        );
+        const feb = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-02-%'`,
+          [elem]
+        );
+        const mar = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-03-%'`,
+          [elem]
+        );
+        const apr = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-04-%'`,
+          [elem]
+        );
+        const may = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-05-%'`,
+          [elem]
+        );
+        const jun = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-06-%'`,
+          [elem]
+        );
+        const jul = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-07-%'`,
+          [elem]
+        );
+        const aug = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-08-%'`,
+          [elem]
+        );
+        const sep = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-09-%'`,
+          [elem]
+        );
+        const oct = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-10-%'`,
+          [elem]
+        );
+        const nov = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-11-%'`,
+          [elem]
+        );
+        const dec = await db.one(
+          `SELECT COUNT(message_id) AS "$1" FROM stats WHERE message_id=$1 AND date LIKE '%${year.to_char}-12-%'`,
+          [elem]
+        );
+        return [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec];
+      };
+      return count();
+    });
+
+    return Promise.all(stats);
+  } catch (error) {
+    return error;
+  }
+};
 
 const getByDayPieChart = async (date) => {
   try {
@@ -204,7 +257,7 @@ const getByYearBarChart = async (date) => {
 };
 
 // const log = async () => {
-//   let data = await getByYearPieChart("2021-09-29");
+//   let data = await getAnnualStats("2021-09-29");
 //   console.log(data);
 // };
 
@@ -275,6 +328,7 @@ module.exports = {
   getByMonthBarChart,
   getByYearPieChart,
   getByYearBarChart,
+  getAnnualStats,
   createStats,
   deleteStat,
   updateStat,
