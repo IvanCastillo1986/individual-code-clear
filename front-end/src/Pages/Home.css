@@ -17,7 +17,7 @@
 .green-yelow-text {
   color: green;
 }
-.prueba:hover{ 
+.prueba:hover {
   color: purple;
 }
 
@@ -73,7 +73,6 @@
   font-weight: bold;
   border: none;
   border-radius: 5px;
-  
 }
 
 .CodeEditor2 form input[type="submit"] {
@@ -84,7 +83,6 @@
   border: none;
   border-radius: 5px;
   margin-top: 135px;
-
 }
 .Editor {
   width: 100%;
@@ -141,6 +139,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  margin: 50px;
 }
 
 .starts {
@@ -169,7 +169,7 @@
 }
 
 .reportForms {
-  width: 500px;
+  width: 700px;
   display: flex;
   justify-content: space-between;
 }

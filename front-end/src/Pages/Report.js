@@ -96,11 +96,13 @@ export default function Report() {
 
   const handleLineChartSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${API}/stats/annual-chart`, { date: annualDate })
-      .then((res) => {
-        setLineChart([res.data]);
-      });
+    if (annualDate.length > 0) {
+      axios
+        .post(`${API}/stats/annual-chart`, { date: annualDate })
+        .then((res) => {
+          setLineChart([res.data]);
+        });
+    }
   };
 
   const lineChartData = () => {
@@ -201,7 +203,10 @@ export default function Report() {
   return (
     <div>
       <h1>Report Page</h1>
+      <br />
+      <br />
       <div className="charts">
+        <h2>Annual code quality chart</h2>
         <form className="reportForms" onSubmit={handleLineChartSubmit}>
           <input
             type="date"
@@ -211,16 +216,17 @@ export default function Report() {
           />
           <input type="submit" value="Get Data" />
         </form>
+        <br />
         <Chart
-          width={"1000px"}
-          height={"500px"}
+          width={"1200px"}
+          height={"700px"}
           padding={"10px"}
           chartType="Line"
           loader={<div>Loading Chart</div>}
           data={lineChartData()}
           options={{
             chart: {
-              title: "Annual code quality chart",
+              title: "",
               subtitle: "Frequency",
             },
           }}
@@ -229,6 +235,7 @@ export default function Report() {
       </div>
       <br />
       <div className="charts">
+        <h2>Linter error/warning breakdown</h2>
         <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
           <select
             id="pieChart"
@@ -251,19 +258,20 @@ export default function Report() {
         </form>
 
         <Chart
-          width={"1000px"}
-          height={"500px"}
+          width={"1200px"}
+          height={"700px"}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={pieChartData()}
           options={{
-            title: "Linter error/warning breakdown",
+            title: "",
           }}
           rootProps={{ "data-testid": "1" }}
         />
       </div>
       <br />
       <div className="charts">
+        <h2>Linter error/warning frequency chart</h2>
         <form className="reportForms" id="barChart" onSubmit={handleSubmit}>
           <select
             id="barChart"
@@ -286,8 +294,8 @@ export default function Report() {
         </form>
 
         <Chart
-          width={"1000px"}
-          height={"500px"}
+          width={"1200px"}
+          height={"700px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
@@ -295,7 +303,7 @@ export default function Report() {
             ["", frequencyObj["2"], frequencyObj["1"], total],
           ]}
           options={{
-            title: "Linter error/warning frequency chart",
+            title: "",
             chartArea: { width: "50%" },
             colors: ["#b0120a", "#ffab91", "#faebd7"],
             hAxis: {
