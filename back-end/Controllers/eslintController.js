@@ -22,6 +22,7 @@ eslint.post("/", async (req, res) => {
       });
       console.log("LINE 22")
       await createStats(result[0].messages);
+      console.log("LINE 25")
       res.json({ result });
     }
   } else {
