@@ -46,7 +46,6 @@ export default function ParentComponent() {
   function handleEditorDidMount(editor, monaco) {
     monacoObjects.current = { editor, monaco };
 
-    console.log(monaco);
     monaco.editor.defineTheme("TeamCodeClearDark", {
       base: "hc-black",
       colors: { "editor.background": "#2E2735" },
@@ -89,6 +88,7 @@ export default function ParentComponent() {
     }
   };
 
+
   return (
     <div className="part">
       <div className="ParentComponent">
@@ -121,10 +121,10 @@ export default function ParentComponent() {
             <Editor
               height="36.5vh"
               width="88vh"
-              theme="vs-dark"
               defaultLanguage="javascript"
               value={last}
               className="solution"
+              onMount={handleEditorDidMount}
             />
           )}
         </div>
