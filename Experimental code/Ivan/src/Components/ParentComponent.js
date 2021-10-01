@@ -74,6 +74,7 @@ export default function ParentComponent() {
     return (
         <div className='ParentComponent'>
             <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} input={input} handleEditorDidMount={handleEditorDidMount} />
+            <CodeEditor handleChange={handleChange} handleSubmit={handleSubmit} input={input} handleEditorDidMount={handleEditorDidMount} />
             <Results resultInput={resultInput} handleErrorClick={handleErrorClick} />
         </div>
     )
