@@ -96,6 +96,7 @@ export default function ParentComponent() {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           handleEditorDidMount={handleEditorDidMount}
+          monacoObjects={monacoObjects}
         />
         <Results
           input={input}
