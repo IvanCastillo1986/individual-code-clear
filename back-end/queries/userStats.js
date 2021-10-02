@@ -265,22 +265,33 @@ const getByYearBarChart = async (date) => {
 
 const createStats = async (stats) => {
   try {
-    const newStats = stats.map((elem) => {
-      const newStat = async () => {
-        return await db.one(
-          "INSERT INTO stats (message_id, message, source_code, severity, rating) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-          [
-            elem.ruleId,
-            elem.message,
-            elem.source_code,
-            elem.severity,
-            elem.rating,
-          ]
-        );
-      };
-      return newStat();
-    });
-    return Promise.all(newStats);
+    let qString = "INSERT INTO stats (message_id, message, source_code, severity, rating) VALUES ";
+    let count = 0;
+    qString += Array.from({ length: stats.length }, () => `($${++count}, $${++count}, $${++count}, $${++count}, $${++count})`).join(",") + " RETURNING *";
+    console.log(qString, "STRINGGGGGG HERE")
+
+    const qArray = [];
+    stats.forEach(stat => qArray.push(stat.ruleId, stat.message, stat.source_code, stat.severity, stat.rating));
+
+    const result = await db.any(qString, qArray);
+    console.log(result, "RESULT HEREEEE")
+    return result;
+    // const newStats = stats.map((elem) => {
+    //   const newStat = async () => {
+    //     return await db.one(
+    //       "INSERT INTO stats (message_id, message, source_code, severity, rating) VALUES ($1, $2, $3, $4, $5), ($6, $7) RETURNING *",
+    //       [
+    //         elem.ruleId,
+    //         elem.message,
+    //         elem.source_code,
+    //         elem.severity,
+    //         elem.rating,
+    //       ]
+    //     );
+    //   };
+    //   return newStat();
+    // });
+    // return Promise.all(newStats);
   } catch (error) {
     return error;
   }
