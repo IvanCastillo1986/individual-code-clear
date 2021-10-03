@@ -27,8 +27,7 @@ export default function Report() {
   const user = useContext(UserContext);
 
   useEffect(() => {
-    if (!user)
-      return history.push("/");
+    if (!user) return history.push("/");
 
     axios.get(`${API}/stats?uid=${user.uid}`).then((response) => {
       setStats(response.data.payload);
@@ -52,8 +51,7 @@ export default function Report() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!date[e.target.id])
-      return;
+    if (!date[e.target.id]) return;
 
     switch (select[e.target.id]) {
       case "Daily":
@@ -61,7 +59,7 @@ export default function Report() {
           .post(`${API}/stats/daily`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
-            uid: user.uid
+            uid: user.uid,
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -74,7 +72,7 @@ export default function Report() {
           .post(`${API}/stats/weekly`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
-            uid: user.uid
+            uid: user.uid,
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -87,7 +85,7 @@ export default function Report() {
           .post(`${API}/stats/monthly`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
-            uid: user.uid
+            uid: user.uid,
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -100,7 +98,7 @@ export default function Report() {
           .post(`${API}/stats/annually`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
-            uid: user.uid
+            uid: user.uid,
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -126,50 +124,77 @@ export default function Report() {
 
   const lineChartData = () => {
     if (lineChart.length > 0) {
-      let allStats = stats.map((elem) => {
+      let ids = stats.map((elem) => {
         return elem.message_id;
       });
-      let labels = allStats.filter((elem, i) => {
-        return allStats.indexOf(elem) === i;
-      });
-      let monthObj = {
-        0: ["JAN"],
-        1: ["FEB"],
-        2: ["MAR"],
-        3: ["APR"],
-        4: ["MAY"],
-        5: ["JUN"],
-        6: ["JUL"],
-        7: ["AUG"],
-        8: ["SEP"],
-        9: ["OCT"],
-        10: ["NOV"],
-        11: ["DEC"],
-      };
 
-      labels.forEach((elem, i) => {
+      let uniqueValues = ids.filter((elem, i) => {
+        return ids.indexOf(elem) === i;
+      });
+
+      let count = 0;
+      uniqueValues.forEach((elem, i) => {
         let dataArr = lineChart[0].payload[i];
         for (let j = 0; j < dataArr.length; j++) {
-          monthObj[j].push(Number(dataArr[j][`'${elem}'`]));
+          count += Number(dataArr[j][`'${elem}'`]);
         }
       });
-      let arr = [
-        monthObj["0"],
-        monthObj["1"],
-        monthObj["2"],
-        monthObj["3"],
-        monthObj["4"],
-        monthObj["5"],
-        monthObj["6"],
-        monthObj["7"],
-        monthObj["8"],
-        monthObj["9"],
-        monthObj["10"],
-        monthObj["11"],
-      ];
-      labels.unshift("Month");
-      arr.unshift(labels);
-      return arr;
+
+      if (count > 0) {
+        let allStats = stats.map((elem) => {
+          return elem.message_id;
+        });
+        let labels = allStats.filter((elem, i) => {
+          return allStats.indexOf(elem) === i;
+        });
+        let monthObj = {
+          0: ["JAN"],
+          1: ["FEB"],
+          2: ["MAR"],
+          3: ["APR"],
+          4: ["MAY"],
+          5: ["JUN"],
+          6: ["JUL"],
+          7: ["AUG"],
+          8: ["SEP"],
+          9: ["OCT"],
+          10: ["NOV"],
+          11: ["DEC"],
+        };
+
+        labels.forEach((elem, i) => {
+          let dataArr = lineChart[0].payload[i];
+          for (let j = 0; j < dataArr.length; j++) {
+            monthObj[j].push(Number(dataArr[j][`'${elem}'`]));
+          }
+        });
+
+        let arr = [
+          monthObj["0"],
+          monthObj["1"],
+          monthObj["2"],
+          monthObj["3"],
+          monthObj["4"],
+          monthObj["5"],
+          monthObj["6"],
+          monthObj["7"],
+          monthObj["8"],
+          monthObj["9"],
+          monthObj["10"],
+          monthObj["11"],
+        ];
+
+        labels.unshift("Month");
+
+        arr.unshift(labels);
+
+        return arr;
+      } else {
+        return [
+          ["Month", "No Data"],
+          ["No Data", 0],
+        ];
+      }
     } else {
       return [
         ["Month", "No Data"],
@@ -180,28 +205,49 @@ export default function Report() {
 
   const pieChartData = () => {
     if (pieChart.length > 0) {
-      let allStats = stats.map((elem) => {
-        return {
-          name: elem.message_id,
-          message: elem.message,
-          severity: elem.severity,
-        };
+      let ids = stats.map((elem) => {
+        return elem.message_id;
       });
-      const uniqueValuesSet = new Set();
 
-      let filter = allStats.filter((obj) => {
-        const isPresentInSet = uniqueValuesSet.has(obj.name);
-        uniqueValuesSet.add(obj.name);
-        return !isPresentInSet;
+      let uniqueValues = ids.filter((elem, i) => {
+        return ids.indexOf(elem) === i;
       });
-      let data = filter.map((elem, i) => {
-        return [
-          elem.name + `: (${elem.severity})`,
-          Number(pieChart[0].payload[i][`'${elem.name}'`]),
-        ];
+
+      let count = 0;
+      uniqueValues.forEach((elem, i) => {
+        count += Number(pieChart[0].payload[i][`'${elem}'`]);
       });
-      data.unshift(["Stat", "Frequency"]);
-      return data;
+
+      if (count > 0) {
+        let allStats = stats.map((elem) => {
+          return {
+            name: elem.message_id,
+            message: elem.message,
+            severity: elem.severity,
+          };
+        });
+
+        const uniqueValuesSet = new Set();
+
+        let filter = allStats.filter((obj) => {
+          const isPresentInSet = uniqueValuesSet.has(obj.name);
+          uniqueValuesSet.add(obj.name);
+          return !isPresentInSet;
+        });
+
+        let data = filter.map((elem, i) => {
+          return [
+            elem.name + `: (${elem.severity})`,
+            Number(pieChart[0].payload[i][`'${elem.name}'`]),
+          ];
+        });
+
+        data.unshift(["Stat", "Frequency"]);
+
+        return data;
+      } else {
+        return [["Stat", "Frequency"]];
+      }
     } else {
       return [["Stat", "Frequency"]];
     }
@@ -221,10 +267,9 @@ export default function Report() {
   const total = frequencyObj["1"] + frequencyObj["2"];
   return (
     <div>
-      {!user ? <h1>
-        For registered user only, please sign in.
-      </h1>
-        :
+      {!user ? (
+        <h1>For registered user only, please sign in.</h1>
+      ) : (
         <>
           <h1>Report Page</h1>
           <br />
@@ -342,7 +387,8 @@ export default function Report() {
               rootProps={{ "data-testid": "4" }}
             />
           </div>
-        </>}
+        </>
+      )}
     </div>
   );
 }
