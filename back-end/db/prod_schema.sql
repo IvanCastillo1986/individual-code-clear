@@ -8,5 +8,5 @@ CREATE TABLE stats (
   date TEXT DEFAULT CURRENT_DATE,
   week TEXT DEFAULT TO_CHAR(CURRENT_DATE, 'WW'),
   time TEXT DEFAULT CURRENT_TIME,
-  severity INT,
+  severity INT
 );
