@@ -24,16 +24,17 @@ export default function Report() {
   });
 
   const history = useHistory();
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
 
   useEffect(() => {
     if (!user)
       return history.push("/");
 
-    axios.get(`${API}/stats`).then((response) => {
+    axios.get(`${API}/stats?uid=${user.uid}`).then((response) => {
       setStats(response.data.payload);
     });
-  }, []);
+  }, [history, user]);
+
   const handleSelectChange = (e) => {
     setSelect({
       ...select,
@@ -57,6 +58,7 @@ export default function Report() {
           .post(`${API}/stats/daily`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+            uid: user.uid
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -69,6 +71,7 @@ export default function Report() {
           .post(`${API}/stats/weekly`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+            uid: user.uid
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -81,6 +84,7 @@ export default function Report() {
           .post(`${API}/stats/monthly`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+            uid: user.uid
           })
           .then((response) => {
             e.target.id === "pieChart"
@@ -93,12 +97,15 @@ export default function Report() {
           .post(`${API}/stats/annually`, {
             date: date[e.target.id],
             type: e.target.id === "pieChart" ? "pieChart" : "barChart",
+            uid: user.uid
           })
           .then((response) => {
             e.target.id === "pieChart"
               ? setPieChart([response.data])
               : setBarChart([response.data]);
           });
+        break;
+      default:
         break;
     }
   };
@@ -107,7 +114,7 @@ export default function Report() {
     e.preventDefault();
     if (annualDate.length > 0) {
       axios
-        .post(`${API}/stats/annual-chart`, { date: annualDate })
+        .post(`${API}/stats/annual-chart`, { date: annualDate, uid: user.uid })
         .then((res) => {
           setLineChart([res.data]);
         });
@@ -211,9 +218,9 @@ export default function Report() {
   const total = frequencyObj["1"] + frequencyObj["2"];
   return (
     <div>
-      {!user ? <>
+      {!user ? <h1>
         For registered user only, please sign in.
-      </>
+      </h1>
         :
         <>
           <h1>Report Page</h1>
