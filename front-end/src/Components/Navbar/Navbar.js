@@ -21,7 +21,7 @@ export default function Navbar() {
         <nav className='navbar'>
             <ul className="navbar-nav">
                 <Link to='/'>Home</Link>
-                <Link to='/report'>Report</Link>
+                {user && <Link to='/report'>Report</Link>}
                 <div className="navbar-center-space"></div>
                 <li className="msg-welcome">
                     {user ? <span className="txt-white">Hi <span className="msg-username" onClick={() => setOpen(!open)}>{user.displayName}!</span></span> : <span className="txt-white">Hello Guest.</span>}

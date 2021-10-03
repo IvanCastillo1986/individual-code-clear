@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import CodeEditor from "./CodeEditor";
 import Editor from "@monaco-editor/react";
 import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import { UserContext } from "../Providers/UserProvider";
 // import Display from "./Display";
 // import styled, { ThemeProvider } from "styled-components";
 
@@ -25,6 +26,7 @@ export default function ParentComponent() {
   const [show, setShow] = useState("Fix Code");
   const API = apiURL();
   const monacoObjects = useRef(null);
+  const user = useContext(UserContext);
 
   const handleChange = (value, e) => {
     setInput({
@@ -36,7 +38,8 @@ export default function ParentComponent() {
     e.preventDefault();
 
     try {
-      axios.post(`${API}/eslint`, input).then((res) => {
+      const submission = { ...input, uid: user ? user.uid : null };
+      axios.post(`${API}/eslint`, submission).then((res) => {
         setResult(res.data.result[0].messages);
       });
     } catch (c) {

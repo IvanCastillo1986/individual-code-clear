@@ -256,44 +256,18 @@ const getByYearBarChart = async (date) => {
   }
 };
 
-// const log = async () => {
-//   let data = await getAnnualStats("2021-09-29");
-//   console.log(data);
-// };
-
-// log();
-
-const createStats = async (stats) => {
+const createStats = async ({ input, uid, result }) => {
   try {
-    let qString = "INSERT INTO stats (message_id, message, source_code, severity, rating) VALUES ";
+    let qString = "INSERT INTO stats (message_id, message, source_code, severity, uid) VALUES ";
     let count = 0;
-    qString += Array.from({ length: stats.length }, () => `($${++count}, $${++count}, $${++count}, $${++count}, $${++count})`).join(",") + " RETURNING *";
-    console.log(qString, "STRINGGGGGG HERE")
+    qString += Array.from({ length: result.length }, () => `($${++count}, $${++count}, $${++count}, $${++count}, $${++count})`).join(",");
 
     const qArray = [];
-    stats.forEach(stat => qArray.push(stat.ruleId, stat.message, stat.source_code, stat.severity, stat.rating));
+    result.forEach(stat => qArray.push(stat.ruleId, stat.message, input, stat.severity, uid));
 
-    const result = await db.any(qString, qArray);
-    console.log(result, "RESULT HEREEEE")
-    return result;
-    // const newStats = stats.map((elem) => {
-    //   const newStat = async () => {
-    //     return await db.one(
-    //       "INSERT INTO stats (message_id, message, source_code, severity, rating) VALUES ($1, $2, $3, $4, $5), ($6, $7) RETURNING *",
-    //       [
-    //         elem.ruleId,
-    //         elem.message,
-    //         elem.source_code,
-    //         elem.severity,
-    //         elem.rating,
-    //       ]
-    //     );
-    //   };
-    //   return newStat();
-    // });
-    // return Promise.all(newStats);
+    await db.none(qString, qArray);
   } catch (error) {
-    return error;
+    console.log(error);
   }
 };
 
