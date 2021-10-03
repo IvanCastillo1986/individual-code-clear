@@ -98,6 +98,7 @@
 }
 .Results ol li::marker {
   color: #2ed2e6;
+  text-shadow: 2px 2px 2px #03454e;
 }
 .Results ol li {
   font-size: 23px;
