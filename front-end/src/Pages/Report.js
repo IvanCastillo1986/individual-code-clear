@@ -52,6 +52,9 @@ export default function Report() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!date[e.target.id])
+      return;
+
     switch (select[e.target.id]) {
       case "Daily":
         axios
