@@ -9,7 +9,6 @@ eslint.get("/", (req, res) => {
 eslint.post("/", async (req, res) => {
   const lint = new ESLint();
   const result = await lint.lintText(req.body.input);
-  console.log(result)
   if (req.body.uid && result[0].messages.length > 0 && !result[0].messages[0]?.fatal) {
     const data = { ...req.body, result: result[0].messages };
     await createStats(data);

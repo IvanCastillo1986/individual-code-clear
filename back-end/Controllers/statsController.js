@@ -1,7 +1,6 @@
 const stats = require("express").Router();
 const {
   getAllStats,
-  getStat,
   getByDayPieChart,
   getByDayBarChart,
   getByWeekPieChart,
@@ -12,14 +11,12 @@ const {
   getByYearBarChart,
   getAnnualStats,
   deleteStat,
-  updateStat,
 } = require("../queries/userStats");
 
 stats.get("/", async (req, res) => {
   try {
-    const allStats = await getAllStats();
+    const allStats = await getAllStats(req.query.uid);
     if (allStats.code === "ECONNREFUSED") {
-      console.log(`Database ${allStats}`);
       throw `Unable to connect to the database`;
     } else {
       res.status(200).json({
@@ -38,13 +35,13 @@ stats.get("/", async (req, res) => {
 stats.post("/daily", async (req, res) => {
   try {
     if (req.body.type === "pieChart") {
-      const daily = await getByDayPieChart(req.body.date);
+      const daily = await getByDayPieChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: daily,
       });
     } else {
-      const daily = await getByDayBarChart(req.body.date);
+      const daily = await getByDayBarChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: daily,
@@ -61,13 +58,13 @@ stats.post("/daily", async (req, res) => {
 stats.post("/weekly", async (req, res) => {
   try {
     if (req.body.type === "pieChart") {
-      const weekly = await getByWeekPieChart(req.body.date);
+      const weekly = await getByWeekPieChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: weekly,
       });
     } else {
-      const weekly = await getByWeekBarChart(req.body.date);
+      const weekly = await getByWeekBarChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: weekly,
@@ -84,13 +81,13 @@ stats.post("/weekly", async (req, res) => {
 stats.post("/monthly", async (req, res) => {
   try {
     if (req.body.type === "pieChart") {
-      const monthly = await getByMonthPieChart(req.body.date);
+      const monthly = await getByMonthPieChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: monthly,
       });
     } else {
-      const monthly = await getByMonthBarChart(req.body.date);
+      const monthly = await getByMonthBarChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: monthly,
@@ -107,13 +104,13 @@ stats.post("/monthly", async (req, res) => {
 stats.post("/annually", async (req, res) => {
   try {
     if (req.body.type === "pieChart") {
-      const yearly = await getByYearPieChart(req.body.date);
+      const yearly = await getByYearPieChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: yearly,
       });
     } else {
-      const yearly = await getByYearBarChart(req.body.date);
+      const yearly = await getByYearBarChart(req.body.date, req.body.uid);
       res.status(200).json({
         success: true,
         payload: yearly,
@@ -129,7 +126,7 @@ stats.post("/annually", async (req, res) => {
 
 stats.post("/annual-chart", async (req, res) => {
   try {
-    const annual = await getAnnualStats(req.body.date);
+    const annual = await getAnnualStats(req.body.date, req.body.uid);
     res.status(200).json({
       success: true,
       payload: annual,
@@ -142,64 +139,17 @@ stats.post("/annual-chart", async (req, res) => {
   }
 });
 
-stats.get("/:id", async (req, res) => {
+stats.delete("/:uid", async (req, res) => {
   try {
-    const { id } = req.params;
-    const stat = await getStat(id);
-    if (stat["id"]) {
-      res.json({
-        success: true,
-        payload: stat,
-      });
-    } else {
-      console.log(`Database error: ${stat}`);
-      throw `There is no statistic with the id: ${id}`;
-    }
-  } catch (e) {
-    res.status(404).json({
-      error: "Statistic not found",
-      message: e,
+    const { uid } = req.params;
+    await deleteStat(uid);
+    res.status(200).json({
+      success: true,
+      payload: "user data deleted from database",
     });
-  }
-});
-
-stats.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedStat = await deleteStat(id);
-    if (deletedStat["id"]) {
-      res.status(200).json({
-        success: true,
-        payload: deletedStat,
-      });
-    } else {
-      console.log(`Database error: ${deletedStat}`);
-      throw `There is no statistic to delete with the id: ${id}`;
-    }
   } catch (e) {
     res.status(404).json({
       error: "Statistic not deleted",
-      message: e,
-    });
-  }
-});
-
-stats.put("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedStat = await updateStat(id, req.body);
-    if (updatedStat["id"]) {
-      res.status(200).json({
-        success: true,
-        payload: updatedStat,
-      });
-    } else {
-      console.log(`Database error: ${updatedStat}`);
-      throw `There is no statistic to be updated with the id: ${id}`;
-    }
-  } catch (e) {
-    res.status(404).json({
-      error: "Statistic not updated",
       message: e,
     });
   }

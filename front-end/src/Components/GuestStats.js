@@ -1,8 +1,5 @@
 import React from "react";
 import Chart from "react-google-charts";
-import { apiURL } from "../util/apiURL";
-
-const API = apiURL();
 
 export default function GuestStats(props) {
   const { result } = props;
