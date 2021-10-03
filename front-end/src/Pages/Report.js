@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Chart from "react-google-charts";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import { UserContext } from "../Providers/UserProvider";
+
 const API = apiURL();
 
 export default function Report() {
@@ -20,7 +23,13 @@ export default function Report() {
     barChart: "",
   });
 
+  const history = useHistory();
+  const user = useContext(UserContext)
+
   useEffect(() => {
+    if (!user)
+      return history.push("/");
+
     axios.get(`${API}/stats`).then((response) => {
       setStats(response.data.payload);
     });
@@ -202,122 +211,128 @@ export default function Report() {
   const total = frequencyObj["1"] + frequencyObj["2"];
   return (
     <div>
-      <h1>Report Page</h1>
-      <br />
-      <br />
-      <div className="charts">
-        <h2>Annual code quality chart</h2>
-        <form className="reportForms" onSubmit={handleLineChartSubmit}>
-          <input
-            type="date"
-            id="annualDate"
-            value={annualDate}
-            onChange={handleAnnualDateChange}
-          />
-          <input type="submit" value="Get Data" />
-        </form>
-        <br />
-        <Chart
-          width={"1200px"}
-          height={"700px"}
-          padding={"10px"}
-          chartType="Line"
-          loader={<div>Loading Chart</div>}
-          data={lineChartData()}
-          options={{
-            chart: {
-              title: "",
-              subtitle: "Frequency",
-            },
-          }}
-          rootProps={{ "data-testid": "3" }}
-        />
-      </div>
-      <br />
-      <div className="charts">
-        <h2>Linter error/warning breakdown</h2>
-        <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
-          <select
-            id="pieChart"
-            value={select.pieChart}
-            onChange={handleSelectChange}
-          >
-            <option value="--">--</option>
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Annually">Annually</option>
-          </select>
-          <input
-            type="date"
-            id="pieChart"
-            value={date.pieChart}
-            onChange={handleDateChange}
-          />
-          <input type="submit" value="Get Data" />
-        </form>
+      {!user ? <>
+        For registered user only, please sign in.
+      </>
+        :
+        <>
+          <h1>Report Page</h1>
+          <br />
+          <br />
+          <div className="charts">
+            <h2>Annual code quality chart</h2>
+            <form className="reportForms" onSubmit={handleLineChartSubmit}>
+              <input
+                type="date"
+                id="annualDate"
+                value={annualDate}
+                onChange={handleAnnualDateChange}
+              />
+              <input type="submit" value="Get Data" />
+            </form>
+            <br />
+            <Chart
+              width={"1200px"}
+              height={"700px"}
+              padding={"10px"}
+              chartType="Line"
+              loader={<div>Loading Chart</div>}
+              data={lineChartData()}
+              options={{
+                chart: {
+                  title: "",
+                  subtitle: "Frequency",
+                },
+              }}
+              rootProps={{ "data-testid": "3" }}
+            />
+          </div>
+          <br />
+          <div className="charts">
+            <h2>Linter error/warning breakdown</h2>
+            <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
+              <select
+                id="pieChart"
+                value={select.pieChart}
+                onChange={handleSelectChange}
+              >
+                <option value="--">--</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Annually">Annually</option>
+              </select>
+              <input
+                type="date"
+                id="pieChart"
+                value={date.pieChart}
+                onChange={handleDateChange}
+              />
+              <input type="submit" value="Get Data" />
+            </form>
 
-        <Chart
-          width={"1200px"}
-          height={"700px"}
-          chartType="PieChart"
-          loader={<div>Loading Chart</div>}
-          data={pieChartData()}
-          options={{
-            title: "",
-          }}
-          rootProps={{ "data-testid": "1" }}
-        />
-      </div>
-      <br />
-      <div className="charts">
-        <h2>Linter error/warning frequency chart</h2>
-        <form className="reportForms" id="barChart" onSubmit={handleSubmit}>
-          <select
-            id="barChart"
-            value={select.barChart}
-            onChange={handleSelectChange}
-          >
-            <option value="--">--</option>
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Annually">Annually</option>
-          </select>
-          <input
-            type="date"
-            id="barChart"
-            value={date.barChart}
-            onChange={handleDateChange}
-          />
-          <input type="submit" value="Get Data" />
-        </form>
+            <Chart
+              width={"1200px"}
+              height={"700px"}
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={pieChartData()}
+              options={{
+                title: "",
+              }}
+              rootProps={{ "data-testid": "1" }}
+            />
+          </div>
+          <br />
+          <div className="charts">
+            <h2>Linter error/warning frequency chart</h2>
+            <form className="reportForms" id="barChart" onSubmit={handleSubmit}>
+              <select
+                id="barChart"
+                value={select.barChart}
+                onChange={handleSelectChange}
+              >
+                <option value="--">--</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Annually">Annually</option>
+              </select>
+              <input
+                type="date"
+                id="barChart"
+                value={date.barChart}
+                onChange={handleDateChange}
+              />
+              <input type="submit" value="Get Data" />
+            </form>
 
-        <Chart
-          width={"1200px"}
-          height={"700px"}
-          chartType="BarChart"
-          loader={<div>Loading Chart</div>}
-          data={[
-            ["Severity", "2 (Error)", "1 (Warning)", "Combined Total"],
-            ["", frequencyObj["2"], frequencyObj["1"], total],
-          ]}
-          options={{
-            title: "",
-            chartArea: { width: "50%" },
-            colors: ["#b0120a", "#ffab91", "#faebd7"],
-            hAxis: {
-              title: "Frequency",
-              minValue: 0,
-            },
-            vAxis: {
-              title: "Severity",
-            },
-          }}
-          // For tests
-          rootProps={{ "data-testid": "4" }}
-        />
-      </div>
+            <Chart
+              width={"1200px"}
+              height={"700px"}
+              chartType="BarChart"
+              loader={<div>Loading Chart</div>}
+              data={[
+                ["Severity", "2 (Error)", "1 (Warning)", "Combined Total"],
+                ["", frequencyObj["2"], frequencyObj["1"], total],
+              ]}
+              options={{
+                title: "",
+                chartArea: { width: "50%" },
+                colors: ["#b0120a", "#ffab91", "#faebd7"],
+                hAxis: {
+                  title: "Frequency",
+                  minValue: 0,
+                },
+                vAxis: {
+                  title: "Severity",
+                },
+              }}
+              // For tests
+              rootProps={{ "data-testid": "4" }}
+            />
+          </div>
+        </>}
     </div>
   );
 }

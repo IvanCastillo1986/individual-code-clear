@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { CSSTransition } from "react-transition-group";
 
 import { userAccountSignIn, userProviderSignIn, userSignOut } from '../../Services/Firebase';
@@ -19,6 +20,7 @@ import { ReactComponent as IcGoogle } from "../../Assets/icons/logo_google.svg";
 import { ReactComponent as IcIdentity } from "../../Assets/icons/identity.svg";
 import { ReactComponent as IcPassword } from "../../Assets/icons/password.svg";
 import { ReactComponent as IcCloseAcc } from "../../Assets/icons/close_account.svg";
+import { ReactComponent as IcReport } from "../../Assets/icons/report.svg";
 
 export default function DropdownMenu(props) {
     const [activeMenu, setActiveMenu] = useState("main");
@@ -26,6 +28,7 @@ export default function DropdownMenu(props) {
     const dropdownRef = useRef(null);
     const [userInfo, setUserInfo] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
+    const history = useHistory();
 
     useEffect(() => {
         setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
@@ -34,6 +37,11 @@ export default function DropdownMenu(props) {
     const calcHeight = (el) => {
         const height = el.offsetHeight;
         setMenuHeight(height);
+    }
+
+    const goToReport = () => {
+        history.push("/report");
+        props.setOpen(false);
     }
 
     const signInWithEmail = async () => {
@@ -76,6 +84,8 @@ export default function DropdownMenu(props) {
             >
                 <div className="menu">
                     {props.user ? <>
+                        <DropdownItem leftIcon={<IcReport />} clickAction={goToReport}>Report</DropdownItem>
+                        <hr className="nav-hr" />
                         <DropdownItem goToMenu="update-name" leftIcon={<IcIdentity />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Update Name</h5></DropdownItem>
                         <DropdownItem goToMenu="update-email" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Update Email</h5></DropdownItem>
                         <DropdownItem goToMenu="update-password" leftIcon={<IcSettings />} rightIcon={<IcArrowForward />}><h5 className="dropdown-h5">Update Password</h5></DropdownItem>
