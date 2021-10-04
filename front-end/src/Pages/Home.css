@@ -135,13 +135,21 @@
   height: fit-content;
 }
 
+.reportPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .charts {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
-  margin: 100px;
+  width: 95%;
+  min-width: 300px;
 }
 
 .starts {
@@ -170,7 +178,16 @@
 }
 
 .reportForms {
-  width: 700px;
+  width: 50%;
+  min-width: 300px;
   display: flex;
   justify-content: space-between;
 }
+
+/* @media screen and (max-width: 970px) {
+  .reportForms {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+  }
+} */

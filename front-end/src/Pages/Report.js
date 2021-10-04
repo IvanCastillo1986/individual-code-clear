@@ -273,7 +273,7 @@ export default function Report() {
 
   const total = frequencyObj["1"] + frequencyObj["2"];
   return (
-    <div>
+    <div className="reportPage">
       {!user ? (
         <h1>For registered user only, please sign in.</h1>
       ) : (
@@ -294,8 +294,8 @@ export default function Report() {
             </form>
             <br />
             <Chart
-              width={"900px"}
-              height={"700px"}
+              width={"90%"}
+              height={"800px"}
               padding={"10px"}
               chartType="Line"
               loader={<div>Loading Chart</div>}
@@ -334,7 +334,7 @@ export default function Report() {
             </form>
 
             <Chart
-              width={"1200px"}
+              width={"90%"}
               height={"700px"}
               chartType="PieChart"
               loader={<div>Loading Chart</div>}
@@ -370,7 +370,7 @@ export default function Report() {
             </form>
 
             <Chart
-              width={"1200px"}
+              width={"90%"}
               height={"700px"}
               chartType="BarChart"
               loader={<div>Loading Chart</div>}
