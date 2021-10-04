@@ -294,7 +294,7 @@ export default function Report() {
             </form>
             <br />
             <Chart
-              width={"1200px"}
+              width={"900px"}
               height={"700px"}
               padding={"10px"}
               chartType="Line"
