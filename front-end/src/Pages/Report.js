@@ -13,6 +13,7 @@ export default function Report() {
   const [barChart, setBarChart] = useState([]);
   const [lineChart, setLineChart] = useState([]);
   const [annualDate, setAnnualDate] = useState("");
+  const [infoShow, setInfoShow] = useState(false);
   const [select, setSelect] = useState({
     pieChart: "",
     barChart: "",
@@ -260,6 +261,55 @@ export default function Report() {
     }
   };
 
+  const chartInfo = () => {
+    let arrObj = stats.map((elem) => {
+      return {
+        name: elem.message_id,
+        message: elem.message,
+      };
+    });
+
+    const uniqueValuesSet = new Set();
+
+    let filter = arrObj.filter((obj) => {
+      const isPresentInSet = uniqueValuesSet.has(obj.name);
+      uniqueValuesSet.add(obj.name);
+      return !isPresentInSet;
+    });
+
+    filter.forEach((elem) => {
+      switch (elem.name) {
+        case "indent":
+          elem.message = "Wrong indentation found.";
+          break;
+        case "no-unused-vars":
+          elem.message = "Variables defined but never used.";
+          break;
+        case "no-multi-spaces":
+          elem.message = "Multiple spaces found.";
+          break;
+      }
+    });
+
+    filter.unshift(
+      { name: "1", message: "Warning." },
+      { name: "2", message: "Error." }
+    );
+
+    let messages = filter.map((elem, i) => {
+      return (
+        <p>
+          {elem.name} : {elem.message}
+        </p>
+      );
+    });
+    return messages;
+  };
+
+  const showButton = () => {
+    setInfoShow(!infoShow);
+  };
+
   let frequencyObj = {
     1: 0,
     2: 0,
@@ -279,6 +329,12 @@ export default function Report() {
       ) : (
         <>
           <h1>Report Page</h1>
+          <br />
+          <br />
+          <button onClick={showButton}>
+            {infoShow ? "Hide Chart Info" : "Show Chart Info"}
+          </button>
+          {infoShow ? <ol className="moreInfo">{chartInfo()}</ol> : ""}
           <br />
           <br />
           <div className="charts">
@@ -312,6 +368,7 @@ export default function Report() {
           <br />
           <div className="charts">
             <h2>Linter error/warning breakdown</h2>
+
             <form className="reportForms" id="pieChart" onSubmit={handleSubmit}>
               <select
                 id="pieChart"
