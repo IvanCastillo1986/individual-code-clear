@@ -124,21 +124,23 @@ export default function Report() {
 
   const lineChartData = () => {
     if (lineChart.length > 0) {
-      let ids = stats.map((elem) => {
-        return elem.message_id;
-      });
-
-      let uniqueValues = ids.filter((elem, i) => {
-        return ids.indexOf(elem) === i;
-      });
-
       let count = 0;
-      uniqueValues.forEach((elem, i) => {
-        let dataArr = lineChart[0].payload[i];
-        for (let j = 0; j < dataArr.length; j++) {
-          count += Number(dataArr[j][`'${elem}'`]);
-        }
-      });
+      if (lineChart[0].payload.length > 0) {
+        let ids = stats.map((elem) => {
+          return elem.message_id;
+        });
+
+        let uniqueValues = ids.filter((elem, i) => {
+          return ids.indexOf(elem) === i;
+        });
+
+        uniqueValues.forEach((elem, i) => {
+          let dataArr = lineChart[0].payload[i];
+          for (let j = 0; j < dataArr.length; j++) {
+            count += Number(dataArr[j][`'${elem}'`]);
+          }
+        });
+      }
 
       if (count > 0) {
         let allStats = stats.map((elem) => {
@@ -203,22 +205,26 @@ export default function Report() {
     }
   };
 
+  let pieCount = 0;
+  let show = false;
   const pieChartData = () => {
     if (pieChart.length > 0) {
-      let ids = stats.map((elem) => {
-        return elem.message_id;
-      });
+      if (pieChart[0].payload.length > 0) {
+        show = true;
+        let ids = stats.map((elem) => {
+          return elem.message_id;
+        });
 
-      let uniqueValues = ids.filter((elem, i) => {
-        return ids.indexOf(elem) === i;
-      });
+        let uniqueValues = ids.filter((elem, i) => {
+          return ids.indexOf(elem) === i;
+        });
 
-      let count = 0;
-      uniqueValues.forEach((elem, i) => {
-        count += Number(pieChart[0].payload[i][`'${elem}'`]);
-      });
+        uniqueValues.forEach((elem, i) => {
+          pieCount += Number(pieChart[0].payload[i][`'${elem}'`]);
+        });
+      }
 
-      if (count > 0) {
+      if (pieCount > 0) {
         let allStats = stats.map((elem) => {
           return {
             name: elem.message_id,
@@ -246,6 +252,7 @@ export default function Report() {
 
         return data;
       } else {
+        show = false;
         return [["Stat", "Frequency"]];
       }
     } else {
@@ -333,7 +340,7 @@ export default function Report() {
               loader={<div>Loading Chart</div>}
               data={pieChartData()}
               options={{
-                title: "",
+                title: show ? `Total: ${pieCount}` : "",
               }}
               rootProps={{ "data-testid": "1" }}
             />
