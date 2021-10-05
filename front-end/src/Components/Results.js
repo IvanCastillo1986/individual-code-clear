@@ -20,7 +20,7 @@ export default function Results({ result, handleErrorClick }) {
     else if(cuenta <= 40 && cuenta > 30){ rest = 1.5 }
     else if(cuenta <= 30 && cuenta > 20){ rest = 1.0 }
     else if(cuenta <= 20 && cuenta > 10){ rest = 0.5 }
-    else if(cuenta <= 10){ rest = 0.0 }
+    else if(cuenta <= 10 ){ rest = 0.0 }
     return rest
   }; 
   
@@ -34,7 +34,7 @@ export default function Results({ result, handleErrorClick }) {
     if(rest <= 4.5  && rest > 3.5 ){ level = "Good"}
     if(rest <= 3.5 && rest > 2.5 ){ level = "Fair"}
     if(rest <= 2.5 && rest > 1.5 ){ level = "Poor"}
-    if(rest <= 1.5 && rest > 0.5 ){ level = "Warning"}
+    if(rest <= 1.5 && rest > 0.5 ){ level = "Warnnig"}
     if(rest <= 0.5){ level = "Alert"}
     if (cuenta < 0){level = "Error"}
     return level
@@ -80,13 +80,14 @@ export default function Results({ result, handleErrorClick }) {
               onChange={direct}
               /> 
             
-              <h6 style={{fontSize: '22px', marginTop: '4px', padding: '8px', marginLeft: '10px'}}>{cuenta} %</h6>
+              <h6 style={{fontSize: '22px', marginTop: '4px', padding: '8px', marginLeft: '10px'}}>{cuenta < 0 ? `-${0}` : cuenta } %</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Great Job' ? "green-text" : null} >{prueba() === 'Great Job' ? "Great Job" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Good' ? "green-yelow-text" : null} >{prueba() === 'Good' ? "Good" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
-              
+               <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}}  >{prueba() === 'Alert' ? "Alert, to many errors  😳" : null}</h6>
+               <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}}  >{prueba() === 'Error' ? <p>This web do not wanna handle this amount of Error</p>  : null}</h6>
           </div>
 
           <div className="enside">
