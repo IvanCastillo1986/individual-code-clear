@@ -224,51 +224,55 @@ export default function Report() {
   };
 
   const statsInfo = () => {
-    let arrObj = stats.map((elem) => {
-      return {
-        name: elem.message_id,
-        message: elem.message,
-        severity: elem.severity,
-      };
-    });
+    if (stats.length > 0) {
+      let arrObj = stats.map((elem) => {
+        return {
+          name: elem.message_id,
+          message: elem.message,
+          severity: elem.severity,
+        };
+      });
 
-    const uniqueValuesSet = new Set();
+      const uniqueValuesSet = new Set();
 
-    let filter = arrObj.filter((obj) => {
-      const isPresentInSet = uniqueValuesSet.has(obj.name);
-      uniqueValuesSet.add(obj.name);
-      return !isPresentInSet;
-    });
+      let filter = arrObj.filter((obj) => {
+        const isPresentInSet = uniqueValuesSet.has(obj.name);
+        uniqueValuesSet.add(obj.name);
+        return !isPresentInSet;
+      });
 
-    filter.forEach((elem) => {
-      switch (elem.name) {
-        case "indent":
-          elem.message = "Wrong indentation found.";
-          break;
-        case "no-unused-vars":
-          elem.message = "Variables defined but never used.";
-          break;
-        case "no-multi-spaces":
-          elem.message = "Multiple spaces found.";
-          break;
-        default:
-          break;
-      }
-    });
+      filter.forEach((elem) => {
+        switch (elem.name) {
+          case "indent":
+            elem.message = "Wrong indentation found.";
+            break;
+          case "no-unused-vars":
+            elem.message = "Variables defined but never used.";
+            break;
+          case "no-multi-spaces":
+            elem.message = "Multiple spaces found.";
+            break;
+          default:
+            break;
+        }
+      });
 
-    filter.unshift(
-      { name: "Warning", message: "", severity: 1 },
-      { name: "Error", message: "", severity: 2 }
-    );
-
-    let messages = filter.map((elem, i) => {
-      return (
-        <p key={i}>
-          {elem.name} : {elem.message} &nbsp; ( {elem.severity} )
-        </p>
+      filter.unshift(
+        { name: "Warning", message: "", severity: 1 },
+        { name: "Error", message: "", severity: 2 }
       );
-    });
-    return messages;
+
+      let messages = filter.map((elem, i) => {
+        return (
+          <p key={i}>
+            {elem.name} : {elem.message} &nbsp; ( {elem.severity} )
+          </p>
+        );
+      });
+      return messages;
+    } else {
+      return <p>No data in the database</p>;
+    }
   };
 
   const showButton = () => {
@@ -299,7 +303,8 @@ export default function Report() {
           <button onClick={showButton}>
             {infoShow ? "Hide Report Info" : "Show Report Info"}
           </button>
-          {infoShow ? <ol className="moreInfo">{statsInfo()}</ol> : ""}
+          <br />
+          {infoShow ? <div className="moreInfo">{statsInfo()}</div> : ""}
           <br />
           <br />
           <div className="charts">
