@@ -7,7 +7,7 @@ export default function Results({ result, handleErrorClick }) {
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
   let cuenta = `${100 - (total * 5) / 10}` 
- 
+
   const ratingChanged = () => { 
     let rest = 0
     if(cuenta === 100 ){ rest = 5 }
