@@ -30,6 +30,7 @@ export default function App() {
   const [countInTimeout, setCountInTimeout] = useState(
     <img src={logo} className="App-logo" alt="call" />
   );
+
   useEffect(() => {
     setTimeout(() => {
       setCountInTimeout(count);
