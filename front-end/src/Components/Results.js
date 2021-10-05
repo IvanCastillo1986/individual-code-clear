@@ -7,7 +7,6 @@ export default function Results({ result, handleErrorClick }) {
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
   let cuenta = `${100 - (total * 5) / 10}` 
-
   const ratingChanged = () => { 
     let rest = 0
     if(cuenta === 100 ){ rest = 5 }
@@ -20,7 +19,7 @@ export default function Results({ result, handleErrorClick }) {
     else if(cuenta <= 40 && cuenta > 30){ rest = 1.5 }
     else if(cuenta <= 30 && cuenta > 20){ rest = 1.0 }
     else if(cuenta <= 20 && cuenta > 10){ rest = 0.5 }
-    else if(cuenta <= 10 && cuenta >= 0){ rest = 0.0 }
+    else if(cuenta <= 10){ rest = 0.0 }
     return rest
   }; 
 
@@ -34,7 +33,8 @@ export default function Results({ result, handleErrorClick }) {
     if(rest <= 3.5 && rest > 2.5 ){ level = "Fair"}
     if(rest <= 2.5 && rest > 1.5 ){ level = "Poor"}
     if(rest <= 1.5 && rest > 0.5 ){ level = "Warning"}
-    if(rest === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
+    if(rest <= 0.5){ level = "Alert"}
+    if (cuenta < 0){level = "Error"}
     return level
   }
 
