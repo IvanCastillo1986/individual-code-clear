@@ -26,8 +26,8 @@ export default function CodeEditor({
     <div className="CodeEditor">
       <h2>Code Editor</h2>
       <form onSubmit={handleFileSubmit}>
-        <label for="file">
-          <input type="file" accept=".js" minSize={0} maxSize={5242880} onChange={getFile} />
+        <label htmlFor="file">
+          <input type="file" accept=".js" onChange={getFile} />
         </label>
         <input type="submit" value="Import code from js file" />
       </form>

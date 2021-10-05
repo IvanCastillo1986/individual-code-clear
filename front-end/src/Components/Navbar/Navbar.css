@@ -241,6 +241,9 @@
   margin: 0px;
   padding: 0px;
 }
+.page-delete form {
+  color: whitesmoke;
+}
 
 .page-delete > * {
   margin: 2px;
