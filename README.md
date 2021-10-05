@@ -1,153 +1,48 @@
-# PERN Final Project Template
+# Project Code Clear: An app dedicated to progressing people to become better coders.
 
-- select `use this template`
-- clone this repo
+## Running the application
+Link to the application https://pursuit-capstone-frontend.netlify.app/
 
-## Getting Started
+- Go to the website
+- Import/paste the code that needs to be analyzed
+- Press the Submit button
 
-### Project Structure
 
-```
-├── README.md (what you are currently reading)
-├── back-end (a basic express app)
-├── front-end (a basic create-react-app)
-└── package.json (necessary boilerplate for heroku deployment )
-```
+## Description
 
-**NOTE:** - You will have 3 `package.json` files in this project
+Code Clear is an app that imports code that will analyzed for code quailty and errors. Through continuous submission of code, the app will be able to track the user's progress over time though an Annual code quality chart, an Linter error/warning breakdown chart, and an Linter error/warning frequency chart. By doing this, the user is able to determine which types of errors are frequently repeated and specfically focus on fixing those errors.
 
-- **Top level** - necessary for heroku deployment: you don't need to do anything with this file, it is set up for you
-- **back-end** - everything to do with the express/postgres backend
-- **front-end** - everything to do with the create-react-app front-end
+![Alt Text](https://media.giphy.com/media/vt7FEIIDOcyeOZtlbp/giphy.gif)
 
-### `back-end` Set Up and Deployment to Heroku
+## Technical Description
 
-#### Basic App
+The user will import code that will be passed to the back-end, where the code is ran through an ESlinter function. This function will use the inputted code to obtain the errors results that will be send back to the front-end. When the user is logged into an account, the user's data will be stored in the back-end and produce mulitple report chart data that will be sent to the front-end. 
 
-**/back-end**
+![Alt Text](https://media.giphy.com/media/ni4JjNQBUUsdWMVixH/giphy.gif)
 
-- `cd back-end`
-- `npm install`
-- `touch .env`
+## Features
+- Screen splash with setTimeout()
+- A light/dark mode to accommodate the eyes of the user
+- The severity level for each linter issue to indicate to the user how important it is to correct this issue. 
+- A scroll down feature for the results section to create a more user friendly display.
+- A feature which lets you click on a Linting Error in the Results component, which highlights the exact location of the problem in the Code Editor.
+- A star rating system to help users determine the holistic quality of their code, as well as providing them with a score that evaluates their code level.
+- A display button that will show up a second Editor with the code fixed.
+- A histogram graph to display the frequency of the type of severity level the user gets.
+- Firebase accounts able to create an account, login with google/github account, recover password with email, update feature, delete feature
+- A report page that shows the stats from data collected from the user.
 
-make sure you are on the same level as the `package.json` of the `back-end` directory
+## Our mission 
+This project was created by our team's burning desire to become better coders. Many membersof our team struggled with sloppy code, which hinder our understanding and growth in a collaborative setting. Code Clear is designed to help users identify the types of coding mistakes that they make and fix them. We want the user to also keep not just fix their code but to fix their bad coding habit. By keeping track of their progress, the user focus on the type of coding mistakes they need to work on. 
 
-- `touch .env`
+## Challenges 
+Most of the challenges come from reading and understanding documentations for developing and customizing our Integrated Development Environment, setting out firebase and Eslint. Other challenges include getting the charts to use data coming from the backend as opposed to mock data in the front end.
 
-```
-PORT=3333
-PG_HOST=localhost
-PG_PORT=5432
-PG_DATABASE=postgres
-PG_USER=postgres
-PG_PASSWORD=""
-```
 
-- `npm run db_init`
-- `npm run db_seed`
+## Acknowledgements
+- Special thanks to the Pursuit organization for the mentorship and guidance in completing this project. 
+- Special thanks to our technical mentors Nathan Lehrer and Scott Kaplan.
+- Special thanks to our Pursuit Mentors Myra Smith and Tristain Angieri.
 
-Test app locally. If it does not work locally, it will not work on Heroku.
 
-Fix bugs.
 
-When ready:
-
-- `heroku create`
-- `git add .`
-- `git commit -m 'heroku deployment`
-- `git push heroku main` - if this does not work, go to heroku dashboard => deployment and add the remote
-
-ie `heroku git:remote -a <your-heroku-app-name>`
-
-Open your heroku app. You should see the `Hello, world!` message.
-
-#### Adding the Database on Heroku
-
-In the heroku dashboard, go to `Overview` choose `configure add ons`
-
-In the search bar `Quickly add add-ons` - search for `postgres` - choose `heroku postgres`
-
-- Choose hobby dev
-- Note: even though hobby dev is free, you may be required to provide a credit card
-- In new view, click on `heroku Postgres / attached as DATABASE` => Settings
-
-![](./assets/heroku-database-dash.png)
-
-You will need to make these key value pairs in your heroku app
-
-**IMPORTANT**
-The `keys` must match perfectly with what is in your `db/dbConfig.js` file and your local `.env`
-
-- Open a new tab/window and go to the main page of your heroku app choose settings
-- Reveal Config Variables
-- Add the variables
-
-**Note:** these are false credentials and given for example only:
-
-```
-PG_HOST=ec2-55-227-246-76.compute-1.amazonaws.com
-PG_PORT=5432
-PG_DATABASE=d9bq2bk2s4ilde
-PG_USER=bcwmtakzkmkdxr
-PG_PASSWORD=afb0a7a9396af1bac763154f5649e049ce280658bef0ded7efde6
-```
-
-![](./assets/heroku-config-vars.png)
-
-- make sure you are on the same directory level as your `package.json` of your `back-end` directory
-
-Go back to the heroku database view => settings
-
-- copy `Heroku CLI` (something like `heroku pg:psql postgresql-shaped-11685 --app mysterious-spires-49488`)
-- paste into your terminal
-
-- it should open a `pg shell`
-
-Run the following:
-
-- update the `\i ./db/prod_schema.sql` with the PG_DATABASE value from Heroku
-- `\i ./db/prod_schema.sql`
-  - success should say `CREATE TABLE`
-- update the `\i ./db/prod_seed.sql` with the PG_DATABASE value from Herkou
-- `\i ./db/prod_seed.sql`
-  - success should say `INSERT 0 7`
-- `\q`
-
-This will insert the test table with the days of the week.
-
-Later, when you have build out your app to have your schema and seed data, you will:
-
-- edit the `db/schema.sql` file to be your own
-- edit th `db/seed.sql` file to be your own
-- reopen this shell and rerun these commands.
-
-Note you should set up the
-
-### `front-end` Set Up
-
-**/front-end**
-
-- `cd front-end`
-- `npm install`
-
-- `npm start`
-
-**src/util/apiURL.js**
-
-Replace the placeholder heroku app with your heroku app URL that you set up earlier
-
-Make sure your back-end is still running. You should see an unordered list of the days of the week, coming from your back-end. If it does not work locally, it will not work when it is deployed. Keep debugging until it works
-
-Go to netlify, choose `New site from Git`
-
-- choose continuos deployment, GitHub.
-- configure the netlify app on GitHub
-
-Follow the prompts to add this project repo to Netlify
-Once, authorized, configure to launch app from
-
-- Base directory: `front-end`
-- Build command: `npm run build`
-- Publish directory: `build` (may appear as `front-end/build`)
-
-![](./assets/netlify-deploy-settings.png)
