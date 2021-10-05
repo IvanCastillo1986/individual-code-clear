@@ -7,6 +7,7 @@ export default function Results({ result, handleErrorClick }) {
   const todo = result.length
   let total = (Math.round(todo * 10)  / 10 )
   let cuenta = `${100 - (total * 5) / 10}` 
+
   const ratingChanged = () => { 
     let rest = 0
     if(cuenta === 100 ){ rest = 5 }
@@ -22,7 +23,8 @@ export default function Results({ result, handleErrorClick }) {
     else if(cuenta <= 10){ rest = 0.0 }
     return rest
   }; 
-
+  
+ 
   const rest = ratingChanged()
   const direct = ratingChanged()
 
@@ -84,6 +86,7 @@ export default function Results({ result, handleErrorClick }) {
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
+              
           </div>
 
           <div className="enside">
