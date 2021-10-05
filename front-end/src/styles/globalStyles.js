@@ -52,6 +52,13 @@ h3 {
 .logoType {
  color: ${({ theme}) => theme.logo};
 }
+.SecondStars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto:
+}
 `;
 
 export const lightTheme = {
