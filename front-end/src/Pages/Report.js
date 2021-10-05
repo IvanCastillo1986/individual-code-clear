@@ -125,31 +125,16 @@ export default function Report() {
 
   const lineChartData = () => {
     if (lineChart.length > 0) {
-      let count = 0;
       if (lineChart[0].payload.length > 0) {
-        let ids = stats.map((elem) => {
-          return elem.message_id;
-        });
+        let labels = [];
 
-        let uniqueValues = ids.filter((elem, i) => {
-          return ids.indexOf(elem) === i;
-        });
-
-        uniqueValues.forEach((elem, i) => {
-          let dataArr = lineChart[0].payload[i];
-          for (let j = 0; j < dataArr.length; j++) {
-            count += Number(dataArr[j][`'${elem}'`]);
+        lineChart[0].payload.forEach((elem) => {
+          let obj = elem[0];
+          for (let key in obj) {
+            labels.push(key.split("'").join(""));
           }
         });
-      }
 
-      if (count > 0) {
-        let allStats = stats.map((elem) => {
-          return elem.message_id;
-        });
-        let labels = allStats.filter((elem, i) => {
-          return allStats.indexOf(elem) === i;
-        });
         let monthObj = {
           0: ["JAN"],
           1: ["FEB"],
@@ -212,41 +197,18 @@ export default function Report() {
     if (pieChart.length > 0) {
       if (pieChart[0].payload.length > 0) {
         show = true;
-        let ids = stats.map((elem) => {
-          return elem.message_id;
+        let labels = [];
+
+        pieChart[0].payload.forEach((elem) => {
+          let obj = elem;
+          for (let key in obj) {
+            labels.push(key.split("'").join(""));
+          }
         });
 
-        let uniqueValues = ids.filter((elem, i) => {
-          return ids.indexOf(elem) === i;
-        });
-
-        uniqueValues.forEach((elem, i) => {
+        let data = labels.map((elem, i) => {
           pieCount += Number(pieChart[0].payload[i][`'${elem}'`]);
-        });
-      }
-
-      if (pieCount > 0) {
-        let allStats = stats.map((elem) => {
-          return {
-            name: elem.message_id,
-            message: elem.message,
-            severity: elem.severity,
-          };
-        });
-
-        const uniqueValuesSet = new Set();
-
-        let filter = allStats.filter((obj) => {
-          const isPresentInSet = uniqueValuesSet.has(obj.name);
-          uniqueValuesSet.add(obj.name);
-          return !isPresentInSet;
-        });
-
-        let data = filter.map((elem, i) => {
-          return [
-            elem.name + `: (${elem.severity})`,
-            Number(pieChart[0].payload[i][`'${elem.name}'`]),
-          ];
+          return [elem, Number(pieChart[0].payload[i][`'${elem}'`])];
         });
 
         data.unshift(["Stat", "Frequency"]);
@@ -261,11 +223,12 @@ export default function Report() {
     }
   };
 
-  const chartInfo = () => {
+  const statsInfo = () => {
     let arrObj = stats.map((elem) => {
       return {
         name: elem.message_id,
         message: elem.message,
+        severity: elem.severity,
       };
     });
 
@@ -288,18 +251,20 @@ export default function Report() {
         case "no-multi-spaces":
           elem.message = "Multiple spaces found.";
           break;
+        default:
+          break;
       }
     });
 
     filter.unshift(
-      { name: "1", message: "Warning." },
-      { name: "2", message: "Error." }
+      { name: "Warning", message: "", severity: 1 },
+      { name: "Error", message: "", severity: 2 }
     );
 
     let messages = filter.map((elem, i) => {
       return (
-        <p>
-          {elem.name} : {elem.message}
+        <p key={i}>
+          {elem.name} : {elem.message} &nbsp; ( {elem.severity} )
         </p>
       );
     });
@@ -332,9 +297,9 @@ export default function Report() {
           <br />
           <br />
           <button onClick={showButton}>
-            {infoShow ? "Hide Chart Info" : "Show Chart Info"}
+            {infoShow ? "Hide Report Info" : "Show Report Info"}
           </button>
-          {infoShow ? <ol className="moreInfo">{chartInfo()}</ol> : ""}
+          {infoShow ? <ol className="moreInfo">{statsInfo()}</ol> : ""}
           <br />
           <br />
           <div className="charts">

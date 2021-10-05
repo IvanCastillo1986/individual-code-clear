@@ -12,7 +12,10 @@ const getAllStats = async (uid) => {
 const getAnnualStats = async (date, uid) => {
   try {
     const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
-    const allStats = await db.any(`SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${year.to_char}%'`, uid);
+    const allStats = await db.any(
+      `SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${year.to_char}%'`,
+      uid
+    );
 
     const wordArr = allStats.map((elem) => {
       return elem.message_id;
@@ -26,9 +29,11 @@ const getAnnualStats = async (date, uid) => {
       const statMonthly = [];
       for (let j = 1; j < 13; j++) {
         const result = await db.one(
-          `SELECT COUNT(message_id) AS "$2" FROM stats WHERE uid=$1 AND message_id=$2 AND date LIKE '%${year.to_char}-${j < 10 ? ("0" + j) : j}%'`,
+          `SELECT COUNT(message_id) AS "$2" FROM stats WHERE uid=$1 AND message_id=$2 AND date LIKE '%${
+            year.to_char
+          }-${j < 10 ? "0" + j : j}%'`,
           [uid, filter[i]]
-        )
+        );
         statMonthly.push(result);
       }
       stats.push(statMonthly);
@@ -42,7 +47,10 @@ const getAnnualStats = async (date, uid) => {
 const getByDayPieChart = async (date, uid) => {
   try {
     const day = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY-MM-DD')`);
-    const allStats = await db.any("SELECT * FROM stats WHERE uid=$1", uid);
+    const allStats = await db.any(
+      `SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${day.to_char}%'`,
+      uid
+    );
 
     const wordArr = allStats.map((elem) => {
       return elem.message_id;
@@ -72,7 +80,10 @@ const getByWeekPieChart = async (date, uid) => {
   try {
     const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
     const week = await db.one(`SELECT TO_CHAR(DATE '${date}', 'WW')`);
-    const allStats = await db.any(`SELECT * FROM stats WHERE uid=$1 AND week=$2 AND date LIKE '%${year.to_char}-%'`, [uid, week.to_char]);
+    const allStats = await db.any(
+      `SELECT * FROM stats WHERE uid=$1 AND week=$2 AND date LIKE '%${year.to_char}-%'`,
+      [uid, week.to_char]
+    );
 
     const wordArr = allStats.map((elem) => {
       return elem.message_id;
@@ -101,7 +112,10 @@ const getByWeekPieChart = async (date, uid) => {
 const getByMonthPieChart = async (date, uid) => {
   try {
     const month = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY-MM')`);
-    const allStats = await db.any(`SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${month.to_char}%'`, uid);
+    const allStats = await db.any(
+      `SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${month.to_char}%'`,
+      uid
+    );
 
     const wordArr = allStats.map((elem) => {
       return elem.message_id;
@@ -130,7 +144,10 @@ const getByMonthPieChart = async (date, uid) => {
 const getByYearPieChart = async (date, uid) => {
   try {
     const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
-    const allStats = await db.any(`SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${year.to_char}%'`, uid);
+    const allStats = await db.any(
+      `SELECT * FROM stats WHERE uid=$1 AND date LIKE '%${year.to_char}%'`,
+      uid
+    );
 
     const wordArr = allStats.map((elem) => {
       return elem.message_id;
@@ -160,7 +177,8 @@ const getByDayBarChart = async (date, uid) => {
   try {
     const day = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY-MM-DD')`);
     let dayData = await db.any(
-      `SELECT message_id, severity FROM stats WHERE uid=$1 AND date LIKE '%${day.to_char}%'`, uid
+      `SELECT message_id, severity FROM stats WHERE uid=$1 AND date LIKE '%${day.to_char}%'`,
+      uid
     );
     return dayData;
   } catch (error) {
@@ -186,7 +204,8 @@ const getByMonthBarChart = async (date, uid) => {
   try {
     const month = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY-MM')`);
     let monthData = await db.any(
-      `SELECT message_id, severity FROM stats WHERE uid=$1 AND date LIKE '%${month.to_char}%'`, uid
+      `SELECT message_id, severity FROM stats WHERE uid=$1 AND date LIKE '%${month.to_char}%'`,
+      uid
     );
     return monthData;
   } catch (error) {
@@ -198,7 +217,8 @@ const getByYearBarChart = async (date, uid) => {
   try {
     const year = await db.one(`SELECT TO_CHAR(DATE '${date}', 'YYYY')`);
     let yearData = await db.any(
-      `SELECT message_id, severity FROM stats WHERE uid=$1 AND date LIKE '%${year.to_char}-%'`, uid
+      `SELECT message_id, severity FROM stats WHERE uid=$1 AND date LIKE '%${year.to_char}-%'`,
+      uid
     );
     return yearData;
   } catch (error) {
@@ -208,12 +228,18 @@ const getByYearBarChart = async (date, uid) => {
 
 const createStats = async ({ input, uid, result }) => {
   try {
-    let qString = "INSERT INTO stats (message_id, message, source_code, severity, uid) VALUES ";
+    let qString =
+      "INSERT INTO stats (message_id, message, source_code, severity, uid) VALUES ";
     let count = 0;
-    qString += Array.from({ length: result.length }, () => `($${++count}, $${++count}, $${++count}, $${++count}, $${++count})`).join(",");
+    qString += Array.from(
+      { length: result.length },
+      () => `($${++count}, $${++count}, $${++count}, $${++count}, $${++count})`
+    ).join(",");
 
     const qArray = [];
-    result.forEach(stat => qArray.push(stat.ruleId, stat.message, input, stat.severity, uid));
+    result.forEach((stat) =>
+      qArray.push(stat.ruleId, stat.message, input, stat.severity, uid)
+    );
 
     await db.none(qString, qArray);
   } catch (error) {
@@ -223,10 +249,7 @@ const createStats = async ({ input, uid, result }) => {
 
 const deleteStat = async (uid) => {
   try {
-    await db.none(
-      "DELETE FROM stats WHERE uid = $1",
-      uid
-    );
+    await db.none("DELETE FROM stats WHERE uid = $1", uid);
   } catch (error) {
     return error;
   }
