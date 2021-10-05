@@ -9,19 +9,11 @@ eslint.get("/", (req, res) => {
 eslint.post("/", async (req, res) => {
   const lint = new ESLint();
   const result = await lint.lintText(req.body.input);
-  if (result[0].messages.length > 0) {
-    if (result[0].messages[0].fatal) {
-      res.json({ result });
-    } else {
-      result[0].messages.forEach((elem) => {
-        elem.source_code = req.body.input;
-      });
-      await createStats(result[0].messages);
-      res.json({ result });
-    }
-  } else {
-    res.json({ result });
+  if (req.body.uid && result[0].messages.length > 0 && !result[0].messages[0]?.fatal) {
+    const data = { ...req.body, result: result[0].messages };
+    await createStats(data);
   }
+  res.json({ result });
 });
 
 eslint.post("/fix", async (req, res) => {

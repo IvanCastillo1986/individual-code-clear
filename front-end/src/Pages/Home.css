@@ -98,6 +98,7 @@
 }
 .Results ol li::marker {
   color: #2ed2e6;
+  text-shadow: 2px 2px 2px #03454e;
 }
 .Results ol li {
   font-size: 23px;
@@ -134,13 +135,21 @@
   height: fit-content;
 }
 
+.reportPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .charts {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
-  margin: 50px;
+  width: 95%;
+  min-width: 300px;
 }
 
 .starts {
@@ -169,7 +178,18 @@
 }
 
 .reportForms {
-  width: 700px;
+  width: 50%;
+  min-width: 300px;
   display: flex;
   justify-content: space-between;
+}
+
+.moreInfo {
+  width: 50%;
+  min-width: 300px;
+  font-size: 16px;
+}
+
+.moreInfo li {
+  list-style-type: none;
 }

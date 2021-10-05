@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { userDeleteAccount } from '../../Services/Firebase';
+import axios from "axios";
+import { apiURL } from "../../util/apiURL";
+
+const API = apiURL();
 
 export default function ItemDeleteUser({ user, setOpen }) {
     const [notice, setNotice] = useState({ error: false, msg: "" });
@@ -9,6 +13,7 @@ export default function ItemDeleteUser({ user, setOpen }) {
         if (errorResult)
             return setNotice({ error: true, msg: errorResult });
 
+        await axios.delete(`${API}/stats/${user.uid}`);
         setNotice({ error: false, msg: "Done, goodbye!" });
         setTimeout(() => {
             setOpen(false);
