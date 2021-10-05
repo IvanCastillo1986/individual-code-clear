@@ -31,7 +31,7 @@ export default function Results({ result, handleErrorClick }) {
     if(total <= 4.5  && total > 3.5 ){ level = "Good"}
     if(total <= 3.5 && total > 2.5 ){ level = "Fair"}
     if(total <= 2.5 && total > 1.5 ){ level = "Poor"}
-    if(total <= 1.5 && total > 0.5 ){ level = "Warnnig"}
+    if(total <= 1.5 && total > 0.5 ){ level = "Warning"}
     if(total === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
   }
