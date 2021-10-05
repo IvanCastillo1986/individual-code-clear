@@ -33,7 +33,7 @@ export default function Results({ result, handleErrorClick }) {
     if(rest <= 4.5  && rest > 3.5 ){ level = "Good"}
     if(rest <= 3.5 && rest > 2.5 ){ level = "Fair"}
     if(rest <= 2.5 && rest > 1.5 ){ level = "Poor"}
-    if(rest <= 1.5 && rest > 0.5 ){ level = "Warnnig"}
+    if(rest <= 1.5 && rest > 0.5 ){ level = "Warning"}
     if(rest === 0.5){ return alert(`Alert, this page is only for programmers, if this is an error please try again  😳`)}
     return level
   }

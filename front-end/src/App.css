@@ -9,26 +9,7 @@ Can we merge this CSS into the Home.css file so that they aren't competing?
 .CodeClear {
   margin-top: 200px;
 }
-.enside {
-  margin: -15px;
-  margin-left: 50px;
-  text-align: start;
-  width: 500px;
-  /* height: 400px; */
-  height: 430px;
-  overflow-y: scroll;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  padding: 10px;
-  
-}
 
-.enside::-webkit-scrollbar{
-  width: 20px;
-}
-.enside::-webkit-scrollbar-thumb:hover{
-  background: linear-gradient(gray, red, white) ;
-}
 
 .App-logo {
   height: 35vmin;

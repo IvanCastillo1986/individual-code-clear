@@ -35,16 +35,18 @@
   text-shadow: 3px 5px 2px #177a87, 4px 6px 2px #2ed2e6;
 }
 
+/* Scrollbar at 750px width */
 .ParentComponent {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
   margin-top: 20px;
 }
 
 .CodeEditor {
   width: 50%;
+  margin: 0 0 0 5%;
 }
+
 .CodeEditor2 {
   width: 100%;
   height: 430px;
@@ -86,16 +88,39 @@
 }
 .Editor {
   width: 100%;
-  height: 55vh;
+  height: 400px;
   padding: 5px;
 }
 
 .Results {
   width: 40%;
+  margin-left: 5%;
 }
 .Results h3 {
   text-align: center;
 }
+
+/* Scrollbar at 750px width */
+/* This is what determines the height of the Results Component */
+.enside {
+  /* margin: -15px; */
+  text-align: start;
+  /* width: 500px; */
+  /* USE THIS WIDTH IF .RESULTS RIGHT MARGIN NEEDS TO CHANGE */
+  width: 90%;
+  height: 430px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.enside::-webkit-scrollbar{
+  width: 20px;
+}
+.enside::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(gray, red, white) ;
+}
+
 .Results ol li::marker {
   color: #2ed2e6;
   text-shadow: 2px 2px 2px #03454e;
@@ -104,11 +129,9 @@
   font-size: 23px;
   padding-left: 15px;
 }
-
 .Results li {
   padding-top: 0;
 }
-
 .Results span {
   display: block;
   text-align: left;
@@ -127,6 +150,8 @@
 .Results span:first-of-type {
   padding-bottom: 3px;
 }
+
+
 
 .statsComponent {
   padding: 10px;
@@ -155,17 +180,19 @@
 .starts {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  margin-left: 130px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  /* margin-left: 130px; */
   /* width: 100%; */
-  width: 80%;
+  margin-right: 0;
+  /* width: 70%; */
 }
 .bothcomponent {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin-left: 30px;
+  /* margin-left: 30px; */
   position: relative;
   animation-name: example;
   animation-duration: 4s;
@@ -173,9 +200,13 @@
 }
 
 .solution {
-  margin-top: 10px;
+  margin: 10px 0 200px 0;
   border: 5px ridge #2ed2e6;
+  width: 80%;
+  height: 292px;
 }
+
+
 
 .reportForms {
   width: 50%;
@@ -191,4 +222,28 @@
 
 .moreInfo li {
   list-style-type: none;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .ParentComponent {
+    justify-content: space-around;
+  }
+  .bothcomponent {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .ParentComponent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .CodeEditor {
+    width: 80%;
+  }
+  .Results {
+    width: 85%;
+  }
 }
