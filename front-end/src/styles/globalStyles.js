@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import logoType from '../Assets/icons/LogoMakr.png';
+import logoType2 from '../Assets/icons/LogoMakr2.png';
 
 export const GlobalStyle = createGlobalStyle`
  body{
@@ -47,6 +49,9 @@ h3 {
 .CodeClear {
     marginTop: 400px;
 }
+.logoType {
+ color: ${({ theme}) => theme.logo};
+}
 `;
 
 export const lightTheme = {
@@ -63,6 +68,8 @@ export const lightTheme = {
    scrollbarthumb: ' #35020285',
    primary: 'white',
    color: 'black',
+   logo: {logoType},
+   
 }
 
 export const darkTheme = {
@@ -79,5 +86,6 @@ export const darkTheme = {
     scrollbarthumb: '#2ed2e6',
     primary: '#1e1e1e',
     color: 'white',
+    logo: {logoType2},
 }
 
