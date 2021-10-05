@@ -3,8 +3,11 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     deleteUser,
+    EmailAuthProvider,
     GithubAuthProvider,
     GoogleAuthProvider,
+    reauthenticateWithCredential,
+    reauthenticateWithPopup,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
@@ -24,6 +27,9 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 export const auth = getAuth();
 
@@ -45,8 +51,6 @@ export const userAccountSignIn = async (email, password) => {
 }
 
 export const userProviderSignIn = async (providerName) => {
-    const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
     const provider = providerName === "google" ? googleProvider : githubProvider;
     let error = null;
     await signInWithPopup(auth, provider)
@@ -72,6 +76,8 @@ export const userResetPassword = async (email) => {
 }
 
 export const userUpdateName = async (user, name) => {
+    if (!user) return "User does not exist!";
+
     let error = null;
     await updateProfile(user, { displayName: name })
         .then(() => user.reload())
@@ -81,6 +87,8 @@ export const userUpdateName = async (user, name) => {
 }
 
 export const userUpdateEmail = async (user, email) => {
+    if (!user) return "User does not exist!";
+
     let error = null;
     await updateEmail(user, email)
         .catch((err) => error = err.code)
@@ -89,17 +97,39 @@ export const userUpdateEmail = async (user, email) => {
 }
 
 export const userUpdatePassword = async (user, newPassword) => {
+    if (!user) return "User does not exist!";
+
     let error = null;
-    updatePassword(user, newPassword)
+    await updatePassword(user, newPassword)
         .catch((err) => error = err.code)
 
     return error;
 }
 
 export const userDeleteAccount = async (user) => {
+    if (!user) return "User does not exist!";
+
     let error = null;
-    deleteUser(user)
+    await deleteUser(user)
         .catch((err) => error = err.code)
 
+    return error;
+}
+
+export const userReauthenticate = async (user, email, password) => {
+    if (!user) return "User does not exist!";
+
+    let error = null;
+    const providerId = user.providerData[0].providerId;
+    if (providerId.includes("password")) {
+        const credential = EmailAuthProvider.credential(email, password);
+        await reauthenticateWithCredential(user, credential)
+            .catch((err) => error = err.code)
+        return error;
+    }
+
+    const provider = providerId.includes("google") ? googleProvider : githubProvider;
+    await reauthenticateWithPopup(user, provider)
+        .catch((err) => error = err.code)
     return error;
 }

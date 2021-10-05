@@ -142,6 +142,9 @@ stats.post("/annual-chart", async (req, res) => {
 stats.delete("/:uid", async (req, res) => {
   try {
     const { uid } = req.params;
+    if (!uid)
+      throw "User does not exist!";
+
     await deleteStat(uid);
     res.status(200).json({
       success: true,
