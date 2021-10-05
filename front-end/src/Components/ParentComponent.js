@@ -124,7 +124,7 @@ export default function ParentComponent({toggleLogo }) {
       </form>
 
       <div className="bothcomponent">
-        <div>
+        {/* <div className='Editor2Wrapper'> */}
           {show === "Hide" && (
             <Editor
               height="36.5vh"
@@ -135,14 +135,14 @@ export default function ParentComponent({toggleLogo }) {
               onMount={handleEditorDidMount}
             />
           )}
-        </div>
+        {/* </div> */}
 
         {result[0] !== "Please submit your code" && (
-          <div>
+          // <div>
             <div className="statsComponent">
               <GuestStats result={result} />
             </div>
-          </div>
+          //</div>
         )}
       </div>
          <img src={logoType2} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
