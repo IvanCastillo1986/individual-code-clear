@@ -5,6 +5,10 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+ import logoType from '../Assets/icons/LogoMakr.png';
+ import logoType2 from '../Assets/icons/LogoMakr2.png';
+
+// import Display from "./Display";;
 import { UserContext } from "../Providers/UserProvider";
 // import Display from "./Display";
 // import styled, { ThemeProvider } from "styled-components";
@@ -19,7 +23,7 @@ import { UserContext } from "../Providers/UserProvider";
 //   margin: 10px auto 0;
 // `;
 
-export default function ParentComponent() {
+export default function ParentComponent({toggleLogo }) {
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
@@ -141,6 +145,8 @@ export default function ParentComponent() {
           </div>
         )}
       </div>
+         <img src={logoType2} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
+         <img src={logoType} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
     </div>
   );
 }
