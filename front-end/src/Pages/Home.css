@@ -35,7 +35,6 @@
   text-shadow: 3px 5px 2px #177a87, 4px 6px 2px #2ed2e6;
 }
 
-/* Scrollbar at 750px width */
 .ParentComponent {
   display: flex;
   flex-direction: row;
@@ -100,12 +99,9 @@
   text-align: center;
 }
 
-/* Scrollbar at 750px width */
 /* This is what determines the height of the Results Component */
 .enside {
-  /* margin: -15px; */
   text-align: start;
-  /* width: 500px; */
   /* USE THIS WIDTH IF .RESULTS RIGHT MARGIN NEEDS TO CHANGE */
   width: 90%;
   height: 430px;
@@ -197,7 +193,6 @@
 .bothcomponent {
   display: flex;
   justify-content: space-evenly;
-  /* margin-left: 30px; */
   position: relative;
   animation-name: example;
   animation-duration: 4s;

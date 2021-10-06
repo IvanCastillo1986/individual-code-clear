@@ -34,7 +34,7 @@ export default function Results({ result, handleErrorClick }) {
     if(rest <= 4.5  && rest > 3.5 ){ level = "Good"}
     if(rest <= 3.5 && rest > 2.5 ){ level = "Fair"}
     if(rest <= 2.5 && rest > 1.5 ){ level = "Poor"}
-    if(rest <= 1.5 && rest > 0.5 ){ level = "Warnnig"}
+    if(rest <= 1.5 && rest > 0.5 ){ level = "Warning"}
     if(rest <= 0.5 ){ level = "Alert"}
     if (cuenta < 0 ){level = "Error"} 
     console.log(level)
@@ -71,7 +71,6 @@ console.log(cuenta, 'cuenta')
              <h2 style={{color:  '#28f728'}}> 100% </h2>         
              <h3>Congrats! You have no errors.</h3>
              <h3>You are a great coder!</h3>
-            
           </div>
         </div>
 
@@ -95,7 +94,7 @@ console.log(cuenta, 'cuenta')
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Good' ? "green-yelow-text" : null} >{prueba() === 'Good' ? "Good" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Fair' ? "yelow-text" : null} >{prueba() === 'Fair' ? "Fair" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Poor' ? "orange-text" : null} >{prueba() === 'Poor' ? "Poor" : null}</h6>
-               <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warnning' ? "red-text" : null} >{prueba() === 'Warnnig' ? "Warnnig" : null}</h6>
+               <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}} className= {prueba() === 'Warning' ? "red-text" : null} >{prueba() === 'Warning' ? "Warning" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}}  >{prueba() === 'Alert' ? "Alert, to many errors  😳" : null}</h6>
                <h6 style={{fontSize: '22px',marginTop: '8px', padding: '4px'}}  >{prueba() === 'Error' ? <p>This web do not wanna handle this amount of Error</p>  : null}</h6>
           </div>

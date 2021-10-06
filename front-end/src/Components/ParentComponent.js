@@ -30,6 +30,7 @@ export default function ParentComponent({ toggleLogo }) {
   const [show, setShow] = useState("Fix Code");
   const API = apiURL();
   const monacoObjects = useRef(null);
+  const secondEditorRef = useRef(null)
   const user = useContext(UserContext);
 
   const handleChange = (value, e) => {
@@ -61,6 +62,18 @@ export default function ParentComponent({ toggleLogo }) {
     });
     monaco.editor.setTheme("TeamCodeClearDark");
   }
+  function handleSecondEditor(editor, monaco) {
+    secondEditorRef.current = { editor, monaco };
+
+    monaco.editor.defineTheme("SecondDark", {
+      base: "hc-black",
+      colors: { "editor.background": "#2E2735" },
+      inherit: true,
+      rules: [],
+    });
+    monaco.editor.setTheme("SecondDark");
+  }
+
   const handleFixSubmit = (e) => {
     e.preventDefault();
     axios.post(`${API}/eslint/fix`, input).then((res) => {
@@ -123,7 +136,6 @@ export default function ParentComponent({ toggleLogo }) {
       </form>
 
       <div className="bothcomponent">
-        {/* <div className='Editor2Wrapper'> */}
         {show === "Hide" && (
           <Editor
             height="300px"
@@ -131,17 +143,14 @@ export default function ParentComponent({ toggleLogo }) {
             defaultLanguage="javascript"
             value={last}
             className="solution"
-            onMount={handleEditorDidMount}
+            onMount={handleSecondEditor}
           />
         )}
-        {/* </div> */}
         <br />
         {result[0] !== "Please submit your code" && (
-          // <div>
           <div className="statsComponent">
             <GuestStats result={result} />
           </div>
-          //</div>
         )}
       </div>
       <img
