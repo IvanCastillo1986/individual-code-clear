@@ -8,6 +8,7 @@ import axios from "axios";
 //  import logoType from '../Assets/icons/LogoMakr.png';
 //  import logoType2 from '../Assets/icons/LogoMakr2.png';
 
+
 // import Display from "./Display";;
 import { UserContext } from "../Providers/UserProvider";
 // import Display from "./Display";
@@ -23,7 +24,7 @@ import { UserContext } from "../Providers/UserProvider";
 //   margin: 10px auto 0;
 // `;
 
-export default function ParentComponent({toggleLogo }) {
+export default function ParentComponent({ toggleLogo }) {
   const [input, setInput] = useState({ input: "// your code here" });
   const [result, setResult] = useState(["Please submit your code"]);
   const [last, setLast] = useState("");
@@ -95,7 +96,6 @@ export default function ParentComponent({toggleLogo }) {
     }
   };
 
-
   return (
     <div className="part">
       <div className="ParentComponent">
@@ -125,28 +125,30 @@ export default function ParentComponent({toggleLogo }) {
 
       <div className="bothcomponent">
         {/* <div className='Editor2Wrapper'> */}
-          {show === "Hide" && (
-            <Editor
-              height="36.5vh"
-              width="88vh"
-              defaultLanguage="javascript"
-              value={last}
-              className="solution"
-              onMount={handleEditorDidMount}
-            />
-          )}
+        {show === "Hide" && (
+          <Editor
+            height="300px"
+            width="50%"
+            defaultLanguage="javascript"
+            value={last}
+            className="solution"
+            onMount={handleEditorDidMount}
+          />
+        )}
         {/* </div> */}
-
+        <br />
         {result[0] !== "Please submit your code" && (
           // <div>
-            <div className="statsComponent">
-              <GuestStats result={result} />
-            </div>
+          <div className="statsComponent">
+            <GuestStats result={result} />
+          </div>
           //</div>
         )}
       </div>
+
          {/* <img src={logoType2} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
          <img src={logoType} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/> */}
+
     </div>
   );
 }
