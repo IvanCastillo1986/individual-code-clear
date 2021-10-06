@@ -1,6 +1,7 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component"
 import SecondStars from "../Pages/SecondStars";
+import FinalLogo from "../Assets/icons/FinalLogo.png";
 
 
 export default function Results({ result, handleErrorClick }) {
@@ -52,9 +53,11 @@ console.log(cuenta, 'cuenta')
         <div>
         <h2>Results</h2>
         <div style={{ marginTop: "20vh" }}>
-         
            <h3>Please submit your code</h3>
            <h3>in the code editor</h3>
+           <div className='logoType'>
+             <img src={FinalLogo} alt="logo" style={{marginBottom: '20px', marginLeft: '37%', width: '200px'}} />
+           </div>
         </div>
         </div>
       ) :

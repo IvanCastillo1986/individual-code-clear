@@ -243,3 +243,10 @@
     width: 85%;
   }
 }
+
+@media screen and (max-width: 340px) {
+  .logoType {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
