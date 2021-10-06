@@ -15,7 +15,7 @@ export default function GuestStats(props) {
     <div>
       <div>
         <Chart
-          width={"700px"}
+          width={"100%"}
           height={"300px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
