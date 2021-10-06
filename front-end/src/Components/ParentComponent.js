@@ -5,8 +5,8 @@ import Results from "./Results";
 import GuestStats from "./GuestStats";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
- import logoType from '../Assets/icons/LogoMakr.png';
- import logoType2 from '../Assets/icons/LogoMakr2.png';
+//  import logoType from '../Assets/icons/LogoMakr.png';
+//  import logoType2 from '../Assets/icons/LogoMakr2.png';
 
 // import Display from "./Display";;
 import { UserContext } from "../Providers/UserProvider";
@@ -145,8 +145,8 @@ export default function ParentComponent({toggleLogo }) {
           //</div>
         )}
       </div>
-         <img src={logoType2} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
-         <img src={logoType} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
+         {/* <img src={logoType2} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/>
+         <img src={logoType} alt="logo" style={{marginBottom: '20px', marginLeft: '40%',}}  className='logoType'/> */}
     </div>
   );
 }
