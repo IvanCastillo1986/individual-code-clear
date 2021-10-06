@@ -55,7 +55,9 @@ console.log(cuenta, 'cuenta')
         <div style={{ marginTop: "20vh" }}>
            <h3>Please submit your code</h3>
            <h3>in the code editor</h3>
-           <img src={FinalLogo} alt="logo" style={{marginBottom: '20px', marginLeft: '37%', width: '200px'}}  className='logoType'/>
+           <div className='logoType'>
+             <img src={FinalLogo} alt="logo" style={{marginBottom: '20px', marginLeft: '37%', width: '200px'}} />
+           </div>
         </div>
         </div>
       ) :
