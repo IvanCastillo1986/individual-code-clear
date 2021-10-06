@@ -114,11 +114,11 @@
   margin-bottom: 20px;
   padding: 10px;
 }
-.enside::-webkit-scrollbar{
+.enside::-webkit-scrollbar {
   width: 20px;
 }
-.enside::-webkit-scrollbar-thumb:hover{
-  background: linear-gradient(gray, red, white) ;
+.enside::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(gray, red, white);
 }
 
 .Results ol li::marker {
@@ -151,13 +151,9 @@
   padding-bottom: 3px;
 }
 
-
-
 .statsComponent {
-  padding: 10px;
-  display: flex;
-  justify-content: space-around;
-  height: fit-content;
+  border: 2px solid #2ed2e6;
+  width: 50%;
 }
 
 .reportPage {
@@ -186,8 +182,8 @@
 }
 .starts p {
   margin-top: 38px;
-  color:rgb(213, 233, 190);
-  margin-left: -350px ;
+  color: rgb(213, 233, 190);
+  margin-left: -350px;
   margin-bottom: -60px;
 }
 .secondStars {
@@ -201,9 +197,7 @@
 
 .bothcomponent {
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
-  flex-wrap: wrap;
   /* margin-left: 30px; */
   position: relative;
   animation-name: example;
@@ -212,13 +206,8 @@
 }
 
 .solution {
-  margin: 10px 0 200px 0;
   border: 5px ridge #2ed2e6;
-  width: 80%;
-  height: 292px;
 }
-
-
 
 .reportForms {
   width: 50%;
@@ -236,11 +225,6 @@
   justify-content: center;
 }
 
-.moreInfo li {
-  list-style-type: none;
-}
-
-
 @media screen and (max-width: 1200px) {
   .ParentComponent {
     justify-content: space-around;
@@ -249,6 +233,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
 }
 @media screen and (max-width: 1050px) {
@@ -262,5 +247,4 @@
   .Results {
     width: 85%;
   }
-  
 }
