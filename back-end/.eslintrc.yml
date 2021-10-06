@@ -10,3 +10,4 @@ rules:
   quotes:
     - 1
     - double
+  semi: 1

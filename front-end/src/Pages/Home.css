@@ -152,7 +152,6 @@
 }
 
 .statsComponent {
-  border: 2px solid #2ed2e6;
   width: 50%;
 }
 
@@ -203,6 +202,7 @@
   animation-name: example;
   animation-duration: 4s;
   margin-bottom: 80px;
+  padding: 10px;
 }
 
 .solution {
