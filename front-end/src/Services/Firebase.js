@@ -26,12 +26,14 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
-export const auth = getAuth();
 
 export const userSignUp = async (name, email, password) => {
     let error = null;
