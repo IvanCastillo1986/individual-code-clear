@@ -15,6 +15,7 @@ const {
 
 stats.get("/", async (req, res) => {
   try {
+    // console.log('achieved /stats request')
     const allStats = await getAllStats(req.query.uid);
     if (allStats.code === "ECONNREFUSED") {
       throw `Unable to connect to the database`;

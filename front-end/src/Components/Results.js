@@ -38,12 +38,12 @@ export default function Results({ result, handleErrorClick }) {
     if(rest <= 1.5 && rest > 0.5 ){ level = "Warning"}
     if(rest <= 0.5 ){ level = "Alert"}
     if (cuenta < 0 ){level = "Error"} 
-    console.log(level)
+    // console.log(level)
     return level
   }
-console.log(rest, 'rest')
-console.log(direct, 'rest')
-console.log(cuenta, 'cuenta')
+// console.log(rest, 'rest')
+// console.log(direct, 'rest')
+// console.log(cuenta, 'cuenta')
 
  return (
     <div className="Results">

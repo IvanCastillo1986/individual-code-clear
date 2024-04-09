@@ -2,7 +2,9 @@ const db = require("../db/dbConfig");
 
 const getAllStats = async (uid) => {
   try {
+    console.log('reaching getAllStats() try block')
     const allStats = await db.any("SELECT * FROM stats WHERE uid=$1", uid);
+    // console.log(allStats)
     return allStats;
   } catch (err) {
     return err;

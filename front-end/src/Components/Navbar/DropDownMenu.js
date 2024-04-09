@@ -22,6 +22,8 @@ import { ReactComponent as IcPassword } from "../../Assets/icons/password.svg";
 import { ReactComponent as IcCloseAcc } from "../../Assets/icons/close_account.svg";
 import { ReactComponent as IcReport } from "../../Assets/icons/report.svg";
 
+
+
 export default function DropdownMenu(props) {
     const [activeMenu, setActiveMenu] = useState("main");
     const [menuHeight, setMenuHeight] = useState(null);
@@ -73,6 +75,7 @@ export default function DropdownMenu(props) {
         )
     }
 
+    
     return (
         <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
             <CSSTransition
